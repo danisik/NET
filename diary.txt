@@ -1,0 +1,4 @@
+1.3.2020
+------------
+aktivita 1 (počet hodin)
+aktivita 2 (počet hodin)

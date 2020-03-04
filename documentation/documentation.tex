@@ -1,0 +1,114 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[IL2]{fontenc}
+\usepackage[czech]{babel}
+\usepackage[pdftex]{graphicx}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{svg}
+\usepackage{textcomp}
+\usepackage{listings,xcolor}
+\usepackage[final]{pdfpages}
+\usepackage{verbatim}
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+\usepackage[pdftex,hypertexnames=false]{hyperref}
+\hypersetup{colorlinks=true,
+  unicode=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=black,
+  bookmarksopen=true}
+
+\title{\textbf{Dokumentace semestrální práce} \\KIV/NET}
+\author{Vojtěch Danišík}
+\begin{document}
+
+\begin{titlepage} 
+	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} 
+	\begin{center}
+	\includegraphics[width=12cm]{img/fav_logo}\\
+	\end{center}
+	\textsc{\LARGE Západočeská univerzita v Plzni}\\[1.5cm] 	
+	\textsc{\Large Programování v prostředí .NET}\\[0.5cm] 
+	\textsc{\large KIV/NET}\\[0.5cm] 
+	\HRule\\[0.4cm]
+	{\huge\bfseries Zpracování naměřených teplot}\\[0.4cm] 
+	\HRule\\[1.5cm]
+	
+	\begin{minipage}{0.4\textwidth}
+		\begin{flushleft}
+			\large
+			Vojtěch \textsc{Danišík}\newline
+			A19N0028P\newline
+			danisik@students.zcu.cz
+		\end{flushleft}
+	\end{minipage}
+	\vfill\vfill\vfill
+	\begin{flushright}
+	{\large\today}
+	\end{flushright}
+	\vfill 
+\end{titlepage}
+
+\newpage
+Souhlasím s vystavením této semestrální práce na stránkách katedry \newline informatiky a výpočetní techniky a jejímu využití pro prezentaci pracoviště.
+\newline
+\begin{flushright}
+Vojtěch Danišík
+\end{flushright}
+
+\newpage
+\tableofcontents
+
+\newpage
+\section{Zadání}
+Desktopová aplikace v programovacím jazyce C\#, která umožňuje zaznamenat naměřené teploty ve městech za daný měsíc. Cílem aplikace je možnost zaznamenat si naměřené teploty za daný měsíc pro určité město v daný rok. Zaznamenané teploty se poté zprůměrují v daný měsíc a lze si následně vykreslit 3 grafy:
+\begin{itemize}
+\item Průměrná teplota ve všech městech po měsíci v daný rok.
+\item Porovnání teplot dvou měst po měsících v daný rok.
+\item Teplota ve městech za měsíc v daný rok.
+\end{itemize}
+V aplikaci si uživatel bude moct zvolit jednotku teploty. Zvolená jednotka teploty bude aplikována na data v aktuálně zpracovávaném roce. Na výběr budou 3 jednotky:
+\begin{itemize}
+\item Stupeň Fahrenheita [°F]
+\item Stupeň Celsia [°C]
+\item Kelvin [K]
+\end{itemize}
+Aplikace bude umožňovat přidávání / mazání měst, přidávání / mazání dat z celého roku. Aplikace dále umožní zaznamenané teploty v daný rok exportovat do csv.
+
+\section{Analýza}
+TODO
+\newline
+Popište, jakou architekturu jste vybrali. Popište á pomocí vhodných diágrámů zobrázte, ják vypádájí jednotlivé části (nápř. ER model pro záchycení dátové vrstvy, átp.)
+
+\section{Implementace}
+TODO
+\newline
+Uveďte použité technologie v jednotlivých vrstvách, á jákým způsobem jsou v aplikaci použity.
+
+\section{Uživatelská příručka}
+TODO
+\newline
+Nápište stručnou uživátelskou příručku (Bodnik, 2013) k výsledné aplikaci. Pokud program obsahuje předdefinováné uživátele, uveďte jméná á heslá, pod kterými je možné se přihlásit á otestovát funkčnost.
+
+\section{Závěr}
+TODO
+\newline
+Stručně zhodnoťte výslednou áplikáci á problémy, se kterými jste se během řešení potkáli.
+
+\section{Reference}
+TODO
+\newline
+
+
+\setcounter{section}{0}
+\renewcommand{\thesection}{\Alph{section}}
+\section{Programátorský deník}
+TODO
+\newline
+Evidence áktivit by Vám mohlá v budoucnosti pomoct s odhadem čásu, který je potřebá pro řešení dáného problému. Ve vlástním zájmu tedy uvádějte reálné čásy – z pohledu předmětu .NET nádsázením nebo podhodnocením čásů nic nezískáte. Stáčí nějáký jednoduchý formát, nápř. tabulka: Datum | Aktivita | Délka [hod].
+
+\end{document}

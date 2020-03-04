@@ -1,0 +1,8 @@
+C:\Users\danisik\source\NET\Processing_measured_temperature\Presentation_layer\bin\Debug\Presentation_layer.exe.config
+C:\Users\danisik\source\NET\Processing_measured_temperature\Presentation_layer\bin\Debug\Presentation_layer.exe
+C:\Users\danisik\source\NET\Processing_measured_temperature\Presentation_layer\bin\Debug\Presentation_layer.pdb
+C:\Users\danisik\source\NET\Processing_measured_temperature\Presentation_layer\obj\Debug\Presentation_layer.csprojAssemblyReference.cache
+C:\Users\danisik\source\NET\Processing_measured_temperature\Presentation_layer\obj\Debug\Presentation_layer.Properties.Resources.resources
+C:\Users\danisik\source\NET\Processing_measured_temperature\Presentation_layer\obj\Debug\Presentation_layer.csproj.GenerateResource.cache
+C:\Users\danisik\source\NET\Processing_measured_temperature\Presentation_layer\obj\Debug\Presentation_layer.exe
+C:\Users\danisik\source\NET\Processing_measured_temperature\Presentation_layer\obj\Debug\Presentation_layer.pdb
