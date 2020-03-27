@@ -6,3 +6,13 @@ C:\Users\danisik\source\NET\Processing_measured_temperature\Presentation_layer\o
 C:\Users\danisik\source\NET\Processing_measured_temperature\Presentation_layer\obj\Debug\Presentation_layer.csproj.GenerateResource.cache
 C:\Users\danisik\source\NET\Processing_measured_temperature\Presentation_layer\obj\Debug\Presentation_layer.exe
 C:\Users\danisik\source\NET\Processing_measured_temperature\Presentation_layer\obj\Debug\Presentation_layer.pdb
+C:\Users\danisik\Documents\GitHub\NET\program\Presentation_layer\bin\Debug\Presentation_layer.exe.config
+C:\Users\danisik\Documents\GitHub\NET\program\Presentation_layer\bin\Debug\Presentation_layer.exe
+C:\Users\danisik\Documents\GitHub\NET\program\Presentation_layer\bin\Debug\Presentation_layer.pdb
+C:\Users\danisik\Documents\GitHub\NET\program\Presentation_layer\obj\Debug\Presentation_layer.csprojAssemblyReference.cache
+C:\Users\danisik\Documents\GitHub\NET\program\Presentation_layer\obj\Debug\Presentation_layer.Properties.Resources.resources
+C:\Users\danisik\Documents\GitHub\NET\program\Presentation_layer\obj\Debug\Presentation_layer.csproj.GenerateResource.cache
+C:\Users\danisik\Documents\GitHub\NET\program\Presentation_layer\obj\Debug\Presentation_layer.exe
+C:\Users\danisik\Documents\GitHub\NET\program\Presentation_layer\obj\Debug\Presentation_layer.pdb
+C:\Users\danisik\Documents\GitHub\NET\program\Presentation_layer\bin\Debug\Database\Database.mdf
+C:\Users\danisik\Documents\GitHub\NET\program\Presentation_layer\bin\Debug\Database\Database_log.ldf

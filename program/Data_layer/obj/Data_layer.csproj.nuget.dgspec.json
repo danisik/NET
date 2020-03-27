@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\danisik\\Desktop\\NET\\semestralka\\program\\Data_layer\\Data_layer.csproj": {}
+    "C:\\Users\\danisik\\Documents\\GitHub\\NET\\program\\Data_layer\\Data_layer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\danisik\\Desktop\\NET\\semestralka\\program\\Data_layer\\Data_layer.csproj": {
+    "C:\\Users\\danisik\\Documents\\GitHub\\NET\\program\\Data_layer\\Data_layer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danisik\\Desktop\\NET\\semestralka\\program\\Data_layer\\Data_layer.csproj",
+        "projectUniqueName": "C:\\Users\\danisik\\Documents\\GitHub\\NET\\program\\Data_layer\\Data_layer.csproj",
         "projectName": "Data_layer",
-        "projectPath": "C:\\Users\\danisik\\Desktop\\NET\\semestralka\\program\\Data_layer\\Data_layer.csproj",
+        "projectPath": "C:\\Users\\danisik\\Documents\\GitHub\\NET\\program\\Data_layer\\Data_layer.csproj",
         "packagesPath": "C:\\Users\\danisik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danisik\\Desktop\\NET\\semestralka\\program\\Data_layer\\obj\\",
+        "outputPath": "C:\\Users\\danisik\\Documents\\GitHub\\NET\\program\\Data_layer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\danisik\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -43,6 +43,10 @@
               "target": "Package",
               "version": "[2.0.3, )",
               "autoReferenced": true
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.1, )"
             }
           },
           "imports": [
