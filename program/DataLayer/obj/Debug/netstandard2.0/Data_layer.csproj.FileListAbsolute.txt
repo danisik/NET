@@ -1,0 +1,16 @@
+C:\Users\danisik\source\NET\Processing_measured_temperature\Data_layer\bin\Debug\netstandard2.0\Data_layer.deps.json
+C:\Users\danisik\source\NET\Processing_measured_temperature\Data_layer\bin\Debug\netstandard2.0\Data_layer.dll
+C:\Users\danisik\source\NET\Processing_measured_temperature\Data_layer\bin\Debug\netstandard2.0\Data_layer.pdb
+C:\Users\danisik\source\NET\Processing_measured_temperature\Data_layer\obj\Debug\netstandard2.0\Data_layer.csprojAssemblyReference.cache
+C:\Users\danisik\source\NET\Processing_measured_temperature\Data_layer\obj\Debug\netstandard2.0\Data_layer.AssemblyInfoInputs.cache
+C:\Users\danisik\source\NET\Processing_measured_temperature\Data_layer\obj\Debug\netstandard2.0\Data_layer.AssemblyInfo.cs
+C:\Users\danisik\source\NET\Processing_measured_temperature\Data_layer\obj\Debug\netstandard2.0\Data_layer.dll
+C:\Users\danisik\source\NET\Processing_measured_temperature\Data_layer\obj\Debug\netstandard2.0\Data_layer.pdb
+C:\Users\danisik\Documents\GitHub\NET\program\Data_layer\bin\Debug\netstandard2.0\Data_layer.deps.json
+C:\Users\danisik\Documents\GitHub\NET\program\Data_layer\bin\Debug\netstandard2.0\Data_layer.dll
+C:\Users\danisik\Documents\GitHub\NET\program\Data_layer\bin\Debug\netstandard2.0\Data_layer.pdb
+C:\Users\danisik\Documents\GitHub\NET\program\Data_layer\obj\Debug\netstandard2.0\Data_layer.csprojAssemblyReference.cache
+C:\Users\danisik\Documents\GitHub\NET\program\Data_layer\obj\Debug\netstandard2.0\Data_layer.AssemblyInfoInputs.cache
+C:\Users\danisik\Documents\GitHub\NET\program\Data_layer\obj\Debug\netstandard2.0\Data_layer.AssemblyInfo.cs
+C:\Users\danisik\Documents\GitHub\NET\program\Data_layer\obj\Debug\netstandard2.0\Data_layer.dll
+C:\Users\danisik\Documents\GitHub\NET\program\Data_layer\obj\Debug\netstandard2.0\Data_layer.pdb

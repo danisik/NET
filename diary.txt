@@ -1,4 +1,16 @@
-1.3.2020
+4.3.2020
 ------------
-aktivita 1 (počet hodin)
-aktivita 2 (počet hodin)
+Vytvoření řešení a dvou projektů (data + gui).								(1 hodina)
+Návrh a sepsání zadání v tex.												(1 hodina)
+
+27.3.2020
+------------
+Zprovoznění databáze + získávání dat. 										(3 hodiny)
+Načítání dat z databáze do gui elementu.									(1 hodina)
+Vytvořeny eventy na validaci polí v datasetu								(1 hodina)
+Přidávání řádků s custom buňkama do datasetu								(0.5 hodiny)
+
+3.4.2020
+------------
+Správa tabulky City v novém okně (zatím bez pushování změn).				(2.5 hodiny)
+Úprava hlavního okna (tlačítka, automatické nahrání dat do datasetu)		(1.5 hodina)
