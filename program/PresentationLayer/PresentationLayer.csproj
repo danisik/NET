@@ -61,7 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\DatabaseConnection.cs" />
+    <Compile Include="Database\DatabaseInterface.cs" />
     <Compile Include="GUIElements\CityCell.cs" />
     <Compile Include="GUIElements\MonthCell.cs" />
     <Compile Include="Window\MainWindow.cs">

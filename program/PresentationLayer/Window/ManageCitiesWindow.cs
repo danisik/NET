@@ -14,14 +14,16 @@ namespace PresentationLayer.Window
 {
     public partial class ManageCitiesWindow : Form
     {
-        private readonly DatabaseConnection databaseConnection;
+        private readonly DatabaseInterface databaseInterface;
         private Dictionary<String, City> cities;
+        private String appName = "";
 
-        public ManageCitiesWindow(DatabaseConnection databaseConnection, Dictionary<String, City> cities)
+        public ManageCitiesWindow(DatabaseInterface databaseConnection, String appName)
         {
             InitializeComponent();
-            this.databaseConnection = databaseConnection;
-            this.cities = cities;
+            this.databaseInterface = databaseConnection;
+            this.cities = databaseConnection.getCities();
+            this.appName = appName;
 
             fillDataGridView();
         }
@@ -62,18 +64,16 @@ namespace PresentationLayer.Window
                 // Need to check if any record contains this city name.
                 if (!newCities.Contains(cityName))
                 {
-                    // TODO test if database contains records with this city name.
-                    // if true, then display prepared error message.
-                    // if false, then add cityname to delete list.
-                    bool test = false;
-                    if (test)
+                    bool isPresented = databaseInterface.testIfCityIsPresentedInRecords(cityName);
+                    if (!isPresented)
                     {
                         citiesToBeDeleted.Add(cityName);
                     }
                     else 
                     {
                         Utils.displayErrorMessageBox("Nelze upravit tabulku měst, protože název města '" + cityName + "' je používán v jednotlivých záznamech.",
-                        ", ", null);
+                        appName, null);
+                        return;
                     }                    
                 }
                 else
@@ -82,7 +82,20 @@ namespace PresentationLayer.Window
                 }
             }
 
-            // TODO update table "City".
+            bool success = databaseInterface.updateCities(newCities, citiesToBeDeleted);
+
+            if (success)
+            {
+                Utils.displayInfoMessageBox("Úprava měst proběhla úspěšně.", appName);
+                dataGridViewManageCities.Rows.Clear();
+                cities = databaseInterface.getCities();
+                fillDataGridView();
+            }
+            else
+            {
+                Utils.displayErrorMessageBox("Vyskytla se chyba při úpravě měst v databázi!",
+                appName, null);
+            }
         }
 
         private void btnDiscardChanges_Click(object sender, EventArgs e)

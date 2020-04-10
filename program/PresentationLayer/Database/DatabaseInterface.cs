@@ -6,7 +6,7 @@ using System.Data;
 
 namespace DataLayer.Data
 {
-    public class DatabaseConnection
+    public class DatabaseInterface
     {
         private static readonly String databaseConnectionString =
             "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\danisik\\Documents\\GitHub\\NET\\program\\PresentationLayer\\Database\\Database.mdf;Integrated Security=True";
@@ -14,7 +14,7 @@ namespace DataLayer.Data
         private SqlConnection connection;
         private SqlCommand command;
 
-        public DatabaseConnection()
+        public DatabaseInterface()
         {
             connection = new SqlConnection(databaseConnectionString);
             command = new SqlCommand();
@@ -149,10 +149,80 @@ namespace DataLayer.Data
 
         public bool updateCities(List<String> newCities, List<String> deletedCities)
         {
-            // TODO first delete rows, then add rows.
-            command.CommandText = "UPDATE Dataset SET measure_name = @newMeasureName WHERE name = @nameDataset";
+            bool success = false;
 
-            return true;
+            String commandText = "";
+
+            try
+            { 
+                connection.Open();
+
+                if (deletedCities.Count > 0)
+                {
+                    commandText = "DELETE FROM City WHERE name IN (";
+                    for (int i = 0; i < deletedCities.Count; i++)
+                    {
+                        commandText += "'" + deletedCities[i] + "'";
+
+                        if (i < deletedCities.Count - 1) commandText += ", ";
+                    }
+
+                    commandText += ")";
+
+                    command.CommandText = commandText;
+
+                    command.ExecuteReader();
+
+                }
+
+                if (newCities.Count > 0)
+                {
+                    commandText = "INSERT INTO City (name) VALUES ";
+                    for (int i = 0; i < newCities.Count; i++)
+                    {
+                        commandText += "('" + newCities[i] + "')";
+
+                        if (i < newCities.Count - 1) commandText += ", ";
+                    }
+
+                    command.CommandText = commandText;
+
+                    command.ExecuteReader();
+                }
+                success = true;
+            }
+            catch (Exception e)
+            {
+                success = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return success;
+        }
+
+        public bool testIfCityIsPresentedInRecords(String cityName)
+        {
+            bool isPresented = false;
+
+            command.CommandText = "SELECT * FROM Record WHERE name_city = @cityName";
+            SqlParameter cityNameParameter = new SqlParameter("cityName", System.Data.SqlDbType.VarChar);
+            command.Parameters.Add(cityNameParameter).Value = cityName;
+
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.HasRows) isPresented = true;
+
+            connection.Close();
+
+            command.Parameters.Remove(cityNameParameter);
+
+            if (isPresented) return true;
+            else return false;
         }
 
         public SqlConnection Connection { get; }

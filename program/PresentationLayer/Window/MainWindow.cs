@@ -16,7 +16,7 @@ namespace PresentationLayer
 {
     public partial class MainWindow : Form
     {
-        private readonly DatabaseConnection databaseConnection;
+        private readonly DatabaseInterface databaseInterface;
         private Dictionary<String, Dataset> datasets;
         private Dictionary<String, Measure> measures;
         private Dictionary<String, City> cities;
@@ -28,11 +28,11 @@ namespace PresentationLayer
         {
             InitializeComponent();
             appName = this.Text;
-            databaseConnection = new DatabaseConnection();                      
+            databaseInterface = new DatabaseInterface();                      
 
-            measures = databaseConnection.getMeasures();
-            datasets = databaseConnection.getDatasets(measures);
-            cities = Utils.sortCities(databaseConnection.getCities());
+            measures = databaseInterface.getMeasures();
+            datasets = databaseInterface.getDatasets(measures);
+            cities = Utils.sortCities(databaseInterface.getCities());
 
             initializeComboBoxDataset();
             initializeComboBoxMeasure();
@@ -53,13 +53,15 @@ namespace PresentationLayer
 
         private void cmbDataset_SelectedIndexChanged(object sender, EventArgs e)
         {
+            dataGridViewDataset.Rows.Clear();
+
             if (cmbDataset.SelectedIndex == 0) return;
             Dataset selectedDataset = null;
             datasets.TryGetValue(datasets.Keys.ToList()[cmbDataset.SelectedIndex - 1], out selectedDataset);
 
             if (selectedDataset == null)
             {
-                // TODO: Error handling, missing item.
+                Utils.displayErrorMessageBox("Dataset neexistuje!", appName, null);
                 return;
             }
             else
@@ -85,7 +87,7 @@ namespace PresentationLayer
 
             if (selectedMeasure == null)
             {
-                // TODO: Error handling, missing item.
+                Utils.displayErrorMessageBox("Tato jednotka teploty neexistuje v databázi!", appName, null);
                 return;
             }
             else
@@ -162,7 +164,7 @@ namespace PresentationLayer
         private void fillDataGridView()
         {
             List<Record> records = Utils.sortedRecordsByOrder(
-                databaseConnection.getRecords(currentlySelectedDataset.Name, cities)
+                databaseInterface.getRecords(currentlySelectedDataset.Name, cities)
                 );
 
             foreach(Record record in records)
@@ -210,7 +212,7 @@ namespace PresentationLayer
 
         private void btnManageCities_Click(object sender, EventArgs e)
         {
-            new ManageCitiesWindow(databaseConnection, cities).Show();
+            new ManageCitiesWindow(databaseInterface, appName).Show();
         }
     }
 }
