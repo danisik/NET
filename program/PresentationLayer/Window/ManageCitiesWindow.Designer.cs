@@ -127,6 +127,8 @@
             this.Controls.Add(this.btnDiscardChanges);
             this.Controls.Add(this.btnConfirmChanges);
             this.Controls.Add(this.dataGridViewManageCities);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "ManageCitiesWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Správa měst";

@@ -90,7 +90,7 @@ namespace DataLayer.Data
                     City city = null;
                     cities.TryGetValue(reader.GetString(2), out city);
 
-                    Record record = new Record(city, reader.GetDouble(3), reader.GetDouble(4),
+                    Record record = new Record(reader.GetInt32(0), city, reader.GetDouble(3), reader.GetDouble(4),
                         reader.GetDouble(5), reader.GetDouble(6), reader.GetDouble(7), reader.GetDouble(8),
                         reader.GetDouble(9), reader.GetDouble(10), reader.GetDouble(11), reader.GetDouble(12),
                         reader.GetDouble(13), reader.GetDouble(14), reader.GetInt32(15));
@@ -223,6 +223,12 @@ namespace DataLayer.Data
 
             if (isPresented) return true;
             else return false;
+        }
+
+        public bool updateRecords()
+        {
+
+            return true;
         }
 
         public SqlConnection Connection { get; }

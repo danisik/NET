@@ -6,6 +6,7 @@ namespace DataLayer.Data
 {
     public class Record
     {
+        private int id;
         private City city;
         private double january;
         private double february;
@@ -21,9 +22,10 @@ namespace DataLayer.Data
         private double december;
         private int order;
 
-        public Record(City city, double january, double february, double march, double april, double may,
+        public Record(int id, City city, double january, double february, double march, double april, double may,
             double june, double july, double august, double september, double october, double november, double december, int order)
         {
+            this.id = id;
             this.city = city;
             this.january = january;
             this.february = february;
@@ -37,6 +39,14 @@ namespace DataLayer.Data
             this.october = october;
             this.november = november;
             this.december = december;
+        }
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
         }
 
         public City City

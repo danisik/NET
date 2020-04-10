@@ -18,11 +18,11 @@ namespace PresentationLayer.Window
         private Dictionary<String, City> cities;
         private String appName = "";
 
-        public ManageCitiesWindow(DatabaseInterface databaseConnection, String appName)
+        public ManageCitiesWindow(DatabaseInterface databaseInterface, String appName)
         {
             InitializeComponent();
-            this.databaseInterface = databaseConnection;
-            this.cities = databaseConnection.getCities();
+            this.databaseInterface = databaseInterface;
+            this.cities = databaseInterface.getCities();
             this.appName = appName;
 
             fillDataGridView();
@@ -80,6 +80,12 @@ namespace PresentationLayer.Window
                 {
                     newCities.Remove(cityName);
                 }
+            }
+
+            if (newCities.Count == 0 && citiesToBeDeleted.Count == 0)
+            {
+                Utils.displayInfoMessageBox("Nebyla zaznamenána žádná změna.", appName);
+                return;
             }
 
             bool success = databaseInterface.updateCities(newCities, citiesToBeDeleted);

@@ -40,8 +40,6 @@ namespace PresentationLayer
 
         private void initializeComboBoxDataset()
         {
-            cmbDataset.Items.Add("NEW DATASET...");
-            cmbDataset.SelectedIndex = 0;
             cmbDataset.Items.AddRange(datasets.Keys.ToArray());
         }
 
@@ -55,9 +53,8 @@ namespace PresentationLayer
         {
             dataGridViewDataset.Rows.Clear();
 
-            if (cmbDataset.SelectedIndex == 0) return;
             Dataset selectedDataset = null;
-            datasets.TryGetValue(datasets.Keys.ToList()[cmbDataset.SelectedIndex - 1], out selectedDataset);
+            datasets.TryGetValue(datasets.Keys.ToList()[cmbDataset.SelectedIndex], out selectedDataset);
 
             if (selectedDataset == null)
             {
@@ -80,8 +77,6 @@ namespace PresentationLayer
 
         private void cmbMeasure_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbDataset.SelectedIndex == 0) return;
-
             Measure selectedMeasure = null;
             measures.TryGetValue(cmbMeasure.SelectedItem.ToString(), out selectedMeasure);
 
@@ -103,7 +98,7 @@ namespace PresentationLayer
 
         private void dataGridViewDataset_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            /* TODO
+            /* TODO: Test inserted values for city or months.
             if (String.IsNullOrEmpty(e.FormattedValue.ToString()) || isAppClosing)
             {
                 return;
@@ -143,7 +138,7 @@ namespace PresentationLayer
                 return;
             }
 
-            // TODO
+            // TODO: Delete temperature tag in value cell.
             //DataGridViewTextBoxCell cell = (DataGridViewTextBoxCell) dataGridViewDataset.Rows[e.RowIndex].Cells[e.ColumnIndex];
 
 
@@ -156,7 +151,7 @@ namespace PresentationLayer
                 return;
             }
 
-            // TODO
+            // TODO: Add temperature tag after value for every month cell.
             //DataGridViewTextBoxCell cell = (DataGridViewTextBoxCell)dataGridViewDataset.Rows[e.RowIndex].Cells[e.ColumnIndex];
             //cell.Value = cell.Value + " " + currentlySelectedDataset.Measure.Tag;
         }
@@ -208,6 +203,58 @@ namespace PresentationLayer
                 row.Cells.Add(monthCell);
             }
             dataGridViewDataset.Rows.Add(row);
+        }
+
+        private void btnDiscardRecordChanges_Click(object sender, EventArgs e)
+        {
+            dataGridViewDataset.Rows.Clear();
+            fillDataGridView();
+        }
+
+        private void btnConfirmRecordChanges_Click(object sender, EventArgs e)
+        {
+            List<Record> newRows = new List<Record>();
+            List<Record> rowsToBeDeleted = new List<Record>();
+            List<Record> rowsToBeUpdated = new List<Record>();
+
+            // TODO: check if rows can be inserted or deleted + updated.
+            /*
+            if (newRows.Count == 0 && rowsToBeDeleted.Count == 0 && rowsToBeUpdated.Count == 0)
+            {
+                Utils.displayInfoMessageBox("Nebyla zaznamenána žádná změna.", appName);
+                return;
+            }
+            */
+
+            //bool success = databaseInterface.updateRecords();
+            bool success = true;
+
+            if (success)
+            {
+                Utils.displayInfoMessageBox("Úprava řádek proběhla úspěšně.", appName);
+                dataGridViewDataset.Rows.Clear();
+                cities = databaseInterface.getCities();
+                fillDataGridView();
+            }
+            else
+            {
+                Utils.displayErrorMessageBox("Vyskytla se chyba při úpravě záznamů v tabulce!", appName, null);
+            }
+        }
+
+        private void btnDeleteSelectedRecordRows_Click(object sender, EventArgs e)
+        {
+            DataGridViewSelectedRowCollection selectedRows = dataGridViewDataset.SelectedRows;
+
+            foreach (DataGridViewRow row in selectedRows)
+            {
+                dataGridViewDataset.Rows.Remove(row);
+            }
+        }
+
+        private void btnManageDatasets_Click(object sender, EventArgs e)
+        {
+            new ManageDatasetsWindow(databaseInterface, appName).Show();
         }
 
         private void btnManageCities_Click(object sender, EventArgs e)

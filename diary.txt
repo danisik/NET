@@ -14,3 +14,9 @@ Přidávání řádků s custom buňkama do datasetu								(0.5 hodiny)
 ------------
 Správa tabulky City v novém okně (zatím bez pushování změn).				(2.5 hodiny)
 Úprava hlavního okna (tlačítka, automatické nahrání dat do datasetu)		(1.5 hodina)
+
+10.4.2020
+------------
+Pushování změn v tabulce City - mazání / přidávání + kontroly.				(1 hodina)
+Správa tabulky Record (zatím bez pushování změn).							(0.5 hodiny)
+Správa tabulky Dataset (bez pushování).										(1 hodina)
