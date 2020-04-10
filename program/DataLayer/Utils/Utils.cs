@@ -28,6 +28,11 @@ namespace DataLayer.Utils
             displayMessageBox(infoMessage, appName, new MessageBoxButtons { }, MessageBoxIcon.Information, null);
         }
 
+        public static void displayWarningMessageBox(string infoMessage, String appName)
+        {
+            displayMessageBox(infoMessage, appName, new MessageBoxButtons { }, MessageBoxIcon.Warning, null);
+        }
+
 
         public static List<Record> sortedRecordsByOrder(List<Record> records)
         {

@@ -208,6 +208,10 @@ namespace DataLayer.Data
             bool success = false;
             String commandText = "";
 
+            SqlParameter newDatasetNameParameter = null;
+            SqlParameter newMeasureNameParameter = null;
+            SqlParameter datasetIDParameter = null;
+
             try
             {
                 connection.Open();
@@ -247,9 +251,9 @@ namespace DataLayer.Data
                 if (datasetsToBeUpdated.Count > 0)
                 {
                     command.CommandText = "UPDATE Dataset SET name = @newDatasetName, measure_name = @newMeasureName WHERE id = @id";
-                    SqlParameter newDatasetNameParameter = new SqlParameter("newDatasetName", System.Data.SqlDbType.VarChar);
-                    SqlParameter newMeasureNameParameter = new SqlParameter("newMeasureName", System.Data.SqlDbType.VarChar);
-                    SqlParameter datasetIDParameter = new SqlParameter("id", System.Data.SqlDbType.Int);
+                    newDatasetNameParameter = new SqlParameter("newDatasetName", System.Data.SqlDbType.VarChar);
+                    newMeasureNameParameter = new SqlParameter("newMeasureName", System.Data.SqlDbType.VarChar);
+                    datasetIDParameter = new SqlParameter("id", System.Data.SqlDbType.Int);
                     command.Parameters.Add(newDatasetNameParameter);
                     command.Parameters.Add(newMeasureNameParameter);
                     command.Parameters.Add(datasetIDParameter);
@@ -259,7 +263,7 @@ namespace DataLayer.Data
                     {
                         newDatasetNameParameter.Value = dataset.Name;
                         newMeasureNameParameter.Value = dataset.Measure.Name;
-                        newMeasureNameParameter.Value = dataset.ID;
+                        datasetIDParameter.Value = dataset.ID;
 
                         command.ExecuteReader();
                     }
@@ -273,6 +277,10 @@ namespace DataLayer.Data
             catch (Exception e)
             {
                 success = false;
+
+                if (newDatasetNameParameter != null) command.Parameters.Remove(newDatasetNameParameter);
+                if (newMeasureNameParameter != null) command.Parameters.Remove(newMeasureNameParameter);
+                if (datasetIDParameter != null) command.Parameters.Remove(datasetIDParameter);
             }
             finally
             {

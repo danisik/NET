@@ -19,4 +19,4 @@ Správa tabulky City v novém okně (zatím bez pushování změn).				(2.5 hodi
 ------------
 Pushování změn v tabulce City - mazání / přidávání + kontroly.				(1 hodina)
 Správa tabulky Record (zatím bez pushování změn).							(0.5 hodiny)
-Správa tabulky Dataset (bez pushování).										(1 hodina)
+Správa tabulky Dataset (i s pushováním)										(3 hodina)

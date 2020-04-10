@@ -4,13 +4,7 @@ using PresentationLayer.GUIElements;
 using PresentationLayer.Window;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PresentationLayer
@@ -36,20 +30,12 @@ namespace PresentationLayer
             cities = Utils.sortCities(databaseInterface.getCities());
 
             initializeComboBoxDataset();
-            initializeComboBoxMeasure();
         }
 
         private void initializeComboBoxDataset()
         {
             cmbDataset.Items.Clear();
             cmbDataset.Items.AddRange(datasets.Keys.ToArray());
-        }
-
-        private void initializeComboBoxMeasure()
-        {
-            cmbMeasure.Items.Clear();
-            cmbMeasure.Items.AddRange(measures.Keys.ToArray());
-            if (cmbMeasure.Items.Count > 0) cmbMeasure.SelectedIndex = 0;
         }
 
         private void cmbDataset_SelectedIndexChanged(object sender, EventArgs e)
@@ -71,26 +57,10 @@ namespace PresentationLayer
                 // If false, then display new dataset immediately.
 
                 currentlySelectedDataset = selectedDataset;
-                cmbMeasure.SelectedItem = selectedDataset.Measure.Name;
+                lblDatasetMeasure.Text = selectedDataset.Measure.Name;
 
                 dataGridViewDataset.Rows.Clear();
                 fillDataGridView();                
-            }
-        }
-
-        private void cmbMeasure_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Measure selectedMeasure = null;
-            measures.TryGetValue(cmbMeasure.SelectedItem.ToString(), out selectedMeasure);
-
-            if (selectedMeasure == null)
-            {
-                Utils.displayErrorMessageBox("Tato jednotka teploty neexistuje v databázi!", appName, null);
-                return;
-            }
-            else
-            {                
-                // TODO: update measure tags in every cell.
             }
         }
 
@@ -263,6 +233,28 @@ namespace PresentationLayer
 
             datasets = databaseInterface.getDatasets(measures);
             initializeComboBoxDataset();
+
+            if (currentlySelectedDataset != null)
+            {
+                if (!datasets.ContainsKey(currentlySelectedDataset.Name))
+                {
+                    Utils.displayWarningMessageBox("Aktuálně zvolený dataset již neexistuje!", appName);
+                    cmbDataset.SelectedIndex = 0;
+                    Dataset selectedDataset = null;
+                    datasets.TryGetValue(datasets.Keys.ToList()[cmbDataset.SelectedIndex], out selectedDataset);
+
+                    if (selectedDataset != null)
+                    {
+                        currentlySelectedDataset = selectedDataset;
+                        lblDatasetMeasure.Text = currentlySelectedDataset.Measure.Name;
+                    }
+                }
+                else
+                {
+                    cmbDataset.SelectedItem = currentlySelectedDataset.Name;
+                    lblDatasetMeasure.Text = currentlySelectedDataset.Measure.Name;
+                }
+            }         
         }
 
         private void btnManageCities_Click(object sender, EventArgs e)
@@ -271,7 +263,13 @@ namespace PresentationLayer
             window.ShowDialog();
 
             cities = databaseInterface.getCities();
-            fillDataGridView();
+            if (currentlySelectedDataset != null) fillDataGridView();
+        }
+
+        private void btnManageTemperatures_Click(object sender, EventArgs e)
+        {
+            ManageMeasuresWindow window = new ManageMeasuresWindow(this);
+            window.ShowDialog();
         }
 
         public DatabaseInterface DatabaseInterface

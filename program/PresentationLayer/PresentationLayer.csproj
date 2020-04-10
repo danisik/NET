@@ -84,6 +84,12 @@
     <Compile Include="Window\ManageDatasetsWindow.Designer.cs">
       <DependentUpon>ManageDatasetsWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Window\ManageMeasuresWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\ManageMeasuresWindow.Designer.cs">
+      <DependentUpon>ManageMeasuresWindow.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -102,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Window\ManageDatasetsWindow.resx">
       <DependentUpon>ManageDatasetsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Window\ManageMeasuresWindow.resx">
+      <DependentUpon>ManageMeasuresWindow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
