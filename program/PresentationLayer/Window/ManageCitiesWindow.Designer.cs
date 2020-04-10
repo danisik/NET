@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.dataGridViewManageCities = new System.Windows.Forms.DataGridView();
-            this.columnCityName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnConfirmChanges = new System.Windows.Forms.Button();
             this.btnDiscardChanges = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnNewCityRow = new System.Windows.Forms.Button();
             this.btnDeleteSelectedCityRow = new System.Windows.Forms.Button();
+            this.columnCityName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewManageCities)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,13 +51,6 @@
             this.dataGridViewManageCities.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewManageCities.Size = new System.Drawing.Size(243, 287);
             this.dataGridViewManageCities.TabIndex = 0;
-            // 
-            // columnCityName
-            // 
-            this.columnCityName.FillWeight = 200F;
-            this.columnCityName.HeaderText = "Město";
-            this.columnCityName.Name = "columnCityName";
-            this.columnCityName.Width = 200;
             // 
             // btnConfirmChanges
             // 
@@ -116,6 +109,13 @@
             this.btnDeleteSelectedCityRow.UseVisualStyleBackColor = true;
             this.btnDeleteSelectedCityRow.Click += new System.EventHandler(this.btnDeleteSelectedCityRow_Click);
             // 
+            // columnCityName
+            // 
+            this.columnCityName.FillWeight = 200F;
+            this.columnCityName.HeaderText = "Město";
+            this.columnCityName.Name = "columnCityName";
+            this.columnCityName.Width = 200;
+            // 
             // ManageCitiesWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -143,9 +143,9 @@
         private System.Windows.Forms.Button btnConfirmChanges;
         private System.Windows.Forms.Button btnDiscardChanges;
         private System.Windows.Forms.Button btnReturn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnCityName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.Button btnNewCityRow;
         private System.Windows.Forms.Button btnDeleteSelectedCityRow;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnCityName;
     }
 }

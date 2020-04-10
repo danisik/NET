@@ -6,13 +6,23 @@ namespace DataLayer.Data
 {
     public class Dataset
     {
+        private int id;
         private String name;
         private Measure measure;
 
-        public Dataset(String name, Measure measure)
+        public Dataset(int id, String name, Measure measure)
         {
+            this.id = id;
             this.name = name;
             this.measure = measure;
+        }
+
+        public int ID
+        {
+            get
+            {
+                return id;
+            }
         }
 
         public String Name 

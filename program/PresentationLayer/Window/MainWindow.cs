@@ -9,6 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -36,15 +37,17 @@ namespace PresentationLayer
 
             initializeComboBoxDataset();
             initializeComboBoxMeasure();
-        }        
+        }
 
         private void initializeComboBoxDataset()
         {
+            cmbDataset.Items.Clear();
             cmbDataset.Items.AddRange(datasets.Keys.ToArray());
         }
 
         private void initializeComboBoxMeasure()
         {
+            cmbMeasure.Items.Clear();
             cmbMeasure.Items.AddRange(measures.Keys.ToArray());
             if (cmbMeasure.Items.Count > 0) cmbMeasure.SelectedIndex = 0;
         }
@@ -158,8 +161,9 @@ namespace PresentationLayer
 
         private void fillDataGridView()
         {
+            dataGridViewDataset.Rows.Clear();
             List<Record> records = Utils.sortedRecordsByOrder(
-                databaseInterface.getRecords(currentlySelectedDataset.Name, cities)
+                databaseInterface.getRecords(currentlySelectedDataset.ID, cities)
                 );
 
             foreach(Record record in records)
@@ -254,12 +258,36 @@ namespace PresentationLayer
 
         private void btnManageDatasets_Click(object sender, EventArgs e)
         {
-            new ManageDatasetsWindow(databaseInterface, appName).Show();
+            ManageDatasetsWindow window = new ManageDatasetsWindow(this);
+            window.ShowDialog();
+
+            datasets = databaseInterface.getDatasets(measures);
+            initializeComboBoxDataset();
         }
 
         private void btnManageCities_Click(object sender, EventArgs e)
         {
-            new ManageCitiesWindow(databaseInterface, appName).Show();
+            ManageCitiesWindow window = new ManageCitiesWindow(this);
+            window.ShowDialog();
+
+            cities = databaseInterface.getCities();
+            fillDataGridView();
+        }
+
+        public DatabaseInterface DatabaseInterface
+        {
+            get
+            {
+                return databaseInterface;
+            }
+        }
+
+        public String AppName
+        {
+            get
+            {
+                return appName;
+            }
         }
     }
 }

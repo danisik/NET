@@ -60,9 +60,9 @@ namespace DataLayer.Data
                 while (reader.Read())
                 {
                     Measure measure = null;
-                    measures.TryGetValue(reader.GetString(1), out measure);
+                    measures.TryGetValue(reader.GetString(2), out measure);
 
-                    datasets.Add(reader.GetString(0), new Dataset(reader.GetString(0), measure));
+                    datasets.Add(reader.GetString(1), new Dataset(reader.GetInt32(0), reader.GetString(1), measure));
                 }
             }
 
@@ -71,13 +71,13 @@ namespace DataLayer.Data
             return datasets;
         }
 
-        public List<Record> getRecords(String datasetName, Dictionary<String, City> cities)
+        public List<Record> getRecords(int datasetID, Dictionary<String, City> cities)
         {
             List<Record> records = new List<Record>();
 
-            command.CommandText = "SELECT * FROM Record WHERE name_dataset = @nameDataset";
-            SqlParameter nameDatasetParameter = new SqlParameter("nameDataset", System.Data.SqlDbType.VarChar);
-            command.Parameters.Add(nameDatasetParameter).Value = datasetName;
+            command.CommandText = "SELECT * FROM Record WHERE id_dataset = @datasetID";
+            SqlParameter idDatasetParameter = new SqlParameter("datasetID", System.Data.SqlDbType.Int);
+            command.Parameters.Add(idDatasetParameter).Value = datasetID;
             
             connection.Open();
 
@@ -100,7 +100,7 @@ namespace DataLayer.Data
             }
 
             connection.Close();
-            command.Parameters.Remove(nameDatasetParameter);
+            command.Parameters.Remove(idDatasetParameter);
 
             return records;
         }
@@ -188,6 +188,85 @@ namespace DataLayer.Data
                     command.CommandText = commandText;
 
                     command.ExecuteReader();
+                }
+                success = true;
+            }
+            catch (Exception e)
+            {
+                success = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return success;
+        }
+
+        public Boolean updateDatasets(List<Dataset> newDatasets, List<int> datasetsToBeDeleted, List<Dataset> datasetsToBeUpdated)
+        {
+            bool success = false;
+            String commandText = "";
+
+            try
+            {
+                connection.Open();
+
+                if (newDatasets.Count > 0)
+                {
+                    commandText = "INSERT INTO Dataset (name, measure_name) VALUES ";
+                    int i = newDatasets.Count - 1;
+                    foreach (Dataset dataset in newDatasets)
+                    {
+                        commandText += "('" + dataset.Name + "', '" + dataset.Measure.Name + "')";
+
+                        if (i > 0) commandText += ", ";
+                        i--;
+                    }
+
+                    command.CommandText = commandText;
+
+                    command.ExecuteReader();
+                }
+
+                if (datasetsToBeDeleted.Count > 0)
+                {
+                    commandText = "DELETE FROM Dataset WHERE id IN (";
+                    for (int i = 0; i < datasetsToBeDeleted.Count; i++)
+                    {
+                        commandText += "'" + datasetsToBeDeleted[i] + "'";
+
+                        if (i < datasetsToBeDeleted.Count - 1) commandText += ", ";
+                    }
+
+                    commandText += ")";
+
+                    command.ExecuteReader();
+                }
+
+                if (datasetsToBeUpdated.Count > 0)
+                {
+                    command.CommandText = "UPDATE Dataset SET name = @newDatasetName, measure_name = @newMeasureName WHERE id = @id";
+                    SqlParameter newDatasetNameParameter = new SqlParameter("newDatasetName", System.Data.SqlDbType.VarChar);
+                    SqlParameter newMeasureNameParameter = new SqlParameter("newMeasureName", System.Data.SqlDbType.VarChar);
+                    SqlParameter datasetIDParameter = new SqlParameter("id", System.Data.SqlDbType.Int);
+                    command.Parameters.Add(newDatasetNameParameter);
+                    command.Parameters.Add(newMeasureNameParameter);
+                    command.Parameters.Add(datasetIDParameter);
+
+
+                    foreach (Dataset dataset in datasetsToBeUpdated)
+                    {
+                        newDatasetNameParameter.Value = dataset.Name;
+                        newMeasureNameParameter.Value = dataset.Measure.Name;
+                        newMeasureNameParameter.Value = dataset.ID;
+
+                        command.ExecuteReader();
+                    }
+
+                    command.Parameters.Remove(newDatasetNameParameter);
+                    command.Parameters.Remove(newMeasureNameParameter);
+                    command.Parameters.Remove(datasetIDParameter);                    
                 }
                 success = true;
             }

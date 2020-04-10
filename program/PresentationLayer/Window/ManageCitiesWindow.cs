@@ -17,13 +17,15 @@ namespace PresentationLayer.Window
         private readonly DatabaseInterface databaseInterface;
         private Dictionary<String, City> cities;
         private String appName = "";
+        private MainWindow mainWindow;
 
-        public ManageCitiesWindow(DatabaseInterface databaseInterface, String appName)
+        public ManageCitiesWindow(MainWindow mainWindow)
         {
             InitializeComponent();
-            this.databaseInterface = databaseInterface;
+            this.databaseInterface = mainWindow.DatabaseInterface;
+            this.appName = mainWindow.AppName;
+            this.mainWindow = mainWindow;
             this.cities = databaseInterface.getCities();
-            this.appName = appName;
 
             fillDataGridView();
         }
@@ -50,8 +52,9 @@ namespace PresentationLayer.Window
             // Get new city names.
             foreach (DataGridViewRow row in dataGridViewManageCities.Rows)
             {
+                
+                if (row.Cells[0].Value == null) continue;
                 String cityName = row.Cells[0].Value.ToString();
-                if (cityName.Length == 0) continue;
 
                 if (!newCities.Contains(cityName)) newCities.Add(cityName);
             }

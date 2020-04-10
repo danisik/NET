@@ -17,12 +17,14 @@ namespace PresentationLayer.Window
         private readonly DatabaseInterface databaseInterface;
         private Dictionary<String, Dataset> datasets;
         private String appName = "";
+        private MainWindow mainWindow;
 
-        public ManageDatasetsWindow(DatabaseInterface databaseInterface, String appName)
+        public ManageDatasetsWindow(MainWindow mainWindow)
         {
             InitializeComponent();
-            this.databaseInterface = databaseInterface;
-            this.appName = appName;
+            this.databaseInterface = mainWindow.DatabaseInterface;
+            this.appName = mainWindow.AppName;
+            this.mainWindow = mainWindow;
             this.datasets = databaseInterface.getDatasets(databaseInterface.getMeasures());
 
             fillDataGridView();
@@ -35,6 +37,10 @@ namespace PresentationLayer.Window
             foreach (Dataset dataset in datasets.Values)
             {
                 DataGridViewRow row = new DataGridViewRow();
+
+                DataGridViewTextBoxCell idCell = new DataGridViewTextBoxCell();
+                row.Cells.Add(idCell);
+                idCell.Value = dataset.ID;
 
                 DataGridViewTextBoxCell datasetCell = new DataGridViewTextBoxCell();
                 row.Cells.Add(datasetCell);
@@ -61,6 +67,9 @@ namespace PresentationLayer.Window
             Dictionary<String, Measure> measures = databaseInterface.getMeasures();
 
             DataGridViewRow row = new DataGridViewRow();
+            DataGridViewTextBoxCell idCell = new DataGridViewTextBoxCell();
+            row.Cells.Add(idCell);
+
             DataGridViewTextBoxCell datasetCell = new DataGridViewTextBoxCell();
             row.Cells.Add(datasetCell);
 
@@ -89,33 +98,56 @@ namespace PresentationLayer.Window
 
         private void btnConfirmDatasetChanges_Click(object sender, EventArgs e)
         {
-            /*
-            List<Dataset> datasetsToBeDeleted = new List<Dataset>();
+            List<int> datasetsToBeDeleted = new List<int>();
             List<Dataset> newDatasets = new List<Dataset>();
-            List<Dataset> datasetsToBeUpdated = new List<Dataset>();
+            Dictionary<int, Dataset> datasetsToBeUpdated = new Dictionary<int,Dataset>();
 
-            // Get new city names.
+            Dictionary<String, Measure> measures = databaseInterface.getMeasures();
+
             foreach (DataGridViewRow row in dataGridViewManageDatasets.Rows)
             {
-                String cityName = row.Cells[0].Value.ToString();
-                if (cityName.Length == 0) continue;
+                Measure measure = null;
+                measures.TryGetValue(row.Cells[2].Value.ToString(), out measure);
 
-                if (!newDatasets.Contains(cityName)) newDatasets.Add(cityName);
+                if (measure == null || row.Cells[1].Value == null) continue;
+                int id = -1;
+                if (row.Cells[0].Value == null)
+                {
+                    Dataset dataset = new Dataset(id, row.Cells[1].Value.ToString(), measure);
+                    newDatasets.Add(dataset);
+                }
+                else
+                {
+                    Dataset dataset = new Dataset((int)row.Cells[0].Value, row.Cells[1].Value.ToString(), measure);
+                    datasetsToBeUpdated.Add((int)row.Cells[0].Value, dataset);
+                }
             }
 
-            // Check if currently stored city names in database are presented in new list.
-            foreach (String cityName in cities.Keys)
+            foreach (Dataset dataset in datasets.Values)
             {
-                newDatasets.Remove(cityName);
+                Dataset newDataset = datasetsToBeUpdated[dataset.ID];
+                if (newDataset == null)
+                {
+                    datasetsToBeDeleted.Add(dataset.ID);
+                    datasetsToBeUpdated.Remove(dataset.ID);                    
+                }
+                else
+                {
+                    
+                    if (dataset.Name.Equals(newDataset.Name) && dataset.Measure.Name.Equals(newDataset.Measure.Name))
+                    {
+                        datasetsToBeUpdated.Remove(dataset.ID);
+                    }
+                }
             }
 
-            if (newDatasets.Count == 0 && datasetsToBeDeleted.Count == 0)
+            if (newDatasets.Count == 0 && datasetsToBeDeleted.Count == 0 && datasetsToBeUpdated.Count == 0)
             {
                 Utils.displayInfoMessageBox("Nebyla zaznamenána žádná změna.", appName);
                 return;
             }
 
-            bool success = databaseInterface.updateDatasets(newDatasets, datasetsToBeDeleted);
+            bool success = databaseInterface.updateDatasets(newDatasets, datasetsToBeDeleted, datasetsToBeUpdated.Values.ToList());
 
             if (success)
             {
@@ -129,7 +161,6 @@ namespace PresentationLayer.Window
                 Utils.displayErrorMessageBox("Vyskytla se chyba při úpravě měst v databázi!",
                 appName, null);
             }
-            */
         }
 
         private void btnDiscardDatasetChanges_Click(object sender, EventArgs e)
