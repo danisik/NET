@@ -155,10 +155,9 @@ namespace DataLayer.Data
 
             try
             { 
-                connection.Open();
-
                 if (deletedCities.Count > 0)
                 {
+                    connection.Open();
                     commandText = "DELETE FROM City WHERE name IN (";
                     for (int i = 0; i < deletedCities.Count; i++)
                     {
@@ -172,11 +171,13 @@ namespace DataLayer.Data
                     command.CommandText = commandText;
 
                     command.ExecuteReader();
+                    connection.Close();
 
                 }
 
                 if (newCities.Count > 0)
                 {
+                    connection.Open();
                     commandText = "INSERT INTO City (name) VALUES ";
                     for (int i = 0; i < newCities.Count; i++)
                     {
@@ -188,6 +189,7 @@ namespace DataLayer.Data
                     command.CommandText = commandText;
 
                     command.ExecuteReader();
+                    connection.Close();
                 }
                 success = true;
             }
@@ -214,10 +216,9 @@ namespace DataLayer.Data
 
             try
             {
-                connection.Open();
-
                 if (newDatasets.Count > 0)
                 {
+                    connection.Open();
                     commandText = "INSERT INTO Dataset (name, measure_name) VALUES ";
                     int i = newDatasets.Count - 1;
                     foreach (Dataset dataset in newDatasets)
@@ -231,10 +232,12 @@ namespace DataLayer.Data
                     command.CommandText = commandText;
 
                     command.ExecuteReader();
+                    connection.Close();
                 }
 
                 if (datasetsToBeDeleted.Count > 0)
                 {
+                    connection.Open();
                     commandText = "DELETE FROM Dataset WHERE id IN (";
                     for (int i = 0; i < datasetsToBeDeleted.Count; i++)
                     {
@@ -245,11 +248,15 @@ namespace DataLayer.Data
 
                     commandText += ")";
 
+                    command.CommandText = commandText;
+
                     command.ExecuteReader();
+                    connection.Close();
                 }
 
                 if (datasetsToBeUpdated.Count > 0)
                 {
+                    connection.Open();
                     command.CommandText = "UPDATE Dataset SET name = @newDatasetName, measure_name = @newMeasureName WHERE id = @id";
                     newDatasetNameParameter = new SqlParameter("newDatasetName", System.Data.SqlDbType.VarChar);
                     newMeasureNameParameter = new SqlParameter("newMeasureName", System.Data.SqlDbType.VarChar);
@@ -270,7 +277,8 @@ namespace DataLayer.Data
 
                     command.Parameters.Remove(newDatasetNameParameter);
                     command.Parameters.Remove(newMeasureNameParameter);
-                    command.Parameters.Remove(datasetIDParameter);                    
+                    command.Parameters.Remove(datasetIDParameter);
+                    connection.Close();
                 }
                 success = true;
             }
@@ -281,6 +289,93 @@ namespace DataLayer.Data
                 if (newDatasetNameParameter != null) command.Parameters.Remove(newDatasetNameParameter);
                 if (newMeasureNameParameter != null) command.Parameters.Remove(newMeasureNameParameter);
                 if (datasetIDParameter != null) command.Parameters.Remove(datasetIDParameter);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return success;
+        }
+
+        public Boolean updateMeasures(Dictionary<String, Measure> newMeasures, List<String> measuresToBeDeleted, List<Measure> measuresToBeUpdated)
+        {
+            bool success = false;
+            String commandText = "";
+
+            SqlParameter newMeasureTagParameter = null;
+            SqlParameter measureNameParameter = null;
+
+            try
+            {
+                if (newMeasures.Count > 0)
+                {
+                    connection.Open();
+                    commandText = "INSERT INTO Measure (name, measure_tag) VALUES ";
+                    int i = newMeasures.Count - 1;
+                    foreach (Measure measure in newMeasures.Values)
+                    {
+                        commandText += "('" + measure.Name + "', '" + measure.Tag + "')";
+
+                        if (i > 0) commandText += ", ";
+                        i--;
+                    }
+
+                    command.CommandText = commandText;
+
+                    command.ExecuteReader();
+                    connection.Close();
+                }
+                
+                if (measuresToBeDeleted.Count > 0)
+                {
+                    connection.Open();
+                    commandText = "DELETE FROM Measure WHERE name IN (";
+                    for (int i = 0; i < measuresToBeDeleted.Count; i++)
+                    {
+                        commandText += "'" + measuresToBeDeleted[i] + "'";
+
+                        if (i < measuresToBeDeleted.Count - 1) commandText += ", ";
+                    }
+
+                    commandText += ")";
+
+                    command.CommandText = commandText;
+
+                    command.ExecuteReader();
+                    connection.Close();
+                }
+                
+                if (measuresToBeUpdated.Count > 0)
+                {
+                    connection.Open();
+                    command.CommandText = "UPDATE Measure SET measure_tag = @newMeasureTag WHERE name = @measureName";
+                    newMeasureTagParameter = new SqlParameter("newMeasureTag", System.Data.SqlDbType.VarChar);
+                    measureNameParameter = new SqlParameter("measureName", System.Data.SqlDbType.VarChar);
+                    command.Parameters.Add(newMeasureTagParameter);
+                    command.Parameters.Add(measureNameParameter);
+
+
+                    foreach (Measure measure in measuresToBeUpdated)
+                    {
+                        newMeasureTagParameter.Value = measure.Tag;
+                        measureNameParameter.Value = measure.Name;
+
+                        command.ExecuteReader();
+                    }
+
+                    command.Parameters.Remove(newMeasureTagParameter);
+                    command.Parameters.Remove(measureNameParameter);
+                    connection.Close();
+                }
+                success = true;
+            }
+            catch (Exception e)
+            {
+                success = false;
+
+                if (newMeasureTagParameter != null) command.Parameters.Remove(newMeasureTagParameter);
+                if (measureNameParameter != null) command.Parameters.Remove(measureNameParameter);
             }
             finally
             {
@@ -308,8 +403,29 @@ namespace DataLayer.Data
 
             command.Parameters.Remove(cityNameParameter);
 
-            if (isPresented) return true;
-            else return false;
+            return isPresented;
+        }
+
+        public bool testIfMeasureIsPresentedInDatasets(String measureName)
+        {
+            bool isPresented = false;
+
+            command.CommandText = "SELECT * FROM Dataset WHERE measure_name = @measureName";
+            SqlParameter measureNameParameter = new SqlParameter("measureName", System.Data.SqlDbType.VarChar);
+            command.Parameters.Add(measureNameParameter);
+            measureNameParameter.Value = measureName;
+
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.HasRows) isPresented = true;
+
+            connection.Close();
+
+            command.Parameters.Remove(measureNameParameter);
+
+            return isPresented;
         }
 
         public bool updateRecords()

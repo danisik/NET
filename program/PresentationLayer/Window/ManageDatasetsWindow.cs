@@ -109,7 +109,24 @@ namespace PresentationLayer.Window
                 Measure measure = null;
                 measures.TryGetValue(row.Cells[2].Value.ToString(), out measure);
 
-                if (measure == null || row.Cells[1].Value == null) continue;
+                if (row.Cells[1].Value == null)
+                {
+                    Utils.displayErrorMessageBox("Jeden z řádků nemá vyplněný název datasetu!", appName, null);
+                    return;
+                }
+
+                if (row.Cells[2].Value == null) 
+                {
+                    Utils.displayErrorMessageBox("Jeden z řádků nemá vyplněný název jednotky teploty!", appName, null);
+                    return;
+                }
+
+                if (measure == null)
+                {
+                    Utils.displayErrorMessageBox("Název vybrané jednotky teploty neodpovídá žádné hodnotě v databázi!", appName, null);
+                    return;
+                }
+
                 int id = -1;
                 if (row.Cells[0].Value == null)
                 {
@@ -125,6 +142,7 @@ namespace PresentationLayer.Window
 
             foreach (Dataset dataset in datasets.Values)
             {
+                // TODO: error - není ve slovníku
                 Dataset newDataset = datasetsToBeUpdated[dataset.ID];
                 if (newDataset == null)
                 {

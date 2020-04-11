@@ -20,3 +20,10 @@ Správa tabulky City v novém okně (zatím bez pushování změn).				(2.5 hodi
 Pushování změn v tabulce City - mazání / přidávání + kontroly.				(1 hodina)
 Správa tabulky Record (zatím bez pushování změn).							(0.5 hodiny)
 Správa tabulky Dataset (i s pushováním)										(3 hodina)
+Správa teplot v novém okně (bez pushování).									(0.5 hodiny)
+Zvětšení buněk pro měsíce + jednotka teploty zobrazena jako label			(0.5 hodiny)
+
+11.4.2020
+------------
+Bugfix správy dat (ukládání, mazání, update) v databázi.					(1 hodina)
+Správa teplot v novém okně (pushování).										(0.5 hodiny)

@@ -52,8 +52,13 @@ namespace PresentationLayer.Window
             // Get new city names.
             foreach (DataGridViewRow row in dataGridViewManageCities.Rows)
             {
-                
-                if (row.Cells[0].Value == null) continue;
+
+                if (row.Cells[0].Value == null)
+                {
+                    Utils.displayErrorMessageBox("Jeden z řádků nemá vyplněný název města!", appName, null);
+                    return;
+                }
+
                 String cityName = row.Cells[0].Value.ToString();
 
                 if (!newCities.Contains(cityName)) newCities.Add(cityName);

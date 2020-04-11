@@ -1,4 +1,5 @@
 ﻿using DataLayer.Data;
+using DataLayer.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -70,81 +71,81 @@ namespace PresentationLayer.Window
 
         private void btnConfirmMeasureChanges_Click(object sender, EventArgs e)
         {
-            // TODO: complete 
+            List<String> measuresToBeDeleted = new List<String>();
+            Dictionary<String, Measure> newMeasures = new Dictionary<String, Measure>();
+            List<Measure> measuresToBeUpdated = new List<Measure>();
 
-
-
-            /*
-             
-            List<int> datasetsToBeDeleted = new List<int>();
-            List<Dataset> newDatasets = new List<Dataset>();
-            Dictionary<int, Dataset> datasetsToBeUpdated = new Dictionary<int,Dataset>();
-
-
-
-
-
-
-            List<String> citiesToBeDeleted = new List<String>();
-            List<String> newCities = new List<String>();
-
-            // Get new city names.
-            foreach (DataGridViewRow row in dataGridViewManageCities.Rows)
+            foreach (DataGridViewRow row in dataGridViewManageMeasures.Rows)
             {
 
-                if (row.Cells[0].Value == null) continue;
-                String cityName = row.Cells[0].Value.ToString();
+                if (row.Cells[0].Value == null)
+                {
+                    Utils.displayErrorMessageBox("Jeden z řádků nemá vyplněný název jednotky teploty!", appName, null);
+                    return;
+                }
 
-                if (!newCities.Contains(cityName)) newCities.Add(cityName);
+                if (row.Cells[1].Value == null) 
+                {
+                    Utils.displayErrorMessageBox("Jeden z řádků nemá vyplněný symbol jednotky teploty!", appName, null);
+                    return;
+                }
+
+                String measureName = row.Cells[0].Value.ToString();
+                String measureTag = row.Cells[1].Value.ToString();
+
+                if (!newMeasures.ContainsKey(measureName)) newMeasures.Add(measureName, new Measure(measureName, measureTag));
             }
 
-            // Check if currently stored city names in database are presented in new list.
-            foreach (String cityName in cities.Keys)
+            foreach (String measureName in measures.Keys)
             {
-                // If currently stored city name is not presented in new list, then check
-                // if deleting this city will result in database incompatibility.
-                // Need to check if any record contains this city name.
-                if (!newCities.Contains(cityName))
+                if (!newMeasures.ContainsKey(measureName))
                 {
-                    bool isPresented = databaseInterface.testIfCityIsPresentedInRecords(cityName);
+                    bool isPresented = databaseInterface.testIfMeasureIsPresentedInDatasets(measureName);
                     if (!isPresented)
                     {
-                        citiesToBeDeleted.Add(cityName);
+                        measuresToBeDeleted.Add(measureName);
                     }
                     else
                     {
-                        Utils.displayErrorMessageBox("Nelze upravit tabulku měst, protože název města '" + cityName + "' je používán v jednotlivých záznamech.",
+                        Utils.displayErrorMessageBox("Nelze upravit tabulku jednotek teplot, protože název jednotky teploty '" + measureName + "' je používán v jednotlivých datasetech.",
                         appName, null);
                         return;
                     }
                 }
                 else
                 {
-                    newCities.Remove(cityName);
+                    Measure newMeasure = null;
+                    newMeasures.TryGetValue(measureName, out newMeasure);
+                    if (newMeasure == null) continue;
+
+                    Measure oldMeasure = null;
+                    measures.TryGetValue(measureName, out oldMeasure);
+                    if (oldMeasure == null) continue;
+
+                    if (!newMeasure.Tag.Equals(oldMeasure.Tag)) measuresToBeUpdated.Add(newMeasure);
+                    newMeasures.Remove(measureName);
                 }
             }
 
-            if (newCities.Count == 0 && citiesToBeDeleted.Count == 0)
+            if (measuresToBeDeleted.Count == 0 && newMeasures.Count == 0 && measuresToBeUpdated.Count == 0)
             {
                 Utils.displayInfoMessageBox("Nebyla zaznamenána žádná změna.", appName);
                 return;
             }
-
-            bool success = databaseInterface.updateCities(newCities, citiesToBeDeleted);
+            bool success = databaseInterface.updateMeasures(newMeasures, measuresToBeDeleted, measuresToBeUpdated);
 
             if (success)
             {
                 Utils.displayInfoMessageBox("Úprava měst proběhla úspěšně.", appName);
-                dataGridViewManageCities.Rows.Clear();
-                cities = databaseInterface.getCities();
+                dataGridViewManageMeasures.Rows.Clear();
+                measures = databaseInterface.getMeasures();
                 fillDataGridView();
             }
             else
             {
-                Utils.displayErrorMessageBox("Vyskytla se chyba při úpravě měst v databázi!",
+                Utils.displayErrorMessageBox("Vyskytla se chyba při úpravě jednotek teplot v databázi!",
                 appName, null);
             }
-            */
         }
 
         private void btnDiscardMeasureChanges_Click(object sender, EventArgs e)

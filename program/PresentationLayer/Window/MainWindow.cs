@@ -57,7 +57,7 @@ namespace PresentationLayer
                 // If false, then display new dataset immediately.
 
                 currentlySelectedDataset = selectedDataset;
-                lblDatasetMeasure.Text = selectedDataset.Measure.Name;
+                updateMeasureLabel();
 
                 dataGridViewDataset.Rows.Clear();
                 fillDataGridView();                
@@ -246,13 +246,13 @@ namespace PresentationLayer
                     if (selectedDataset != null)
                     {
                         currentlySelectedDataset = selectedDataset;
-                        lblDatasetMeasure.Text = currentlySelectedDataset.Measure.Name;
+                        updateMeasureLabel();
                     }
                 }
                 else
                 {
                     cmbDataset.SelectedItem = currentlySelectedDataset.Name;
-                    lblDatasetMeasure.Text = currentlySelectedDataset.Measure.Name;
+                    updateMeasureLabel();
                 }
             }         
         }
@@ -270,6 +270,13 @@ namespace PresentationLayer
         {
             ManageMeasuresWindow window = new ManageMeasuresWindow(this);
             window.ShowDialog();
+
+            if (currentlySelectedDataset != null) updateMeasureLabel();
+        }
+
+        private void updateMeasureLabel()
+        {
+            lblDatasetMeasure.Text = currentlySelectedDataset.Measure.Name + " [" + currentlySelectedDataset.Measure.Tag + "]";
         }
 
         public DatabaseInterface DatabaseInterface
