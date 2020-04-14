@@ -1,5 +1,6 @@
 ﻿using DataLayer.Data;
 using DataLayer.Utils;
+using PresentationLayer.GUIElements;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,11 +37,7 @@ namespace PresentationLayer.Window
 
             foreach (Dataset dataset in datasets.Values)
             {
-                DataGridViewRow row = new DataGridViewRow();
-
-                DataGridViewTextBoxCell idCell = new DataGridViewTextBoxCell();
-                row.Cells.Add(idCell);
-                idCell.Value = dataset.ID;
+                DataGridViewRowWithId row = new DataGridViewRowWithId(dataset.ID);
 
                 DataGridViewTextBoxCell datasetCell = new DataGridViewTextBoxCell();
                 row.Cells.Add(datasetCell);
@@ -66,9 +63,7 @@ namespace PresentationLayer.Window
         {
             Dictionary<String, Measure> measures = databaseInterface.getMeasures();
 
-            DataGridViewRow row = new DataGridViewRow();
-            DataGridViewTextBoxCell idCell = new DataGridViewTextBoxCell();
-            row.Cells.Add(idCell);
+            DataGridViewRowWithId row = new DataGridViewRowWithId(-1);
 
             DataGridViewTextBoxCell datasetCell = new DataGridViewTextBoxCell();
             row.Cells.Add(datasetCell);
@@ -106,16 +101,18 @@ namespace PresentationLayer.Window
 
             foreach (DataGridViewRow row in dataGridViewManageDatasets.Rows)
             {
-                Measure measure = null;
-                measures.TryGetValue(row.Cells[2].Value.ToString(), out measure);
+                DataGridViewRowWithId rowWithId = (DataGridViewRowWithId)row;
 
-                if (row.Cells[1].Value == null)
+                Measure measure = null;
+                measures.TryGetValue(row.Cells[1].Value.ToString(), out measure);
+
+                if (row.Cells[0].Value == null)
                 {
                     Utils.displayErrorMessageBox("Jeden z řádků nemá vyplněný název datasetu!", appName, null);
                     return;
                 }
 
-                if (row.Cells[2].Value == null) 
+                if (row.Cells[1].Value == null) 
                 {
                     Utils.displayErrorMessageBox("Jeden z řádků nemá vyplněný název jednotky teploty!", appName, null);
                     return;
@@ -128,30 +125,28 @@ namespace PresentationLayer.Window
                 }
 
                 int id = -1;
-                if (row.Cells[0].Value == null)
+                if (rowWithId.Id == id)
                 {
-                    Dataset dataset = new Dataset(id, row.Cells[1].Value.ToString(), measure);
+                    Dataset dataset = new Dataset(id, row.Cells[0].Value.ToString(), measure);
                     newDatasets.Add(dataset);
                 }
                 else
                 {
-                    Dataset dataset = new Dataset((int)row.Cells[0].Value, row.Cells[1].Value.ToString(), measure);
-                    datasetsToBeUpdated.Add((int)row.Cells[0].Value, dataset);
+                    Dataset dataset = new Dataset(rowWithId.Id, row.Cells[0].Value.ToString(), measure);
+                    datasetsToBeUpdated.Add(rowWithId.Id, dataset);
                 }
             }
 
             foreach (Dataset dataset in datasets.Values)
-            {
-                // TODO: error - není ve slovníku
-                Dataset newDataset = datasetsToBeUpdated[dataset.ID];
-                if (newDataset == null)
+            {                
+                if (!datasetsToBeUpdated.ContainsKey(dataset.ID))
                 {
                     datasetsToBeDeleted.Add(dataset.ID);
                     datasetsToBeUpdated.Remove(dataset.ID);                    
                 }
                 else
                 {
-                    
+                    Dataset newDataset = datasetsToBeUpdated[dataset.ID];
                     if (dataset.Name.Equals(newDataset.Name) && dataset.Measure.Name.Equals(newDataset.Measure.Name))
                     {
                         datasetsToBeUpdated.Remove(dataset.ID);

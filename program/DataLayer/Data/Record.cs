@@ -39,6 +39,7 @@ namespace DataLayer.Data
             this.october = october;
             this.november = november;
             this.december = december;
+            this.order = order;
         }
 
         public int Id
@@ -57,7 +58,7 @@ namespace DataLayer.Data
             }
         }
 
-        public Double January
+        public double January
         {
             get
             {
@@ -65,15 +66,15 @@ namespace DataLayer.Data
             }
         }
 
-        public Double February
+        public double February
         {
             get
             {
-                return February;
+                return february;
             }
         }
 
-        public Double March
+        public double March
         {
             get
             {
@@ -81,15 +82,15 @@ namespace DataLayer.Data
             }
         }
 
-        public Double April
+        public double April
         {
             get
             {
-                return April;
+                return april;
             }
         }
 
-        public Double May
+        public double May
         {
             get
             {
@@ -97,7 +98,7 @@ namespace DataLayer.Data
             }
         }
 
-        public Double June
+        public double June
         {
             get
             {
@@ -105,7 +106,7 @@ namespace DataLayer.Data
             }
         }
 
-        public Double July
+        public double July
         {
             get
             {
@@ -113,7 +114,7 @@ namespace DataLayer.Data
             }
         }
 
-        public Double August
+        public double August
         {
             get
             {
@@ -121,7 +122,7 @@ namespace DataLayer.Data
             }
         }
 
-        public Double September
+        public double September
         {
             get
             {
@@ -129,7 +130,7 @@ namespace DataLayer.Data
             }
         }
 
-        public Double October
+        public double October
         {
             get
             {
@@ -137,7 +138,7 @@ namespace DataLayer.Data
             }
         }
 
-        public Double November
+        public double November
         {
             get
             {
@@ -145,11 +146,11 @@ namespace DataLayer.Data
             }
         }
 
-        public Double December
+        public double December
         {
             get
             {
-                return December;
+                return december;
             }
         }
 
@@ -161,9 +162,9 @@ namespace DataLayer.Data
             }
         }
 
-        public List<Double> getMonths()
+        public List<double> getMonths()
         {
-            List<Double> months = new List<Double>();
+            List<double> months = new List<double>();
 
             months.Add(january);
             months.Add(february);

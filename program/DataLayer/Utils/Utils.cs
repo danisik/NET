@@ -33,12 +33,6 @@ namespace DataLayer.Utils
             displayMessageBox(infoMessage, appName, new MessageBoxButtons { }, MessageBoxIcon.Warning, null);
         }
 
-
-        public static List<Record> sortedRecordsByOrder(List<Record> records)
-        {
-            return records.OrderBy(r => r.Order).ToList();
-        }
-
         public static Dictionary<String, City> sortCities(Dictionary<String, City> unsortedCities)
         {
             Dictionary<String, City> sortedCities = new Dictionary<String, City>();
@@ -54,6 +48,16 @@ namespace DataLayer.Utils
             }
 
             return sortedCities;
+        }
+
+        public static bool doubleEquals(double val1, double val2)
+        {
+            double difference = Math.Abs(val1 * .00001);
+
+            // Compare the values
+            // The output to the console indicates that the two values are equal
+            if (Math.Abs(val1 - val2) <= difference) return true;
+            else return false;            
         }
     }
 }

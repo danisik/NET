@@ -1,29 +1,49 @@
 4.3.2020
 ------------
-Vytvoření řešení a dvou projektů (data + gui).								(1 hodina)
-Návrh a sepsání zadání v tex.												(1 hodina)
+Vytvoření řešení a dvou projektů (data + gui).														(1 hodina)
+Návrh a sepsání zadání v tex.																		(1 hodina)
+
+																									(2 hodiny)
 
 27.3.2020
 ------------
-Zprovoznění databáze + získávání dat. 										(3 hodiny)
-Načítání dat z databáze do gui elementu.									(1 hodina)
-Vytvořeny eventy na validaci polí v datasetu								(1 hodina)
-Přidávání řádků s custom buňkama do datasetu								(0.5 hodiny)
+Zprovoznění databáze + získávání dat. 																(3 hodiny)
+Načítání dat z databáze do gui elementu.															(1 hodina)
+Vytvořeny eventy na validaci polí v datasetu														(1 hodina)
+Přidávání řádků s custom buňkama do datasetu														(0.5 hodiny)
+
+																									(5.5 hodin)
 
 3.4.2020
 ------------
-Správa tabulky City v novém okně (zatím bez pushování změn).				(2.5 hodiny)
-Úprava hlavního okna (tlačítka, automatické nahrání dat do datasetu)		(1.5 hodina)
+Správa tabulky City v novém okně (zatím bez pushování změn).										(2.5 hodiny)
+Úprava hlavního okna (tlačítka, automatické nahrání dat do datasetu)								(1.5 hodina)
+
+																									(4 hodiny)
 
 10.4.2020
 ------------
-Pushování změn v tabulce City - mazání / přidávání + kontroly.				(1 hodina)
-Správa tabulky Record (zatím bez pushování změn).							(0.5 hodiny)
-Správa tabulky Dataset (i s pushováním)										(3 hodina)
-Správa teplot v novém okně (bez pushování).									(0.5 hodiny)
-Zvětšení buněk pro měsíce + jednotka teploty zobrazena jako label			(0.5 hodiny)
+Pushování změn v tabulce City - mazání / přidávání + kontroly.										(1 hodina)
+Správa tabulky Record (zatím bez pushování změn).													(0.5 hodiny)
+Správa tabulky Dataset (i s pushováním)																(3 hodina)
+Správa teplot v novém okně (bez pushování).															(0.5 hodiny)
+Zvětšení buněk pro měsíce + jednotka teploty zobrazena jako label									(0.5 hodiny)
+
+																									(5.5 hodin)
 
 11.4.2020
 ------------
-Bugfix správy dat (ukládání, mazání, update) v databázi.					(1 hodina)
-Správa teplot v novém okně (pushování).										(0.5 hodiny)
+Bugfix správy dat (ukládání, mazání, update) v databázi.											(1 hodina)
+Správa teplot v novém okně (pushování).																(0.5 hodiny)
+Bugfix mazání datasetů.																				(1 hodina)
+Zobrazení jednotky teploty u buněk měsíců.															(0.5 hodiny)
+
+																									(3 hodiny)
+
+14.4.2020
+------------
+Smazání jednotky teploty při editaci buňky, zobrazení jednotky teploty po skončení editace buňky.	(0.5 hodiny)
+Správa recordů (pushování).																			(2 hodiny)
+Drag & Drop recordů - změna pořadí.																	(0.5 hodiny)
+Validace hodnot buněk v record datagridview.														()
+																			

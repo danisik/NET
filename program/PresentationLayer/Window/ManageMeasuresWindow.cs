@@ -132,7 +132,7 @@ namespace PresentationLayer.Window
                 Utils.displayInfoMessageBox("Nebyla zaznamenána žádná změna.", appName);
                 return;
             }
-            bool success = databaseInterface.updateMeasures(newMeasures, measuresToBeDeleted, measuresToBeUpdated);
+            bool success = databaseInterface.updateMeasures(newMeasures.Values.ToList(), measuresToBeDeleted, measuresToBeUpdated);
 
             if (success)
             {
