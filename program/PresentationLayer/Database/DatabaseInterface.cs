@@ -600,7 +600,7 @@ namespace DataLayer.Data
 
                 success = true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 success = false;
 

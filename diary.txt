@@ -43,7 +43,13 @@ Zobrazení jednotky teploty u buněk měsíců.															(0.5 hodiny)
 14.4.2020
 ------------
 Smazání jednotky teploty při editaci buňky, zobrazení jednotky teploty po skončení editace buňky.	(0.5 hodiny)
-Správa recordů (pushování).																			(2 hodiny)
+Správa recordů (pushování).																			(4 hodiny)
 Drag & Drop recordů - změna pořadí.																	(0.5 hodiny)
-Validace hodnot buněk v record datagridview.														()
+Export dat do csv.																					(1 hodina)
+Validace hodnot buněk v record datagridview.														(4 hodiny)
+
+
+Vytvoření grafů.																					()
+Kontrola, zda se aktuální dataset změnil či ne při přehazování datasetů / exportování do csv.		()
+Import dat z csv ???																				()
 																			

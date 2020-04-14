@@ -5,7 +5,9 @@ using PresentationLayer.Window;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace PresentationLayer
@@ -19,7 +21,6 @@ namespace PresentationLayer
         private Dictionary<int, Record> records;
         private Dataset currentlySelectedDataset;
         private String appName = "";
-        private Boolean isAppClosing = false;
 
         private Rectangle dragBoxFromMouseDownDataGridViewDataset;
         private int rowIndexFromMouseDownDataGridViewDataset;
@@ -29,7 +30,7 @@ namespace PresentationLayer
         {
             InitializeComponent();
             appName = this.Text;
-            databaseInterface = new DatabaseInterface();                      
+            databaseInterface = new DatabaseInterface();
 
             measures = databaseInterface.getMeasures();
             datasets = databaseInterface.getDatasets(measures);
@@ -44,6 +45,7 @@ namespace PresentationLayer
             btnDeleteSelectedRecordRows.Enabled = status;
             btnConfirmRecordChanges.Enabled = status;
             btnDiscardRecordChanges.Enabled = status;
+            btnExportCSV.Enabled = status;
         }
 
         private void initializeComboBoxDataset()
@@ -51,9 +53,9 @@ namespace PresentationLayer
             cmbDataset.Items.Clear();
             changeButtonStatus(false);
             if (datasets.Count > 0)
-            {             
+            {
                 cmbDataset.Items.AddRange(datasets.Keys.ToArray());
-            }            
+            }
         }
 
         private void cmbDataset_SelectedIndexChanged(object sender, EventArgs e)
@@ -65,7 +67,7 @@ namespace PresentationLayer
 
             if (selectedDataset == null)
             {
-                Utils.displayErrorMessageBox("Dataset neexistuje!", appName, null);
+                Utils.displayErrorMessageBox("Dataset neexistuje!", appName);
                 return;
             }
             else
@@ -78,22 +80,44 @@ namespace PresentationLayer
                 updateMeasureLabel();
 
                 dataGridViewDataset.Rows.Clear();
-                fillDataGridView();                
+                fillDataGridView();
             }
         }
-
-        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            isAppClosing = true;
-        }
-
 
         private void dataGridViewDataset_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             if (e.ColumnIndex > 0)
             {
-                MonthCell monthCell = (MonthCell) dataGridViewDataset.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                MonthCell monthCell = (MonthCell)dataGridViewDataset.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 monthCell.Value = monthCell.CellValue;
+            }
+        }
+
+        private void dataGridViewDataset_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if (e.Control is TextBox)
+            {
+                var tbox = (e.Control as TextBox);
+
+                tbox.KeyPress -= dataGridViewDataset_TextBoxKeyPress;
+                tbox.KeyPress += dataGridViewDataset_TextBoxKeyPress;
+            }
+        }
+        private void dataGridViewDataset_TextBoxKeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 8) return;
+
+            if (dataGridViewDataset.CurrentCell is MonthCell)
+            {
+                MonthCell currentCell = (MonthCell) dataGridViewDataset.CurrentCell;
+                if (Char.IsDigit(e.KeyChar) || (e.KeyChar == (',')))
+                {
+                    e.Handled = false;
+                }
+                else
+                {
+                    e.Handled = true;
+                }
             }
         }
 
@@ -102,46 +126,26 @@ namespace PresentationLayer
             if (e.ColumnIndex > 0)
             {
                 MonthCell monthCell = (MonthCell)dataGridViewDataset.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                Console.WriteLine();
-                monthCell.CellValue = Double.Parse(monthCell.Value.ToString().Replace(".", ","));
+
+                String newValue = monthCell.Value.ToString();
+
+                if (!validateMonth(newValue))
+                {
+                    Utils.displayErrorMessageBox("Zadaná teplota musí být číslo!", appName);
+                    monthCell.Value = monthCell.getText();
+                    return;
+                }
+                monthCell.CellValue = Double.Parse(newValue);
                 monthCell.Value = monthCell.getText();
             }
         }
-
-        private void dataGridViewDataset_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+      
+        private bool validateMonth(String newValue)
         {
-            /* TODO: Test inserted values for city or months.
-            if (String.IsNullOrEmpty(e.FormattedValue.ToString()) || isAppClosing)
-            {
-                return;
-            }
-
-            DataGridViewColumn validated_column = dataGridViewDataset.Columns[e.ColumnIndex];
-
-            if (validated_column.Name.Equals("Město")) validateCity(e);
-            else validateMonth(e);
-            */
+            if (!Double.TryParse(newValue, out Double ignored)) return false;
+            else return true;
         }
-
-        private void validateCity(DataGridViewCellValidatingEventArgs newValue)
-        {
-            if (newValue.FormattedValue.ToString().Length > 100)
-            {
-                Utils.displayErrorMessageBox("Název města je příliš dlouhý!", appName, newValue);
-                return;
-            }
-        }
-
-        private void validateMonth(DataGridViewCellValidatingEventArgs newValue)
-        {
-            Double ignored = new Double();
-
-            if (!Double.TryParse(newValue.FormattedValue.ToString(), out ignored))
-            {
-                Utils.displayErrorMessageBox("Zadaná teplota musí být číslo!", appName, newValue);
-                return;
-            }
-        }
+        
 
         private void fillDataGridView()
         {
@@ -216,14 +220,14 @@ namespace PresentationLayer
                 
                 if (rowWithId.Cells[0].Value == null)
                 {
-                    Utils.displayErrorMessageBox("Jeden z řádků nemá zvolené město!", appName, null);
+                    Utils.displayErrorMessageBox("Jeden z řádků nemá zvolené město!", appName);
                     return;
                 }
 
                 String cityName = rowWithId.Cells[0].Value.ToString();
 
                 if (!cities.ContainsKey(cityName)) {
-                    Utils.displayErrorMessageBox("Zvolené město neexistuje v databázi!", appName, null);
+                    Utils.displayErrorMessageBox("Zvolené město neexistuje v databázi!", appName);
                     return;
                 }
 
@@ -305,7 +309,7 @@ namespace PresentationLayer
             }
             else
             {
-                Utils.displayErrorMessageBox("Vyskytla se chyba při úpravě záznamů v tabulce!", appName, null);
+                Utils.displayErrorMessageBox("Vyskytla se chyba při úpravě záznamů v tabulce!", appName);
             }
         }
 
@@ -479,6 +483,62 @@ namespace PresentationLayer
                 dataGridViewDataset.Rows.Insert(rowIndexOfItemUnderMouseToDropDataGridViewDataset, rowToMove);
 
             }
+        }
+
+        private void btnExportCSV_Click(object sender, EventArgs e)
+        {
+            if (currentlySelectedDataset == null)
+            {
+                Utils.displayErrorMessageBox("Není zvolený žádný dataset!", appName);
+                return;
+            }
+
+            if (dataGridViewDataset.Rows.Count == 0)
+            {
+                Utils.displayWarningMessageBox("V datasetu nejsou žádné záznamy!", appName);
+                return;
+            }
+
+            List<String> columns = new List<String>();
+            List<List<String>> values = new List<List<String>>();
+
+            foreach (DataGridViewColumn column in dataGridViewDataset.Columns)
+            {
+                columns.Add(column.HeaderText);
+            }
+
+            foreach (DataGridViewRow row in dataGridViewDataset.Rows)
+            {
+                List<String> rowValues = new List<String>();
+
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    if (cell is MonthCell)
+                    {
+                        MonthCell monthCell = (MonthCell)cell;
+                        rowValues.Add(monthCell.CellValue.ToString());
+                    }
+                    else
+                    {
+                        rowValues.Add(cell.Value.ToString());
+                    }
+
+                }
+
+                values.Add(rowValues);
+            }
+
+            bool success = Utils.exportDatasetToCSV(columns, values);
+
+            if (success)
+            {
+                Utils.displayInfoMessageBox("Export dat z datasetu '" + currentlySelectedDataset.Name + "' byl úspešně proveden.", appName);
+            }
+            else
+            {
+                Utils.displayErrorMessageBox("Vyskytla se chyba při exportu dat z datasetu '" + currentlySelectedDataset.Name + "'", appName);
+            }
+
         }
 
         public DatabaseInterface DatabaseInterface

@@ -80,13 +80,13 @@ namespace PresentationLayer.Window
 
                 if (row.Cells[0].Value == null)
                 {
-                    Utils.displayErrorMessageBox("Jeden z řádků nemá vyplněný název jednotky teploty!", appName, null);
+                    Utils.displayErrorMessageBox("Jeden z řádků nemá vyplněný název jednotky teploty!", appName);
                     return;
                 }
 
                 if (row.Cells[1].Value == null) 
                 {
-                    Utils.displayErrorMessageBox("Jeden z řádků nemá vyplněný symbol jednotky teploty!", appName, null);
+                    Utils.displayErrorMessageBox("Jeden z řádků nemá vyplněný symbol jednotky teploty!", appName);
                     return;
                 }
 
@@ -108,7 +108,7 @@ namespace PresentationLayer.Window
                     else
                     {
                         Utils.displayErrorMessageBox("Nelze upravit tabulku jednotek teplot, protože název jednotky teploty '" + measureName + "' je používán v jednotlivých datasetech.",
-                        appName, null);
+                        appName);
                         return;
                     }
                 }
@@ -144,7 +144,7 @@ namespace PresentationLayer.Window
             else
             {
                 Utils.displayErrorMessageBox("Vyskytla se chyba při úpravě jednotek teplot v databázi!",
-                appName, null);
+                appName);
             }
         }
 

@@ -108,19 +108,19 @@ namespace PresentationLayer.Window
 
                 if (row.Cells[0].Value == null)
                 {
-                    Utils.displayErrorMessageBox("Jeden z řádků nemá vyplněný název datasetu!", appName, null);
+                    Utils.displayErrorMessageBox("Jeden z řádků nemá vyplněný název datasetu!", appName);
                     return;
                 }
 
                 if (row.Cells[1].Value == null) 
                 {
-                    Utils.displayErrorMessageBox("Jeden z řádků nemá vyplněný název jednotky teploty!", appName, null);
+                    Utils.displayErrorMessageBox("Jeden z řádků nemá vyplněný název jednotky teploty!", appName);
                     return;
                 }
 
                 if (measure == null)
                 {
-                    Utils.displayErrorMessageBox("Název vybrané jednotky teploty neodpovídá žádné hodnotě v databázi!", appName, null);
+                    Utils.displayErrorMessageBox("Název vybrané jednotky teploty neodpovídá žádné hodnotě v databázi!", appName);
                     return;
                 }
 
@@ -172,7 +172,7 @@ namespace PresentationLayer.Window
             else
             {
                 Utils.displayErrorMessageBox("Vyskytla se chyba při úpravě měst v databázi!",
-                appName, null);
+                appName);
             }
         }
 

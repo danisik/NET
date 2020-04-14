@@ -71,7 +71,7 @@
             this.columnOctober = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnNovember = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnDecember = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblSelectedMeasureText = new System.Windows.Forms.Label();
             this.btnNewRecordRow = new System.Windows.Forms.Button();
             this.btnManageCities = new System.Windows.Forms.Button();
             this.btnConfirmRecordChanges = new System.Windows.Forms.Button();
@@ -95,6 +95,7 @@
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnExportCSV = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataset)).BeginInit();
             this.SuspendLayout();
             // 
@@ -143,7 +144,7 @@
             this.dataGridViewDataset.TabIndex = 2;
             this.dataGridViewDataset.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewDataset_CellBeginEdit);
             this.dataGridViewDataset.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDataset_CellEndEdit);
-            this.dataGridViewDataset.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridViewDataset_CellValidating);
+            this.dataGridViewDataset.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewDataset_EditingControlShowing);
             this.dataGridViewDataset.DragDrop += new System.Windows.Forms.DragEventHandler(this.dataGridViewDataset_DragDrop);
             this.dataGridViewDataset.DragOver += new System.Windows.Forms.DragEventHandler(this.dataGridViewDataset_DragOver);
             this.dataGridViewDataset.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridViewDataset_MouseDown);
@@ -291,14 +292,14 @@
             this.columnDecember.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.columnDecember.Width = 73;
             // 
-            // label1
+            // lblSelectedMeasureText
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 58);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(127, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Vybraná jednotka teploty:";
+            this.lblSelectedMeasureText.AutoSize = true;
+            this.lblSelectedMeasureText.Location = new System.Drawing.Point(9, 58);
+            this.lblSelectedMeasureText.Name = "lblSelectedMeasureText";
+            this.lblSelectedMeasureText.Size = new System.Drawing.Size(127, 13);
+            this.lblSelectedMeasureText.TabIndex = 3;
+            this.lblSelectedMeasureText.Text = "Vybraná jednotka teploty:";
             // 
             // btnNewRecordRow
             // 
@@ -322,7 +323,7 @@
             // 
             // btnConfirmRecordChanges
             // 
-            this.btnConfirmRecordChanges.Location = new System.Drawing.Point(238, 98);
+            this.btnConfirmRecordChanges.Location = new System.Drawing.Point(12, 480);
             this.btnConfirmRecordChanges.Name = "btnConfirmRecordChanges";
             this.btnConfirmRecordChanges.Size = new System.Drawing.Size(105, 34);
             this.btnConfirmRecordChanges.TabIndex = 7;
@@ -332,7 +333,7 @@
             // 
             // btnDiscardRecordChanges
             // 
-            this.btnDiscardRecordChanges.Location = new System.Drawing.Point(349, 98);
+            this.btnDiscardRecordChanges.Location = new System.Drawing.Point(123, 480);
             this.btnDiscardRecordChanges.Name = "btnDiscardRecordChanges";
             this.btnDiscardRecordChanges.Size = new System.Drawing.Size(105, 34);
             this.btnDiscardRecordChanges.TabIndex = 8;
@@ -542,11 +543,22 @@
             this.dataGridViewTextBoxColumn13.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn13.Width = 73;
             // 
+            // btnExportCSV
+            // 
+            this.btnExportCSV.Location = new System.Drawing.Point(927, 480);
+            this.btnExportCSV.Name = "btnExportCSV";
+            this.btnExportCSV.Size = new System.Drawing.Size(105, 34);
+            this.btnExportCSV.TabIndex = 20;
+            this.btnExportCSV.Text = "Export do CSV";
+            this.btnExportCSV.UseVisualStyleBackColor = true;
+            this.btnExportCSV.Click += new System.EventHandler(this.btnExportCSV_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1047, 486);
+            this.ClientSize = new System.Drawing.Size(1047, 523);
+            this.Controls.Add(this.btnExportCSV);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblDatasetMeasure);
             this.Controls.Add(this.btnManageTemperatures);
@@ -556,7 +568,7 @@
             this.Controls.Add(this.btnConfirmRecordChanges);
             this.Controls.Add(this.btnManageCities);
             this.Controls.Add(this.btnNewRecordRow);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblSelectedMeasureText);
             this.Controls.Add(this.dataGridViewDataset);
             this.Controls.Add(this.cmbDataset);
             this.Controls.Add(this.labelDataset);
@@ -564,8 +576,7 @@
             this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = " ";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
+            this.Text = "Zpracování naměřených teplot";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataset)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -577,7 +588,7 @@
         private System.Windows.Forms.Label labelDataset;
         private System.Windows.Forms.ComboBox cmbDataset;
         private System.Windows.Forms.DataGridView dataGridViewDataset;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblSelectedMeasureText;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -614,6 +625,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnOctober;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnNovember;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDecember;
+        private System.Windows.Forms.Button btnExportCSV;
     }
 }
 

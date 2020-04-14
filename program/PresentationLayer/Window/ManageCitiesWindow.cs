@@ -55,7 +55,7 @@ namespace PresentationLayer.Window
 
                 if (row.Cells[0].Value == null)
                 {
-                    Utils.displayErrorMessageBox("Jeden z řádků nemá vyplněný název města!", appName, null);
+                    Utils.displayErrorMessageBox("Jeden z řádků nemá vyplněný název města!", appName);
                     return;
                 }
 
@@ -80,7 +80,7 @@ namespace PresentationLayer.Window
                     else 
                     {
                         Utils.displayErrorMessageBox("Nelze upravit tabulku měst, protože název města '" + cityName + "' je používán v jednotlivých záznamech.",
-                        appName, null);
+                        appName);
                         return;
                     }                    
                 }
@@ -108,7 +108,7 @@ namespace PresentationLayer.Window
             else
             {
                 Utils.displayErrorMessageBox("Vyskytla se chyba při úpravě měst v databázi!",
-                appName, null);
+                appName);
             }
         }
 
