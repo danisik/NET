@@ -49,12 +49,12 @@
             this.dataGridViewManageCities.Name = "dataGridViewManageCities";
             this.dataGridViewManageCities.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataGridViewManageCities.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewManageCities.Size = new System.Drawing.Size(243, 287);
+            this.dataGridViewManageCities.Size = new System.Drawing.Size(344, 287);
             this.dataGridViewManageCities.TabIndex = 0;
             // 
             // btnConfirmChanges
             // 
-            this.btnConfirmChanges.Location = new System.Drawing.Point(261, 185);
+            this.btnConfirmChanges.Location = new System.Drawing.Point(363, 185);
             this.btnConfirmChanges.Name = "btnConfirmChanges";
             this.btnConfirmChanges.Size = new System.Drawing.Size(105, 34);
             this.btnConfirmChanges.TabIndex = 6;
@@ -64,7 +64,7 @@
             // 
             // btnDiscardChanges
             // 
-            this.btnDiscardChanges.Location = new System.Drawing.Point(260, 225);
+            this.btnDiscardChanges.Location = new System.Drawing.Point(362, 225);
             this.btnDiscardChanges.Name = "btnDiscardChanges";
             this.btnDiscardChanges.Size = new System.Drawing.Size(105, 34);
             this.btnDiscardChanges.TabIndex = 7;
@@ -74,7 +74,7 @@
             // 
             // btnReturn
             // 
-            this.btnReturn.Location = new System.Drawing.Point(261, 265);
+            this.btnReturn.Location = new System.Drawing.Point(363, 265);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(105, 34);
             this.btnReturn.TabIndex = 8;
@@ -91,7 +91,7 @@
             // 
             // btnNewCityRow
             // 
-            this.btnNewCityRow.Location = new System.Drawing.Point(261, 12);
+            this.btnNewCityRow.Location = new System.Drawing.Point(363, 12);
             this.btnNewCityRow.Name = "btnNewCityRow";
             this.btnNewCityRow.Size = new System.Drawing.Size(105, 34);
             this.btnNewCityRow.TabIndex = 9;
@@ -101,7 +101,7 @@
             // 
             // btnDeleteSelectedCityRow
             // 
-            this.btnDeleteSelectedCityRow.Location = new System.Drawing.Point(261, 52);
+            this.btnDeleteSelectedCityRow.Location = new System.Drawing.Point(363, 52);
             this.btnDeleteSelectedCityRow.Name = "btnDeleteSelectedCityRow";
             this.btnDeleteSelectedCityRow.Size = new System.Drawing.Size(105, 34);
             this.btnDeleteSelectedCityRow.TabIndex = 10;
@@ -111,16 +111,16 @@
             // 
             // columnCityName
             // 
-            this.columnCityName.FillWeight = 200F;
+            this.columnCityName.FillWeight = 300F;
             this.columnCityName.HeaderText = "Město";
             this.columnCityName.Name = "columnCityName";
-            this.columnCityName.Width = 200;
+            this.columnCityName.Width = 300;
             // 
             // ManageCitiesWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(377, 311);
+            this.ClientSize = new System.Drawing.Size(477, 311);
             this.Controls.Add(this.btnDeleteSelectedCityRow);
             this.Controls.Add(this.btnNewCityRow);
             this.Controls.Add(this.btnReturn);

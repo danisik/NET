@@ -47,6 +47,7 @@ namespace PresentationLayer
             btnConfirmRecordChanges.Enabled = status;
             btnDiscardRecordChanges.Enabled = status;
             btnExportCSV.Enabled = status;
+            btnShowGraphs.Enabled = status;
         }
 
         private void initializeComboBoxDataset()
@@ -433,6 +434,13 @@ namespace PresentationLayer
                 updateMonthCells();
                 updateMeasureLabel();
             }
+        }
+
+
+        private void btnShowGraphs_Click(object sender, EventArgs e)
+        {
+            GraphWindow window = new GraphWindow(this);
+            window.ShowDialog();
         }
 
         private void updateMeasureLabel()

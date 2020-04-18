@@ -24,6 +24,7 @@ namespace PresentationLayer.Window
         {
             InitializeComponent();
             this.databaseInterface = mainWindow.DatabaseInterface;
+            this.Text = mainWindow.AppName + " - Správa datasetů";
             this.appName = mainWindow.AppName;
             this.mainWindow = mainWindow;
             this.datasets = databaseInterface.getDatasets(databaseInterface.getMeasures());

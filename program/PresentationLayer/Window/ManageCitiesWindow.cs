@@ -23,6 +23,7 @@ namespace PresentationLayer.Window
         {
             InitializeComponent();
             this.databaseInterface = mainWindow.DatabaseInterface;
+            this.Text = mainWindow.AppName + " - Správa měst";
             this.appName = mainWindow.AppName;
             this.mainWindow = mainWindow;
             this.cities = databaseInterface.getCities();

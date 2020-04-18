@@ -53,8 +53,9 @@ Validace hodnot buněk v record datagridview.														(4 hodiny)
 18.4.2020
 ------------
 Kontrola, zda se aktuální dataset změnil či ne při přehazování datasetů / exportování do csv 		(1 hodina)										
-								
-								
 Vytvoření grafů.																					()
+
+Pokud se změní teplota v datasetu, mají se upravit i dané hodnoty v tabulce ??
+Dokumentace																							()
 
 																			

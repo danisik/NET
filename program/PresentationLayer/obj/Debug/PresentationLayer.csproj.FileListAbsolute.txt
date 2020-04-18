@@ -26,3 +26,4 @@ C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\bin\Debug\Databa
 C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\obj\Debug\PresentationLayer.Window.ManageCitiesWindow.resources
 C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\obj\Debug\PresentationLayer.Window.ManageDatasetsWindow.resources
 C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\obj\Debug\PresentationLayer.Window.ManageMeasuresWindow.resources
+C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\obj\Debug\PresentationLayer.Window.GraphWindow.resources
