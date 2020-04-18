@@ -48,8 +48,13 @@ Drag & Drop recordů - změna pořadí.																	(0.5 hodiny)
 Export dat do csv.																					(1 hodina)
 Validace hodnot buněk v record datagridview.														(4 hodiny)
 
-
+																									(10 hodin)
+																									
+18.4.2020
+------------
+Kontrola, zda se aktuální dataset změnil či ne při přehazování datasetů / exportování do csv 		(1 hodina)										
+								
+								
 Vytvoření grafů.																					()
-Kontrola, zda se aktuální dataset změnil či ne při přehazování datasetů / exportování do csv.		()
-Import dat z csv ???																				()
+
 																			

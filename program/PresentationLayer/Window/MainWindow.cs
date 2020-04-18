@@ -21,6 +21,7 @@ namespace PresentationLayer
         private Dictionary<int, Record> records;
         private Dataset currentlySelectedDataset;
         private String appName = "";
+        private bool recordsChanged = false;
 
         private Rectangle dragBoxFromMouseDownDataGridViewDataset;
         private int rowIndexFromMouseDownDataGridViewDataset;
@@ -60,8 +61,7 @@ namespace PresentationLayer
 
         private void cmbDataset_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!btnDiscardRecordChanges.Enabled) changeButtonStatus(true);
-            dataGridViewDataset.Rows.Clear();
+            if (!btnDiscardRecordChanges.Enabled) changeButtonStatus(true);            
 
             datasets.TryGetValue(datasets.Keys.ToList()[cmbDataset.SelectedIndex], out Dataset selectedDataset);
 
@@ -71,11 +71,14 @@ namespace PresentationLayer
                 return;
             }
             else
-            {
-                // TODO: check if something in dataset is updated.
-                // If true, then display messagebox with options.
-                // If false, then display new dataset immediately.
+            {                
+                if (currentlySelectedDataset != null)
+                {
+                    if (currentlySelectedDataset.Name.Equals(selectedDataset.Name)) return;
 
+                    if (!tryPerformRecordsChange()) return;
+                }
+                
                 currentlySelectedDataset = selectedDataset;
                 updateMeasureLabel();
 
@@ -135,8 +138,21 @@ namespace PresentationLayer
                     monthCell.Value = monthCell.getText();
                     return;
                 }
+
+                if (!Utils.doubleEquals(monthCell.CellValue, Double.Parse(newValue))) recordsChanged = true;
                 monthCell.CellValue = Double.Parse(newValue);
                 monthCell.Value = monthCell.getText();
+            }
+            else
+            {
+                CityCell cityCell = (CityCell)dataGridViewDataset.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                String newValue = cityCell.Value.ToString();
+
+                if (!cityCell.CityName.Equals(newValue)) recordsChanged = true;
+
+                cityCell.CityName = newValue;
+                cityCell.Value = newValue;
             }
         }
       
@@ -199,12 +215,14 @@ namespace PresentationLayer
                 monthCell.Value = monthCell.getText();
             }
             dataGridViewDataset.Rows.Add(row);
+            recordsChanged = true;
         }
 
         private void btnDiscardRecordChanges_Click(object sender, EventArgs e)
         {
             dataGridViewDataset.Rows.Clear();
             fillDataGridView();
+            recordsChanged = false;
         }
 
         private void btnConfirmRecordChanges_Click(object sender, EventArgs e)
@@ -306,6 +324,7 @@ namespace PresentationLayer
                 dataGridViewDataset.Rows.Clear();
                 cities = databaseInterface.getCities();
                 fillDataGridView();
+                recordsChanged = false;
             }
             else
             {
@@ -316,6 +335,8 @@ namespace PresentationLayer
         private void btnDeleteSelectedRecordRows_Click(object sender, EventArgs e)
         {
             DataGridViewSelectedRowCollection selectedRows = dataGridViewDataset.SelectedRows;
+
+            if (selectedRows.Count > 0) recordsChanged = true;
 
             foreach (DataGridViewRow row in selectedRows)
             {
@@ -482,6 +503,19 @@ namespace PresentationLayer
                 dataGridViewDataset.Rows.RemoveAt(rowIndexFromMouseDownDataGridViewDataset);
                 dataGridViewDataset.Rows.Insert(rowIndexOfItemUnderMouseToDropDataGridViewDataset, rowToMove);
 
+                for (int i = 0; i < records.Count; i++) {
+                    DataGridViewRowWithId row = (DataGridViewRowWithId) dataGridViewDataset.Rows[i];
+                    
+                    if (records.Values.ToList()[i].Id != row.Id)
+                    {
+                        recordsChanged = true;
+                        break;
+                    }
+                    else
+                    {
+                        recordsChanged = false;
+                    }
+                }
             }
         }
 
@@ -498,6 +532,8 @@ namespace PresentationLayer
                 Utils.displayWarningMessageBox("V datasetu nejsou žádné záznamy!", appName);
                 return;
             }
+
+            if (!tryPerformRecordsChange()) return;
 
             List<String> columns = new List<String>();
             List<List<String>> values = new List<List<String>>();
@@ -539,6 +575,27 @@ namespace PresentationLayer
                 Utils.displayErrorMessageBox("Vyskytla se chyba při exportu dat z datasetu '" + currentlySelectedDataset.Name + "'", appName);
             }
 
+        }
+
+        private bool tryPerformRecordsChange()
+        {
+            if (recordsChanged)
+            {
+                DialogResult result = Utils.displayInfoMessageBoxWithButton("V aktuálním datasetu byly provedeny změny, které ještě nebyly uloženy. " +
+                    "Přejete si změny uložit ?", appName, MessageBoxButtons.YesNoCancel);
+
+                if (result == DialogResult.Cancel)
+                {
+                    cmbDataset.SelectedItem = currentlySelectedDataset.Name;
+                    return false;
+                }
+                else if (result == DialogResult.Yes)
+                {
+                    btnConfirmRecordChanges.PerformClick();
+                }
+                recordsChanged = false;
+            }
+            return true;
         }
 
         public DatabaseInterface DatabaseInterface

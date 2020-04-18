@@ -65,6 +65,7 @@
     <Compile Include="GUIElements\CityCell.cs" />
     <Compile Include="GUIElements\DataGridViewRowWithId.cs" />
     <Compile Include="GUIElements\MonthCell.cs" />
+    <Compile Include="Utils\Utils.cs" />
     <Compile Include="Window\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>

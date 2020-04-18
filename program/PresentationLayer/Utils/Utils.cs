@@ -11,24 +11,29 @@ namespace DataLayer.Utils
 {
     public class Utils
     {
-        public static void displayMessageBox(string errorMessage, String appName, MessageBoxButtons buttons, MessageBoxIcon icon)
-        {
-            MessageBox.Show(errorMessage, appName, buttons, icon);
+        public static DialogResult displayMessageBox(string errorMessage, String appName, MessageBoxButtons buttons, MessageBoxIcon icon)
+        { 
+            return MessageBox.Show(errorMessage, appName, buttons, icon);
         }
 
-        public static void displayErrorMessageBox(string errorMessage, String appName)
+        public static DialogResult displayErrorMessageBox(string errorMessage, String appName)
         {
-            displayMessageBox(errorMessage, appName, new MessageBoxButtons { }, MessageBoxIcon.Error);
+            return displayMessageBox(errorMessage, appName, new MessageBoxButtons { }, MessageBoxIcon.Error);
         }
 
-        public static void displayInfoMessageBox(string infoMessage, String appName)
+        public static DialogResult displayInfoMessageBox(string infoMessage, String appName)
         {
-            displayMessageBox(infoMessage, appName, new MessageBoxButtons { }, MessageBoxIcon.Information);
+            return displayMessageBox(infoMessage, appName, new MessageBoxButtons { }, MessageBoxIcon.Information);
         }
 
-        public static void displayWarningMessageBox(string infoMessage, String appName)
+        public static DialogResult displayWarningMessageBox(string infoMessage, String appName)
         {
-            displayMessageBox(infoMessage, appName, new MessageBoxButtons { }, MessageBoxIcon.Warning);
+            return displayMessageBox(infoMessage, appName, new MessageBoxButtons { }, MessageBoxIcon.Warning);
+        }
+
+        public static DialogResult displayInfoMessageBoxWithButton(string infoMessage, String appName, MessageBoxButtons buttons)
+        {
+            return displayMessageBox(infoMessage, appName, buttons, MessageBoxIcon.Information);
         }
 
         public static Dictionary<String, City> sortCities(Dictionary<String, City> unsortedCities)
@@ -68,7 +73,9 @@ namespace DataLayer.Utils
                 saveFileDialog.FilterIndex = 2;
                 saveFileDialog.RestoreDirectory = true;
 
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                DialogResult result = saveFileDialog.ShowDialog();
+
+                if (result == DialogResult.OK)
                 {
                     Stream myStream;
                     if ((myStream = saveFileDialog.OpenFile()) != null)
@@ -100,6 +107,10 @@ namespace DataLayer.Utils
                         streamWriter.Close();
                         myStream.Close();                        
                     }
+                }
+                else
+                {
+                    return false;
                 }
                 return true;
             }

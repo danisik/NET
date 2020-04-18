@@ -80,7 +80,6 @@
             this.btnManageDatasets = new System.Windows.Forms.Button();
             this.btnManageTemperatures = new System.Windows.Forms.Button();
             this.lblDatasetMeasure = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewComboBoxColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -379,15 +378,6 @@
             this.lblDatasetMeasure.Size = new System.Drawing.Size(0, 13);
             this.lblDatasetMeasure.TabIndex = 17;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(484, 98);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(169, 13);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "Přidat kontrolu pro všechny buňky";
-            // 
             // dataGridViewTextBoxColumn1
             // 
             dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
@@ -559,7 +549,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1047, 523);
             this.Controls.Add(this.btnExportCSV);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.lblDatasetMeasure);
             this.Controls.Add(this.btnManageTemperatures);
             this.Controls.Add(this.btnManageDatasets);
@@ -610,7 +599,6 @@
         private System.Windows.Forms.Button btnManageDatasets;
         private System.Windows.Forms.Button btnManageTemperatures;
         private System.Windows.Forms.Label lblDatasetMeasure;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private System.Windows.Forms.DataGridViewComboBoxColumn columnCity;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnJanuary;
