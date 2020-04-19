@@ -1,4 +1,5 @@
 ﻿using DataLayer.Data;
+using DataLayer.Model;
 using DataLayer.Utils;
 using PresentationLayer.GUIElements;
 using PresentationLayer.Window;
@@ -46,8 +47,7 @@ namespace PresentationLayer
             btnDeleteSelectedRecordRows.Enabled = status;
             btnConfirmRecordChanges.Enabled = status;
             btnDiscardRecordChanges.Enabled = status;
-            btnExportCSV.Enabled = status;
-            btnShowGraphs.Enabled = status;
+            btnExportCSV.Enabled = status;            
         }
 
         private void initializeComboBoxDataset()
@@ -62,7 +62,7 @@ namespace PresentationLayer
 
         private void cmbDataset_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!btnDiscardRecordChanges.Enabled) changeButtonStatus(true);            
+            if (!btnDiscardRecordChanges.Enabled) changeButtonStatus(true);
 
             datasets.TryGetValue(datasets.Keys.ToList()[cmbDataset.SelectedIndex], out Dataset selectedDataset);
 
@@ -72,14 +72,14 @@ namespace PresentationLayer
                 return;
             }
             else
-            {                
+            {
                 if (currentlySelectedDataset != null)
                 {
                     if (currentlySelectedDataset.Name.Equals(selectedDataset.Name)) return;
 
                     if (!tryPerformRecordsChange()) return;
                 }
-                
+
                 currentlySelectedDataset = selectedDataset;
                 updateMeasureLabel();
 
@@ -113,8 +113,8 @@ namespace PresentationLayer
 
             if (dataGridViewDataset.CurrentCell is MonthCell)
             {
-                MonthCell currentCell = (MonthCell) dataGridViewDataset.CurrentCell;
-                if (Char.IsDigit(e.KeyChar) || (e.KeyChar == (',')))
+                MonthCell currentCell = (MonthCell)dataGridViewDataset.CurrentCell;
+                if (Char.IsDigit(e.KeyChar) || (e.KeyChar == (',') || (e.KeyChar == ('-'))))
                 {
                     e.Handled = false;
                 }
@@ -156,13 +156,13 @@ namespace PresentationLayer
                 cityCell.Value = newValue;
             }
         }
-      
+
         private bool validateMonth(String newValue)
         {
             if (!Double.TryParse(newValue, out Double ignored)) return false;
             else return true;
         }
-        
+
 
         private void fillDataGridView()
         {
@@ -171,7 +171,7 @@ namespace PresentationLayer
 
             foreach (Record record in records.Values)
             {
-                DataGridViewRowWithId row = new DataGridViewRowWithId(record.Id);                
+                DataGridViewRowWithId row = new DataGridViewRowWithId(record.Id);
                 List<Double> months = record.getMonths();
 
                 CityCell cityCell = prepareCityCell();
@@ -188,10 +188,10 @@ namespace PresentationLayer
                     monthCell.Value = monthCell.getText();
                 }
                 dataGridViewDataset.Rows.Add(row);
-            }            
+            }
         }
 
-        private CityCell prepareCityCell() 
+        private CityCell prepareCityCell()
         {
             CityCell cityCell = new CityCell();
             foreach (String cityName in cities.Keys)
@@ -235,8 +235,8 @@ namespace PresentationLayer
             int order = 1;
             foreach (DataGridViewRow row in dataGridViewDataset.Rows)
             {
-                DataGridViewRowWithId rowWithId = (DataGridViewRowWithId) row;
-                
+                DataGridViewRowWithId rowWithId = (DataGridViewRowWithId)row;
+
                 if (rowWithId.Cells[0].Value == null)
                 {
                     Utils.displayErrorMessageBox("Jeden z řádků nemá zvolené město!", appName);
@@ -254,18 +254,18 @@ namespace PresentationLayer
                 cities.TryGetValue(cityName, out City city);
 
                 Record record = new Record(rowWithId.Id, city,
-                               Double.Parse(((MonthCell) rowWithId.Cells[1]).CellValue.ToString()),
-                               Double.Parse(((MonthCell) rowWithId.Cells[2]).CellValue.ToString()),
-                               Double.Parse(((MonthCell) rowWithId.Cells[3]).CellValue.ToString()),
-                               Double.Parse(((MonthCell) rowWithId.Cells[4]).CellValue.ToString()),
-                               Double.Parse(((MonthCell) rowWithId.Cells[5]).CellValue.ToString()),
-                               Double.Parse(((MonthCell) rowWithId.Cells[6]).CellValue.ToString()),
-                               Double.Parse(((MonthCell) rowWithId.Cells[7]).CellValue.ToString()),
-                               Double.Parse(((MonthCell) rowWithId.Cells[8]).CellValue.ToString()),
-                               Double.Parse(((MonthCell) rowWithId.Cells[9]).CellValue.ToString()),
-                               Double.Parse(((MonthCell) rowWithId.Cells[10]).CellValue.ToString()),
-                               Double.Parse(((MonthCell) rowWithId.Cells[11]).CellValue.ToString()),
-                               Double.Parse(((MonthCell) rowWithId.Cells[12]).CellValue.ToString()),
+                               Double.Parse(((MonthCell)rowWithId.Cells[1]).CellValue.ToString()),
+                               Double.Parse(((MonthCell)rowWithId.Cells[2]).CellValue.ToString()),
+                               Double.Parse(((MonthCell)rowWithId.Cells[3]).CellValue.ToString()),
+                               Double.Parse(((MonthCell)rowWithId.Cells[4]).CellValue.ToString()),
+                               Double.Parse(((MonthCell)rowWithId.Cells[5]).CellValue.ToString()),
+                               Double.Parse(((MonthCell)rowWithId.Cells[6]).CellValue.ToString()),
+                               Double.Parse(((MonthCell)rowWithId.Cells[7]).CellValue.ToString()),
+                               Double.Parse(((MonthCell)rowWithId.Cells[8]).CellValue.ToString()),
+                               Double.Parse(((MonthCell)rowWithId.Cells[9]).CellValue.ToString()),
+                               Double.Parse(((MonthCell)rowWithId.Cells[10]).CellValue.ToString()),
+                               Double.Parse(((MonthCell)rowWithId.Cells[11]).CellValue.ToString()),
+                               Double.Parse(((MonthCell)rowWithId.Cells[12]).CellValue.ToString()),
                                order
                     );
 
@@ -276,7 +276,7 @@ namespace PresentationLayer
                 else
                 {
                     recordsToBeUpdated.Add(rowWithId.Id, record);
-                }                                
+                }
                 order++;
             }
 
@@ -349,7 +349,7 @@ namespace PresentationLayer
         {
             foreach (DataGridViewRow row in dataGridViewDataset.Rows)
             {
-                CityCell cityCell = (CityCell) row.Cells[0];
+                CityCell cityCell = (CityCell)row.Cells[0];
                 cityCell.Items.Clear();
                 foreach (String cityName in cities.Keys)
                 {
@@ -365,7 +365,7 @@ namespace PresentationLayer
             {
                 for (int i = 1; i < row.Cells.Count; i++)
                 {
-                    MonthCell monthCell = (MonthCell) row.Cells[i];
+                    MonthCell monthCell = (MonthCell)row.Cells[i];
 
                     if (monthCell.MeasureTag == currentlySelectedDataset.Measure.Tag) break;
 
@@ -409,7 +409,7 @@ namespace PresentationLayer
                     cmbDataset.SelectedItem = currentlySelectedDataset.Name;
                     updateMeasureLabel();
                 }
-            }         
+            }
         }
 
         private void btnManageCities_Click(object sender, EventArgs e)
@@ -427,7 +427,7 @@ namespace PresentationLayer
             window.ShowDialog();
 
             measures = databaseInterface.getMeasures();
-            datasets = databaseInterface.getDatasets(measures);            
+            datasets = databaseInterface.getDatasets(measures);
             if (currentlySelectedDataset != null)
             {
                 currentlySelectedDataset = datasets[currentlySelectedDataset.Name];
@@ -512,8 +512,8 @@ namespace PresentationLayer
                 dataGridViewDataset.Rows.Insert(rowIndexOfItemUnderMouseToDropDataGridViewDataset, rowToMove);
 
                 for (int i = 0; i < records.Count; i++) {
-                    DataGridViewRowWithId row = (DataGridViewRowWithId) dataGridViewDataset.Rows[i];
-                    
+                    DataGridViewRowWithId row = (DataGridViewRowWithId)dataGridViewDataset.Rows[i];
+
                     if (records.Values.ToList()[i].Id != row.Id)
                     {
                         recordsChanged = true;
@@ -619,6 +619,39 @@ namespace PresentationLayer
             get
             {
                 return appName;
+            }
+        }
+
+        public Dictionary<String, Dataset> Datasets
+        {
+            get
+            {
+                return datasets;
+            }
+        }
+
+        public Dictionary<String, City> Cities
+        {
+            get
+            {
+                return cities;
+            }
+        }
+
+        public Dictionary<int, Record> Records
+        {
+            get
+            {
+                return records;
+            }
+        }
+
+        public List<String> Months
+        {
+            get
+            {
+                return new List<String> { "Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec",
+                "Srpen", "Září", "Říjen", "Listopad", "Prosinec"};
             }
         }
     }

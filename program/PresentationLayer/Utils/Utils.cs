@@ -1,4 +1,5 @@
 ﻿using DataLayer.Data;
+using DataLayer.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -63,6 +64,21 @@ namespace DataLayer.Utils
             else return false;            
         }
 
+        public static double getAverageValue(List<double> values)
+        {
+            double averageValue = 0;
+
+            foreach (double value in values)
+            {
+                averageValue += value;
+            }
+
+            averageValue /= values.Count;
+            averageValue = Math.Round(averageValue, 2);
+
+            return averageValue;
+        }
+
         public static bool exportDatasetToCSV(List<String> columns, List<List<String>> values)
         {
             try
@@ -121,19 +137,3 @@ namespace DataLayer.Utils
         }
     }
 }
-
-/*
-var file = @"C:\myOutput.csv";
-
-using (var stream = File.CreateText(file))
-{
-    for (int i = 0; i < reader.Count(); i++)
-    {
-        string first = reader[i].ToString();
-        string second = image.ToString();
-        string csvRow = string.Format("{0},{1}", first, second);
-
-        stream.WriteLine(csvRow);
-    }
-}
-*/

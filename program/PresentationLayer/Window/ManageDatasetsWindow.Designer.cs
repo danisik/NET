@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyleColumnDataset = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyleColumnMeasure = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridViewManageDatasets = new System.Windows.Forms.DataGridView();
             this.btnDeleteSelectedDatasetsRow = new System.Windows.Forms.Button();
             this.btnNewDatasetRow = new System.Windows.Forms.Button();
@@ -38,8 +37,8 @@
             this.btnDiscardDatasetChanges = new System.Windows.Forms.Button();
             this.btnConfirmDatasetChanges = new System.Windows.Forms.Button();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewComboBoxColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dataGridViewTextBoxColumnDataset = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewComboBoxColumnMeasure = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.columnCityName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.measure_tag = new System.Windows.Forms.DataGridViewComboBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewManageDatasets)).BeginInit();
@@ -109,36 +108,14 @@
             this.btnConfirmDatasetChanges.UseVisualStyleBackColor = true;
             this.btnConfirmDatasetChanges.Click += new System.EventHandler(this.btnConfirmDatasetChanges_Click);
             // 
-            // dataGridViewTextBoxColumn1
+            // dataGridViewTextBoxColumnDataset
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle1.NullValue = null;
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewTextBoxColumn1.FillWeight = 200F;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Dataset";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 200;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewTextBoxColumn2.FillWeight = 200F;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Dataset";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 200;
-            // 
-            // dataGridViewComboBoxColumn1
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.dataGridViewComboBoxColumn1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridViewComboBoxColumn1.FillWeight = 150F;
-            this.dataGridViewComboBoxColumn1.HeaderText = "Jednotka teploty";
-            this.dataGridViewComboBoxColumn1.Name = "dataGridViewComboBoxColumn1";
-            this.dataGridViewComboBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewComboBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dataGridViewComboBoxColumn1.Width = 150;
+            dataGridViewCellStyleColumnDataset.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.dataGridViewTextBoxColumnDataset.DefaultCellStyle = dataGridViewCellStyleColumnDataset;
+            this.dataGridViewTextBoxColumnDataset.FillWeight = 200F;
+            this.dataGridViewTextBoxColumnDataset.HeaderText = "Dataset";
+            this.dataGridViewTextBoxColumnDataset.Name = "dataGridViewTextBoxColumnDataset";
+            this.dataGridViewTextBoxColumnDataset.Width = 200;
             // 
             // columnCityName
             // 
@@ -187,8 +164,8 @@
         private System.Windows.Forms.Button btnDiscardDatasetChanges;
         private System.Windows.Forms.Button btnConfirmDatasetChanges;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumnMeasure;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumnDataset;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnCityName;
         private System.Windows.Forms.DataGridViewComboBoxColumn measure_tag;
     }

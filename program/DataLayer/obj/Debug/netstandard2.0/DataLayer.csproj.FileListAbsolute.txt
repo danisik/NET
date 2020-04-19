@@ -26,3 +26,4 @@ C:\Users\danisik\Documents\GitHub\NET\program\DataLayer\bin\Debug\netstandard2.0
 C:\Users\danisik\Documents\GitHub\NET\program\DataLayer\bin\Debug\netstandard2.0\System.Deployment.xml
 C:\Users\danisik\Documents\GitHub\NET\program\DataLayer\bin\Debug\netstandard2.0\System.Runtime.Serialization.Formatters.Soap.xml
 C:\Users\danisik\Documents\GitHub\NET\program\DataLayer\obj\Debug\netstandard2.0\DataLayer.csproj.CopyComplete
+C:\Users\danisik\Documents\GitHub\NET\program\DataLayer\obj\Debug\netstandard2.0\DataLayer.csprojAssemblyReference.cache

@@ -53,8 +53,10 @@ Validace hodnot buněk v record datagridview.														(4 hodiny)
 18.4.2020
 ------------
 Kontrola, zda se aktuální dataset změnil či ne při přehazování datasetů / exportování do csv 		(1 hodina)										
-Vytvoření grafů.																					()
+Vytvoření grafů.																					(1+ hodina)
 
+Kontrola změny datasetu pokud se zobrazuje i graf.
+DO SELECTBOXŮ PRO MĚSTO DÁVAT VŽDY JEN TY MĚSTA KTERÝ NEJSOU POUŽITÝ !!!!
 Pokud se změní teplota v datasetu, mají se upravit i dané hodnoty v tabulce ??
 Dokumentace																							()
 

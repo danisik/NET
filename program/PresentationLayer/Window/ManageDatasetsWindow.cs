@@ -1,4 +1,5 @@
 ﻿using DataLayer.Data;
+using DataLayer.Model;
 using DataLayer.Utils;
 using PresentationLayer.GUIElements;
 using System;

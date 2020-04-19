@@ -28,33 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyleColumnCity = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyleColumnJanuary = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyleColumnFebruary = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyleColumnMarch = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyleColumnApril = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyleColumnMay = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyleColumnJune = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyleColumnJuly = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyleColumnAugust = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyleColumnSeptember = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyleColumnOctober = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyleColumnNovember = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyleColumnDecember = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelDataset = new System.Windows.Forms.Label();
             this.cmbDataset = new System.Windows.Forms.ComboBox();
             this.dataGridViewDataset = new System.Windows.Forms.DataGridView();
@@ -80,20 +66,6 @@
             this.btnManageDatasets = new System.Windows.Forms.Button();
             this.btnManageTemperatures = new System.Windows.Forms.Button();
             this.lblDatasetMeasure = new System.Windows.Forms.Label();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewComboBoxColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnExportCSV = new System.Windows.Forms.Button();
             this.btnShowGraphs = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataset)).BeginInit();
@@ -152,8 +124,8 @@
             // 
             // columnCity
             // 
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.columnCity.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyleColumnCity.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.columnCity.DefaultCellStyle = dataGridViewCellStyleColumnCity;
             this.columnCity.HeaderText = "Město";
             this.columnCity.MaxDropDownItems = 1;
             this.columnCity.Name = "columnCity";
@@ -162,10 +134,10 @@
             // 
             // columnJanuary
             // 
-            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle29.Format = "N1";
-            dataGridViewCellStyle29.NullValue = null;
-            this.columnJanuary.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyleColumnJanuary.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyleColumnJanuary.Format = "N1";
+            dataGridViewCellStyleColumnJanuary.NullValue = null;
+            this.columnJanuary.DefaultCellStyle = dataGridViewCellStyleColumnJanuary;
             this.columnJanuary.HeaderText = "Leden";
             this.columnJanuary.Name = "columnJanuary";
             this.columnJanuary.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -173,10 +145,10 @@
             // 
             // columnFebruary
             // 
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle30.Format = "N1";
-            dataGridViewCellStyle30.NullValue = null;
-            this.columnFebruary.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyleColumnFebruary.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyleColumnFebruary.Format = "N1";
+            dataGridViewCellStyleColumnFebruary.NullValue = null;
+            this.columnFebruary.DefaultCellStyle = dataGridViewCellStyleColumnFebruary;
             this.columnFebruary.HeaderText = "Únor";
             this.columnFebruary.Name = "columnFebruary";
             this.columnFebruary.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -184,10 +156,10 @@
             // 
             // columnMarch
             // 
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle31.Format = "N1";
-            dataGridViewCellStyle31.NullValue = null;
-            this.columnMarch.DefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyleColumnMarch.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyleColumnMarch.Format = "N1";
+            dataGridViewCellStyleColumnMarch.NullValue = null;
+            this.columnMarch.DefaultCellStyle = dataGridViewCellStyleColumnMarch;
             this.columnMarch.HeaderText = "Březen";
             this.columnMarch.Name = "columnMarch";
             this.columnMarch.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -195,10 +167,10 @@
             // 
             // columnApril
             // 
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle32.Format = "N1";
-            dataGridViewCellStyle32.NullValue = null;
-            this.columnApril.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyleColumnApril.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyleColumnApril.Format = "N1";
+            dataGridViewCellStyleColumnApril.NullValue = null;
+            this.columnApril.DefaultCellStyle = dataGridViewCellStyleColumnApril;
             this.columnApril.HeaderText = "Duben";
             this.columnApril.Name = "columnApril";
             this.columnApril.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -206,10 +178,10 @@
             // 
             // columnMay
             // 
-            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle33.Format = "N1";
-            dataGridViewCellStyle33.NullValue = null;
-            this.columnMay.DefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyleColumnMay.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyleColumnMay.Format = "N1";
+            dataGridViewCellStyleColumnMay.NullValue = null;
+            this.columnMay.DefaultCellStyle = dataGridViewCellStyleColumnMay;
             this.columnMay.HeaderText = "Květen";
             this.columnMay.Name = "columnMay";
             this.columnMay.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -217,10 +189,10 @@
             // 
             // columnJune
             // 
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle34.Format = "N1";
-            dataGridViewCellStyle34.NullValue = null;
-            this.columnJune.DefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyleColumnJune.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyleColumnJune.Format = "N1";
+            dataGridViewCellStyleColumnJune.NullValue = null;
+            this.columnJune.DefaultCellStyle = dataGridViewCellStyleColumnJune;
             this.columnJune.HeaderText = "Červen";
             this.columnJune.Name = "columnJune";
             this.columnJune.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -228,10 +200,10 @@
             // 
             // columnJuly
             // 
-            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle35.Format = "N1";
-            dataGridViewCellStyle35.NullValue = null;
-            this.columnJuly.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyleColumnJuly.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyleColumnJuly.Format = "N1";
+            dataGridViewCellStyleColumnJuly.NullValue = null;
+            this.columnJuly.DefaultCellStyle = dataGridViewCellStyleColumnJuly;
             this.columnJuly.HeaderText = "Červenec";
             this.columnJuly.Name = "columnJuly";
             this.columnJuly.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -239,10 +211,10 @@
             // 
             // columnAugust
             // 
-            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle36.Format = "N1";
-            dataGridViewCellStyle36.NullValue = null;
-            this.columnAugust.DefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyleColumnAugust.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyleColumnAugust.Format = "N1";
+            dataGridViewCellStyleColumnAugust.NullValue = null;
+            this.columnAugust.DefaultCellStyle = dataGridViewCellStyleColumnAugust;
             this.columnAugust.HeaderText = "Srpen";
             this.columnAugust.Name = "columnAugust";
             this.columnAugust.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -250,10 +222,10 @@
             // 
             // columnSeptember
             // 
-            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle37.Format = "N1";
-            dataGridViewCellStyle37.NullValue = null;
-            this.columnSeptember.DefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyleColumnSeptember.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyleColumnSeptember.Format = "N1";
+            dataGridViewCellStyleColumnSeptember.NullValue = null;
+            this.columnSeptember.DefaultCellStyle = dataGridViewCellStyleColumnSeptember;
             this.columnSeptember.HeaderText = "Září";
             this.columnSeptember.Name = "columnSeptember";
             this.columnSeptember.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -261,10 +233,10 @@
             // 
             // columnOctober
             // 
-            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle38.Format = "N1";
-            dataGridViewCellStyle38.NullValue = null;
-            this.columnOctober.DefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyleColumnOctober.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyleColumnOctober.Format = "N1";
+            dataGridViewCellStyleColumnOctober.NullValue = null;
+            this.columnOctober.DefaultCellStyle = dataGridViewCellStyleColumnOctober;
             this.columnOctober.HeaderText = "Říjen";
             this.columnOctober.Name = "columnOctober";
             this.columnOctober.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -272,10 +244,10 @@
             // 
             // columnNovember
             // 
-            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle39.Format = "N1";
-            dataGridViewCellStyle39.NullValue = null;
-            this.columnNovember.DefaultCellStyle = dataGridViewCellStyle39;
+            dataGridViewCellStyleColumnNovember.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyleColumnNovember.Format = "N1";
+            dataGridViewCellStyleColumnNovember.NullValue = null;
+            this.columnNovember.DefaultCellStyle = dataGridViewCellStyleColumnNovember;
             this.columnNovember.HeaderText = "Listopad";
             this.columnNovember.Name = "columnNovember";
             this.columnNovember.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -283,10 +255,10 @@
             // 
             // columnDecember
             // 
-            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle40.Format = "N1";
-            dataGridViewCellStyle40.NullValue = null;
-            this.columnDecember.DefaultCellStyle = dataGridViewCellStyle40;
+            dataGridViewCellStyleColumnDecember.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyleColumnDecember.Format = "N1";
+            dataGridViewCellStyleColumnDecember.NullValue = null;
+            this.columnDecember.DefaultCellStyle = dataGridViewCellStyleColumnDecember;
             this.columnDecember.HeaderText = "Prosinec";
             this.columnDecember.Name = "columnDecember";
             this.columnDecember.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -379,161 +351,6 @@
             this.lblDatasetMeasure.Size = new System.Drawing.Size(0, 13);
             this.lblDatasetMeasure.TabIndex = 17;
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle41.Format = "N2";
-            dataGridViewCellStyle41.NullValue = null;
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle41;
-            this.dataGridViewTextBoxColumn1.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Leden";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn1.Width = 60;
-            // 
-            // dataGridViewComboBoxColumn1
-            // 
-            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.dataGridViewComboBoxColumn1.DefaultCellStyle = dataGridViewCellStyle42;
-            this.dataGridViewComboBoxColumn1.HeaderText = "Město";
-            this.dataGridViewComboBoxColumn1.MaxDropDownItems = 1;
-            this.dataGridViewComboBoxColumn1.Name = "dataGridViewComboBoxColumn1";
-            this.dataGridViewComboBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewComboBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle43.Format = "N2";
-            dataGridViewCellStyle43.NullValue = null;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle43;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Únor";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn2.Width = 60;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle44.Format = "N2";
-            dataGridViewCellStyle44.NullValue = null;
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle44;
-            this.dataGridViewTextBoxColumn3.HeaderText = "Březen";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn3.Width = 60;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle45.Format = "N1";
-            dataGridViewCellStyle45.NullValue = null;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle45;
-            this.dataGridViewTextBoxColumn4.HeaderText = "Duben";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn4.Width = 60;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle46.Format = "N1";
-            dataGridViewCellStyle46.NullValue = null;
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle46;
-            this.dataGridViewTextBoxColumn5.HeaderText = "Květen";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn5.Width = 60;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle47.Format = "N1";
-            dataGridViewCellStyle47.NullValue = null;
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle47;
-            this.dataGridViewTextBoxColumn6.HeaderText = "Červen";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn6.Width = 60;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle48.Format = "N1";
-            dataGridViewCellStyle48.NullValue = null;
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle48;
-            this.dataGridViewTextBoxColumn7.HeaderText = "Červenec";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn7.Width = 60;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle49.Format = "N1";
-            dataGridViewCellStyle49.NullValue = null;
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle49;
-            this.dataGridViewTextBoxColumn8.HeaderText = "Srpen";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn8.Width = 60;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle50.Format = "N1";
-            dataGridViewCellStyle50.NullValue = null;
-            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle50;
-            this.dataGridViewTextBoxColumn9.HeaderText = "Září";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn9.Width = 60;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle51.Format = "N1";
-            dataGridViewCellStyle51.NullValue = null;
-            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle51;
-            this.dataGridViewTextBoxColumn10.HeaderText = "Říjen";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn10.Width = 60;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle52.Format = "N1";
-            dataGridViewCellStyle52.NullValue = null;
-            this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle52;
-            this.dataGridViewTextBoxColumn11.HeaderText = "Listopad";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn11.Width = 60;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle53.Format = "N1";
-            dataGridViewCellStyle53.NullValue = null;
-            this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle53;
-            this.dataGridViewTextBoxColumn12.HeaderText = "Prosinec";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn12.Width = 60;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle54.Format = "N1";
-            dataGridViewCellStyle54.NullValue = null;
-            this.dataGridViewTextBoxColumn13.DefaultCellStyle = dataGridViewCellStyle54;
-            this.dataGridViewTextBoxColumn13.HeaderText = "Prosinec";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn13.Width = 73;
-            // 
             // btnExportCSV
             // 
             this.btnExportCSV.Location = new System.Drawing.Point(927, 480);
@@ -590,18 +407,6 @@
         private System.Windows.Forms.ComboBox cmbDataset;
         private System.Windows.Forms.DataGridView dataGridViewDataset;
         private System.Windows.Forms.Label lblSelectedMeasureText;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private System.Windows.Forms.Button btnNewRecordRow;
         private System.Windows.Forms.Button btnManageCities;
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn1;
@@ -611,7 +416,6 @@
         private System.Windows.Forms.Button btnManageDatasets;
         private System.Windows.Forms.Button btnManageTemperatures;
         private System.Windows.Forms.Label lblDatasetMeasure;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private System.Windows.Forms.DataGridViewComboBoxColumn columnCity;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnJanuary;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnFebruary;
