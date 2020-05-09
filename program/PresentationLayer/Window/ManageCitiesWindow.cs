@@ -13,13 +13,27 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Window
 {
+    /// <summary>
+    /// Window for managing cities.
+    /// </summary>
     public partial class ManageCitiesWindow : Form
     {
+        // Database interface.
         private readonly DatabaseInterface databaseInterface;
+
+        // Map of cities.
         private Dictionary<String, City> cities;
+
+        // Application name.
         private String appName = "";
+
+        // Main window instance.
         private MainWindow mainWindow;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="mainWindow"> Instance of main window. </param>
         public ManageCitiesWindow(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -32,6 +46,9 @@ namespace PresentationLayer.Window
             fillDataGridView();
         }
 
+        /// <summary>
+        /// Fill DataGridView with default values.
+        /// </summary>
         private void fillDataGridView()
         {
             foreach(String cityName in cities.Keys)
@@ -46,6 +63,11 @@ namespace PresentationLayer.Window
             }
         }
 
+        /// <summary>
+        /// CLick event for btnConfirmChanges.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnConfirmChanges_Click(object sender, EventArgs e)
         {
             List<String> citiesToBeDeleted = new List<String>();
@@ -64,6 +86,11 @@ namespace PresentationLayer.Window
                 String cityName = row.Cells[0].Value.ToString();
 
                 if (!newCities.Contains(cityName)) newCities.Add(cityName);
+                else
+                {
+                    Utils.displayErrorMessageBox("Město '" + cityName + "' se už v tabulce nachází!", appName);
+                    return;
+                }
             }
 
             // Check if currently stored city names in database are presented in new list.
@@ -114,17 +141,33 @@ namespace PresentationLayer.Window
             }
         }
 
+        /// <summary>
+        /// Click event for btnDiscardChanges.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDiscardChanges_Click(object sender, EventArgs e)
         {
             dataGridViewManageCities.Rows.Clear();
             fillDataGridView();
         }
 
+        /// <summary>
+        /// Click event for btnReturn.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnReturn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+
+        /// <summary>
+        /// Click event for btnNewCityRow.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnNewCityRow_Click(object sender, EventArgs e)
         {
             DataGridViewRow row = new DataGridViewRow();
@@ -133,6 +176,11 @@ namespace PresentationLayer.Window
             dataGridViewManageCities.Rows.Add(row);
         }
 
+        /// <summary>
+        /// Click event for btnDeleteSelectedCityRow.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDeleteSelectedCityRow_Click(object sender, EventArgs e)
         {
             DataGridViewSelectedRowCollection selectedRows = dataGridViewManageCities.SelectedRows;            

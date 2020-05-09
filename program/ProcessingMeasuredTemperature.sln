@@ -8,6 +8,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationLayer", "PresentationLayer\PresentationLayer.csproj", "{78C68600-379F-4B11-BF7E-3FE86DB604A3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8E7A211A-ACAE-4558-878B-E9443F3E31FF} = {8E7A211A-ACAE-4558-878B-E9443F3E31FF}
+		{2688DB2E-B153-428A-A719-853626C1B268} = {2688DB2E-B153-428A-A719-853626C1B268}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelLayer", "ModelLayer\ModelLayer.csproj", "{2688DB2E-B153-428A-A719-853626C1B268}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8E7A211A-ACAE-4558-878B-E9443F3E31FF} = {8E7A211A-ACAE-4558-878B-E9443F3E31FF}
 	EndProjectSection
 EndProject
 Global
@@ -24,6 +30,10 @@ Global
 		{78C68600-379F-4B11-BF7E-3FE86DB604A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78C68600-379F-4B11-BF7E-3FE86DB604A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78C68600-379F-4B11-BF7E-3FE86DB604A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2688DB2E-B153-428A-A719-853626C1B268}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2688DB2E-B153-428A-A719-853626C1B268}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2688DB2E-B153-428A-A719-853626C1B268}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2688DB2E-B153-428A-A719-853626C1B268}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

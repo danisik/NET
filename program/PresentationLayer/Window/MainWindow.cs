@@ -13,21 +13,43 @@ using System.Windows.Forms;
 
 namespace PresentationLayer
 {
+    /// <summary>
+    /// Main window.
+    /// </summary>
     public partial class MainWindow : Form
     {
+        // Database interface.
         private readonly DatabaseInterface databaseInterface;
+
+        // Map of datasets.
         private Dictionary<String, Dataset> datasets;
+
+        // Map of measures.
         private Dictionary<String, Measure> measures;
+
+        // Map of cities.
         private Dictionary<String, City> cities;
+
+        // Map of records.
         private Dictionary<int, Record> records;
+
+        // Currently selected dataset.
         private Dataset currentlySelectedDataset;
+
+        // Application ame.
         private String appName = "";
+
+        // True if records in currently selected dataset were changed, false if not.
         private bool recordsChanged = false;
 
+        // Variables for Drag&Drop in DataGridView.
         private Rectangle dragBoxFromMouseDownDataGridViewDataset;
         private int rowIndexFromMouseDownDataGridViewDataset;
         private int rowIndexOfItemUnderMouseToDropDataGridViewDataset;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -41,6 +63,10 @@ namespace PresentationLayer
             initializeComboBoxDataset();
         }
 
+        /// <summary>
+        /// Change buttons status (enabled / disabled).
+        /// </summary>
+        /// <param name="status"> Status for buttons. </param>
         private void changeButtonStatus(bool status)
         {
             btnNewRecordRow.Enabled = status;
@@ -50,6 +76,9 @@ namespace PresentationLayer
             btnExportCSV.Enabled = status;            
         }
 
+        /// <summary>
+        /// Initialize data for dataset combobox.
+        /// </summary>
         private void initializeComboBoxDataset()
         {
             cmbDataset.Items.Clear();
@@ -60,6 +89,11 @@ namespace PresentationLayer
             }
         }
 
+        /// <summary>
+        /// Selected Index Changed event for cmbDataset.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmbDataset_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!btnDiscardRecordChanges.Enabled) changeButtonStatus(true);
@@ -88,6 +122,11 @@ namespace PresentationLayer
             }
         }
 
+        /// <summary>
+        /// Cell Begin Edit for dataGridView. Remove Measure tag from text and display only value.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewDataset_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             if (e.ColumnIndex > 0)
@@ -97,6 +136,11 @@ namespace PresentationLayer
             }
         }
 
+        /// <summary>
+        /// Editing Control Showing event for dataGridView. Assing KeyPress events for currently selected textbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewDataset_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             if (e.Control is TextBox)
@@ -107,6 +151,13 @@ namespace PresentationLayer
                 tbox.KeyPress += dataGridViewDataset_TextBoxKeyPress;
             }
         }
+
+        /// <summary>
+        /// Text Box Key Press event for DataGridView. Check writed values in textbox for month.
+        /// Allowed values are digits, ',' and '-'.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewDataset_TextBoxKeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
         {
             if (e.KeyChar == 8) return;
@@ -125,6 +176,11 @@ namespace PresentationLayer
             }
         }
 
+        /// <summary>
+        /// Cell End Edit event for dataGridView. Validate writed temperature.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewDataset_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex > 0)
@@ -157,13 +213,21 @@ namespace PresentationLayer
             }
         }
 
+
+        /// <summary>
+        /// Validate value, if it is double or not.
+        /// </summary>
+        /// <param name="newValue"> Value in String. </param>
+        /// <returns> True if value is double, false if not. </returns>
         private bool validateMonth(String newValue)
         {
             if (!Double.TryParse(newValue, out Double ignored)) return false;
             else return true;
         }
 
-
+        /// <summary>
+        /// Fill DataGridView with default values.
+        /// </summary>
         private void fillDataGridView()
         {
             dataGridViewDataset.Rows.Clear();
@@ -191,6 +255,10 @@ namespace PresentationLayer
             }
         }
 
+        /// <summary>
+        /// Prepare city names for city cell.
+        /// </summary>
+        /// <returns></returns>
         private CityCell prepareCityCell()
         {
             CityCell cityCell = new CityCell();
@@ -202,6 +270,11 @@ namespace PresentationLayer
             return cityCell;
         }
 
+        /// <summary>
+        /// Click event for btnNewRecordRow.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnNewRecordRow_Click(object sender, EventArgs e)
         {
             DataGridViewRowWithId row = new DataGridViewRowWithId(-1);
@@ -219,6 +292,11 @@ namespace PresentationLayer
             recordsChanged = true;
         }
 
+        /// <summary>
+        /// Click event for btnDiscardRecordChanges.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDiscardRecordChanges_Click(object sender, EventArgs e)
         {
             dataGridViewDataset.Rows.Clear();
@@ -226,11 +304,17 @@ namespace PresentationLayer
             recordsChanged = false;
         }
 
+        /// <summary>
+        /// Click event for btnConfirmRecordChanges.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnConfirmRecordChanges_Click(object sender, EventArgs e)
         {
             List<Record> newRecords = new List<Record>();
             List<int> recordsToBeDeleted = new List<int>();
             Dictionary<int, Record> recordsToBeUpdated = new Dictionary<int, Record>();
+            List<String> usedCities = new List<String>();
 
             int order = 1;
             foreach (DataGridViewRow row in dataGridViewDataset.Rows)
@@ -247,6 +331,12 @@ namespace PresentationLayer
 
                 if (!cities.ContainsKey(cityName)) {
                     Utils.displayErrorMessageBox("Zvolené město neexistuje v databázi!", appName);
+                    return;
+                }
+
+                if (usedCities.Contains(cityName))
+                {
+                    Utils.displayErrorMessageBox("Město '" + cityName + "' se v datasetu nachází vícekrát!", appName);
                     return;
                 }
 
@@ -277,6 +367,8 @@ namespace PresentationLayer
                 {
                     recordsToBeUpdated.Add(rowWithId.Id, record);
                 }
+
+                usedCities.Add(cityName);
                 order++;
             }
 
@@ -333,6 +425,11 @@ namespace PresentationLayer
             }
         }
 
+        /// <summary>
+        /// Click event for btnDeleteSelectedRecordRows.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDeleteSelectedRecordRows_Click(object sender, EventArgs e)
         {
             DataGridViewSelectedRowCollection selectedRows = dataGridViewDataset.SelectedRows;
@@ -345,6 +442,9 @@ namespace PresentationLayer
             }
         }
 
+        /// <summary>
+        /// Update city cell values.
+        /// </summary>
         private void updateCityCells()
         {
             foreach (DataGridViewRow row in dataGridViewDataset.Rows)
@@ -359,6 +459,9 @@ namespace PresentationLayer
             }
         }
 
+        /// <summary>
+        /// Update month cell values (measure tag).
+        /// </summary>
         private void updateMonthCells()
         {
             foreach (DataGridViewRow row in dataGridViewDataset.Rows)
@@ -375,6 +478,11 @@ namespace PresentationLayer
             }
         }
 
+        /// <summary>
+        /// Click event for btnManageDatasets.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnManageDatasets_Click(object sender, EventArgs e)
         {
             ManageDatasetsWindow window = new ManageDatasetsWindow(this);
@@ -412,6 +520,11 @@ namespace PresentationLayer
             }
         }
 
+        /// <summary>
+        /// Click event for btnManageCities.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnManageCities_Click(object sender, EventArgs e)
         {
             ManageCitiesWindow window = new ManageCitiesWindow(this);
@@ -421,6 +534,11 @@ namespace PresentationLayer
             if (currentlySelectedDataset != null) updateCityCells();
         }
 
+        /// <summary>
+        /// Click event for btnManageTemperatures.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnManageTemperatures_Click(object sender, EventArgs e)
         {
             ManageMeasuresWindow window = new ManageMeasuresWindow(this);
@@ -436,18 +554,30 @@ namespace PresentationLayer
             }
         }
 
-
+        /// <summary>
+        /// Click event for btnShowGraphs.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnShowGraphs_Click(object sender, EventArgs e)
-        {
+        {            
             GraphWindow window = new GraphWindow(this);
             window.ShowDialog();
         }
 
+        /// <summary>
+        /// Update measure label, displaying currently used measure name and measure tag.
+        /// </summary>
         private void updateMeasureLabel()
         {
             lblDatasetMeasure.Text = currentlySelectedDataset.Measure.Name + " [" + currentlySelectedDataset.Measure.Tag + "]";
         }
 
+        /// <summary>
+        /// Mouse move event for DataGridView. Used for Drag&Drop record.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewDataset_MouseMove(object sender, MouseEventArgs e)
         {
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
@@ -464,6 +594,11 @@ namespace PresentationLayer
             }
         }
 
+        /// <summary>
+        /// Mouse Down event for DataGridView. Used for Drag&Drop record.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewDataset_MouseDown(object sender, MouseEventArgs e)
         {
             // Get the index of the item the mouse is below.
@@ -489,11 +624,21 @@ namespace PresentationLayer
                 dragBoxFromMouseDownDataGridViewDataset = Rectangle.Empty;
         }
 
+        /// <summary>
+        /// Drag Over event for DataGridView. Used for Drag&Drop record.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewDataset_DragOver(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
         }
 
+        /// <summary>
+        /// Drag Drop event for DataGridView. Used for Drag&Drop record.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewDataset_DragDrop(object sender, DragEventArgs e)
         {
             // The mouse locations are relative to the screen, so they must be 
@@ -527,6 +672,11 @@ namespace PresentationLayer
             }
         }
 
+        /// <summary>
+        /// Export currently selected dataset to csv file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExportCSV_Click(object sender, EventArgs e)
         {
             if (currentlySelectedDataset == null)
@@ -585,6 +735,10 @@ namespace PresentationLayer
 
         }
 
+        /// <summary>
+        /// Try to perform record changes.
+        /// </summary>
+        /// <returns> True if user click yes (confirm record changes) or no (discard changes), false if user select cancel. </returns>
         private bool tryPerformRecordsChange()
         {
             if (recordsChanged)
@@ -646,6 +800,9 @@ namespace PresentationLayer
             }
         }
 
+        /// <summary>
+        /// Get month names.
+        /// </summary>
         public List<String> Months
         {
             get

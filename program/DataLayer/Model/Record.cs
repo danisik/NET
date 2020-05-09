@@ -1,27 +1,78 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DataLayer.Model
 {
+    /// <summary>
+    /// Class representing record in database.
+    /// </summary>
     public class Record
     {
+        // ID of record.
         private int id;
+
+        // City.
         private City city;
+
+        // Temperature in january.
         private double january;
+
+        // Temperature in february.
         private double february;
+
+        // Temperature in march.
         private double march;
+
+        // Temperature in april.
         private double april;
+
+        // Temperature in may.
         private double may;
+
+        // Temperature in june.
         private double june;
+
+        // Temperature in july.
         private double july;
+
+        // Temperature in august.
         private double august;
+
+        // Temperature in september.
         private double september;
+
+        // Temperature in october.
         private double october;
+
+        // Temperature in november.
         private double november;
+
+        // Temperature in december.
         private double december;
+
+        // Record order in dataset.
         private int order;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="id"> ID of record. </param>
+        /// <param name="city"> City. </param>
+        /// <param name="january"> Temperature in january. </param>
+        /// <param name="february"> Temperature in february. </param>
+        /// <param name="march"> Temperature in march. </param>
+        /// <param name="april"> Temperature in april. </param>
+        /// <param name="may"> Temperature in may. </param>
+        /// <param name="june"> Temperature in june. </param>
+        /// <param name="july"> Temperature in july. </param>
+        /// <param name="august"> Temperature in august. </param>
+        /// <param name="september"> Temperature in september. </param>
+        /// <param name="october"> Temperature in october. </param>
+        /// <param name="november"> Temperature in november. </param>
+        /// <param name="december"> Temperature in december. </param>
+        /// <param name="order"> Record order in dataset. </param>
         public Record(int id, City city, double january, double february, double march, double april, double may,
             double june, double july, double august, double september, double october, double november, double december, int order)
         {
@@ -162,6 +213,10 @@ namespace DataLayer.Model
             }
         }
 
+        /// <summary>
+        /// Get all month values.
+        /// </summary>
+        /// <returns> List of temperatures in every month. </returns>
         public List<double> getMonths()
         {
             List<double> months = new List<double>();

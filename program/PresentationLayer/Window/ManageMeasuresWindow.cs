@@ -13,13 +13,27 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Window
 {
+    /// <summary>
+    /// Window for managing measures.
+    /// </summary>
     public partial class ManageMeasuresWindow : Form
     {
+        // Database interface.
         private readonly DatabaseInterface databaseInterface;
+        
+        // Map of measures.
         private Dictionary<String, Measure> measures;
+
+        // Application name.
         private String appName = "";
+
+        // Main window instance.
         private MainWindow mainWindow;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="mainWindow"> Instance of main window. </param>
         public ManageMeasuresWindow(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -32,6 +46,9 @@ namespace PresentationLayer.Window
             fillDataGridView();
         }
 
+        /// <summary>
+        /// Fill DataGridView with default values.
+        /// </summary>
         private void fillDataGridView()
         {
             foreach (Measure measure in measures.Values)
@@ -49,6 +66,11 @@ namespace PresentationLayer.Window
             }
         }
 
+        /// <summary>
+        /// Click event for btnNewMeasureRow.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnNewMeasureRow_Click(object sender, EventArgs e)
         {
             DataGridViewRow row = new DataGridViewRow();
@@ -61,6 +83,11 @@ namespace PresentationLayer.Window
             dataGridViewManageMeasures.Rows.Add(row);
         }
 
+        /// <summary>
+        /// Click event for btnDeleteSelectedMeasures.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDeleteSelectedMeasuresRow_Click(object sender, EventArgs e)
         {
             DataGridViewSelectedRowCollection selectedRows = dataGridViewManageMeasures.SelectedRows;
@@ -71,11 +98,19 @@ namespace PresentationLayer.Window
             }
         }
 
+        /// <summary>
+        /// Click event for btnConfirmMeasure.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnConfirmMeasureChanges_Click(object sender, EventArgs e)
         {
             List<String> measuresToBeDeleted = new List<String>();
             Dictionary<String, Measure> newMeasures = new Dictionary<String, Measure>();
             List<Measure> measuresToBeUpdated = new List<Measure>();
+
+            List<String> usedMeasures = new List<String>();
+            List<String> usedMeasuresTag = new List<String>();
 
             foreach (DataGridViewRow row in dataGridViewManageMeasures.Rows)
             {
@@ -94,6 +129,22 @@ namespace PresentationLayer.Window
 
                 String measureName = row.Cells[0].Value.ToString();
                 String measureTag = row.Cells[1].Value.ToString();
+
+                if (usedMeasures.Contains(measureName))
+                {
+                    Utils.displayErrorMessageBox("Název jednotky '" + measureName + "' se už v tabulce nachází!", appName);
+                    return;
+                }
+
+                if (usedMeasuresTag.Contains(measureTag))
+                {
+                    Utils.displayErrorMessageBox("Veličina jednotky '" + measureTag + "' se už v tabulce nachází!", appName);
+                    return;
+                }
+
+                usedMeasures.Add(measureName);
+                usedMeasuresTag.Add(measureTag);
+                
 
                 if (!newMeasures.ContainsKey(measureName)) newMeasures.Add(measureName, new Measure(measureName, measureTag));
             }
@@ -150,12 +201,22 @@ namespace PresentationLayer.Window
             }
         }
 
+        /// <summary>
+        /// Click event for btnDiscardMeasureChanges.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDiscardMeasureChanges_Click(object sender, EventArgs e)
         {
             dataGridViewManageMeasures.Rows.Clear();
             fillDataGridView();
         }
 
+        /// <summary>
+        /// Click event for btnReturnMeasure.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnReturnMeasure_Click(object sender, EventArgs e)
         {
             this.Close();

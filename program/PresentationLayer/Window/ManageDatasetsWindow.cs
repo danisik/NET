@@ -14,13 +14,27 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Window
 {
+    /// <summary>
+    /// Window for managing datasets.
+    /// </summary>
     public partial class ManageDatasetsWindow : Form
     {
+        // Database interface.
         private readonly DatabaseInterface databaseInterface;
+
+        // Map of datasets.
         private Dictionary<String, Dataset> datasets;
+
+        // Application name.
         private String appName = "";
+
+        // Main window instance.
         private MainWindow mainWindow;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="mainWindow"> Instance of main window. </param>
         public ManageDatasetsWindow(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -33,6 +47,9 @@ namespace PresentationLayer.Window
             fillDataGridView();
         }
 
+        /// <summary>
+        /// Fill DataGridView with default values.
+        /// </summary>
         private void fillDataGridView()
         {
             Dictionary<String, Measure> measures = databaseInterface.getMeasures();
@@ -61,6 +78,11 @@ namespace PresentationLayer.Window
             }
         }
 
+        /// <summary>
+        /// Click event for btnNewDatasetRow.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnNewDatasetRow_Click(object sender, EventArgs e)
         {
             Dictionary<String, Measure> measures = databaseInterface.getMeasures();
@@ -83,6 +105,11 @@ namespace PresentationLayer.Window
             dataGridViewManageDatasets.Rows.Add(row);            
         }
 
+        /// <summary>
+        /// Click event for btnDeleteSelectedDatasetsRow.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDeleteSelectedDatasetsRow_Click(object sender, EventArgs e)
         {
             DataGridViewSelectedRowCollection selectedRows = dataGridViewManageDatasets.SelectedRows;
@@ -93,11 +120,17 @@ namespace PresentationLayer.Window
             }
         }
 
+        /// <summary>
+        /// Click event for btnConfirmDatasetChanges.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnConfirmDatasetChanges_Click(object sender, EventArgs e)
         {
             List<int> datasetsToBeDeleted = new List<int>();
             List<Dataset> newDatasets = new List<Dataset>();
             Dictionary<int, Dataset> datasetsToBeUpdated = new Dictionary<int,Dataset>();
+            List<String> usedDatasets = new List<String>();
 
             Dictionary<String, Measure> measures = databaseInterface.getMeasures();
 
@@ -107,6 +140,12 @@ namespace PresentationLayer.Window
 
                 Measure measure = null;
                 measures.TryGetValue(row.Cells[1].Value.ToString(), out measure);
+
+                if (usedDatasets.Contains(row.Cells[0].Value.ToString()))
+                {
+                    Utils.displayErrorMessageBox("Název datasetu '" + row.Cells[0].Value.ToString() + "' se už v tabulce nachází!", appName);
+                    return;
+                }
 
                 if (row.Cells[0].Value == null)
                 {
@@ -137,6 +176,8 @@ namespace PresentationLayer.Window
                     Dataset dataset = new Dataset(rowWithId.Id, row.Cells[0].Value.ToString(), measure);
                     datasetsToBeUpdated.Add(rowWithId.Id, dataset);
                 }
+
+                usedDatasets.Add(row.Cells[0].Value.ToString());
             }
 
             foreach (Dataset dataset in datasets.Values)
@@ -178,12 +219,22 @@ namespace PresentationLayer.Window
             }
         }
 
+        /// <summary>
+        /// Click event for btnDiscardDatasetChanges.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDiscardDatasetChanges_Click(object sender, EventArgs e)
         {
             dataGridViewManageDatasets.Rows.Clear();
             fillDataGridView();
         }
 
+        /// <summary>
+        /// Click event for btnReturnDataset.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnReturnDataset_Click(object sender, EventArgs e)
         {
             this.Close();

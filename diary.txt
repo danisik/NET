@@ -53,11 +53,22 @@ Validace hodnot buněk v record datagridview.														(4 hodiny)
 18.4.2020
 ------------
 Kontrola, zda se aktuální dataset změnil či ne při přehazování datasetů / exportování do csv 		(1 hodina)										
-Vytvoření grafů.																					(1+ hodina)
+Vytvoření 2 (bez porovnávání měst mezi sebou) grafů.												(3 hodiny)
 
-Kontrola změny datasetu pokud se zobrazuje i graf.
-DO SELECTBOXŮ PRO MĚSTO DÁVAT VŽDY JEN TY MĚSTA KTERÝ NEJSOU POUŽITÝ !!!!
-Pokud se změní teplota v datasetu, mají se upravit i dané hodnoty v tabulce ??
-Dokumentace																							()
+																									(4 hodiny)
+																									
+26.4.2020
+------------
+Vytvoření grafu pro porovnávání měst mezi sebou + implementace staženého checkboxComboboxu			(3 hodiny)
+
+																									(3 hodiny)
+																									
+9.5.2020
+------------
+Komentáře
+Integrační testy.																					()
+Dokumentace.																						()																									
+
+
 
 																			

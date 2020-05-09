@@ -7,9 +7,15 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.GUIElements
 {
+    /// <summary>
+    /// Extended cell for month in DataGridView.
+    /// </summary>
     public class MonthCell : DataGridViewTextBoxCell
     {
+        // Temperature value.
         private double cellValue = 0;
+
+        // Measure tag used in cell.
         private String measureTag = "";
 
         public MonthCell()
@@ -40,6 +46,10 @@ namespace PresentationLayer.GUIElements
             }
         }
         
+        /// <summary>
+        /// Get displayed text for cell.
+        /// </summary>
+        /// <returns></returns>
         public String getText()
         {
             return "" + cellValue + " " + measureTag;

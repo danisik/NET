@@ -4,12 +4,26 @@ using System.Text;
 
 namespace DataLayer.Model
 {
+    /// <summary>
+    /// Class representing dataset in database.
+    /// </summary>
     public class Dataset
     {
+        // ID of dataset.
         private int id;
+
+        // Name of dataset.
         private String name;
+
+        // Used measure in dataset.
         private Measure measure;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="id"> ID of dataset. </param>
+        /// <param name="name"> Name of dataset. </param>
+        /// <param name="measure"> Used measure. </param>
         public Dataset(int id, String name, Measure measure)
         {
             this.id = id;

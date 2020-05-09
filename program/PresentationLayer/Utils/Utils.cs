@@ -10,33 +10,74 @@ using System.Windows.Forms;
 
 namespace DataLayer.Utils
 {
+    /// <summary>
+    /// Class containing utilities.
+    /// </summary>
     public class Utils
     {
-        public static DialogResult displayMessageBox(string errorMessage, String appName, MessageBoxButtons buttons, MessageBoxIcon icon)
+        /// <summary>
+        /// Display message box.
+        /// </summary>
+        /// <param name="message"> Message to be displayed.</param>
+        /// <param name="appName"> Name of this application. </param>
+        /// <param name="buttons"> List of buttons. </param>
+        /// <param name="icon"> MessageBoxIcon. </param>
+        /// <returns> Result from messagebox. </returns>
+        public static DialogResult displayMessageBox(string message, String appName, MessageBoxButtons buttons, MessageBoxIcon icon)
         { 
-            return MessageBox.Show(errorMessage, appName, buttons, icon);
+            return MessageBox.Show(message, appName, buttons, icon);
         }
 
+        /// <summary>
+        /// Display error message.
+        /// </summary>
+        /// <param name="errorMessage"> Error message. </param>
+        /// <param name="appName"> Name of this application. </param>
+        /// <returns> Result from messagebox. </returns>
         public static DialogResult displayErrorMessageBox(string errorMessage, String appName)
         {
             return displayMessageBox(errorMessage, appName, new MessageBoxButtons { }, MessageBoxIcon.Error);
         }
 
+        /// <summary>
+        /// Display info message.
+        /// </summary>
+        /// <param name="infoMessage"> Info message. </param>
+        /// <param name="appName"> Name of this application. </param>
+        /// <returns> Result from messagebox. </returns>
         public static DialogResult displayInfoMessageBox(string infoMessage, String appName)
         {
             return displayMessageBox(infoMessage, appName, new MessageBoxButtons { }, MessageBoxIcon.Information);
         }
 
+        /// <summary>
+        /// Display warning message.
+        /// </summary>
+        /// <param name="infoMessage"> Info message. </param>
+        /// <param name="appName"> Name of this application. </param>
+        /// <returns> Result from messagebox. </returns>
         public static DialogResult displayWarningMessageBox(string infoMessage, String appName)
         {
             return displayMessageBox(infoMessage, appName, new MessageBoxButtons { }, MessageBoxIcon.Warning);
         }
 
+        /// <summary>
+        /// Display info message with buttons.
+        /// </summary>
+        /// <param name="infoMessage"> Info message. </param>
+        /// <param name="appName"> Name of this application. </param>
+        /// <param name="buttons"> List of buttons. </param>
+        /// <returns> Result from messagebox. </returns>
         public static DialogResult displayInfoMessageBoxWithButton(string infoMessage, String appName, MessageBoxButtons buttons)
         {
             return displayMessageBox(infoMessage, appName, buttons, MessageBoxIcon.Information);
         }
 
+        /// <summary>
+        /// Sort Map of cities by their name.
+        /// </summary>
+        /// <param name="unsortedCities"> Map of unsorted cities. </param>
+        /// <returns> Map of sorted cities. </returns>
         public static Dictionary<String, City> sortCities(Dictionary<String, City> unsortedCities)
         {
             Dictionary<String, City> sortedCities = new Dictionary<String, City>();
@@ -54,6 +95,12 @@ namespace DataLayer.Utils
             return sortedCities;
         }
 
+        /// <summary>
+        /// Check if two double values are equal.
+        /// </summary>
+        /// <param name="val1"> Double value 1. </param>
+        /// <param name="val2"> Double value 2. </param>
+        /// <returns> True if both values are equal, false if not. </returns>
         public static bool doubleEquals(double val1, double val2)
         {
             double difference = Math.Abs(val1 * .00001);
@@ -64,6 +111,11 @@ namespace DataLayer.Utils
             else return false;            
         }
 
+        /// <summary>
+        /// Get average value from list of double values.
+        /// </summary>
+        /// <param name="values"> List of values. </param>
+        /// <returns> Average value. </returns>
         public static double getAverageValue(List<double> values)
         {
             double averageValue = 0;
@@ -79,6 +131,12 @@ namespace DataLayer.Utils
             return averageValue;
         }
 
+        /// <summary>
+        /// Export dataset's columns to CSV.
+        /// </summary>
+        /// <param name="columns"> List of columns. </param>
+        /// <param name="values"> List of list values.</param>
+        /// <returns></returns>
         public static bool exportDatasetToCSV(List<String> columns, List<List<String>> values)
         {
             try

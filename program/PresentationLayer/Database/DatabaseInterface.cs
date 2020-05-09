@@ -4,19 +4,34 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Data;
 using DataLayer.Model;
+using System.IO;
 
 namespace DataLayer.Data
 {
+    /// <summary>
+    /// Database interface for accessing data.
+    /// </summary>
     public class DatabaseInterface
     {
+        // Database connecting string.
         private static readonly String databaseConnectionString =
-            "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\danisik\\Documents\\GitHub\\NET\\program\\PresentationLayer\\Database\\Database.mdf;Integrated Security=True";
+            "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";
 
+        // Database connection.
         private SqlConnection connection = null;
+        // Database command.
         private SqlCommand command = null;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         public DatabaseInterface()
         {
+            // Get path to database and set 'DataDirectory'.
+            String dataDirPath = Path.GetFullPath(@"..\..") + @"\Database\Database.mdf";
+            String absolutePath = Path.GetDirectoryName(dataDirPath);
+            AppDomain.CurrentDomain.SetData("DataDirectory", absolutePath);
+
             connection = new SqlConnection(databaseConnectionString);
             command = new SqlCommand
             {
@@ -27,6 +42,10 @@ namespace DataLayer.Data
             if (connection.State != ConnectionState.Closed) connection.Close();
         }
 
+        /// <summary>
+        /// Get all measures.
+        /// </summary>
+        /// <returns> Map of measures. </returns>
         public Dictionary<String, Measure> getMeasures()
         {
             Dictionary<String, Measure> measures = new Dictionary<String, Measure>();
@@ -49,6 +68,11 @@ namespace DataLayer.Data
             return measures;
         } 
 
+        /// <summary>
+        /// Get all datasets.
+        /// </summary>
+        /// <param name="measures"> Measures in database. </param>
+        /// <returns> Map of datasets. </returns>
         public Dictionary<String, Dataset> getDatasets(Dictionary<String, Measure> measures)
         {         
             Dictionary<String, Dataset> datasets = new Dictionary<String, Dataset>();
@@ -73,6 +97,12 @@ namespace DataLayer.Data
             return datasets;
         }
 
+        /// <summary>
+        /// Get all records for specific dataset.
+        /// </summary>
+        /// <param name="datasetID"> ID of current dataset. </param>
+        /// <param name="cities"> Cities in database. </param>
+        /// <returns> Map of records. </returns>
         public Dictionary<int, Record> getRecords(int datasetID, Dictionary<String, City> cities)
         {
             Dictionary<int, Record> records = new Dictionary<int, Record> ();
@@ -106,6 +136,45 @@ namespace DataLayer.Data
             return records;
         }
 
+        /// <summary>
+        /// Get all used cities in dataset.
+        /// </summary>
+        /// <param name="datasetID"> ID of current dataset. </param>
+        /// <returns> List of cities. </returns>
+        public List<String> getCitiesInDataset(int datasetID)
+        {
+            List<String> cities = new List<String>();
+
+            command.CommandText = "SELECT name_city FROM Record WHERE id_dataset = @datasetID";
+            SqlParameter idDatasetParameter = new SqlParameter("datasetID", System.Data.SqlDbType.Int);
+            command.Parameters.Add(idDatasetParameter).Value = datasetID;
+
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    cities.Add(reader.GetString(0));
+                }
+            }
+
+            connection.Close();
+            command.Parameters.Remove(idDatasetParameter);
+
+            cities.Sort();
+
+            return cities;
+        }
+
+        /// <summary>
+        /// Update dataset's measure.
+        /// </summary>
+        /// <param name="nameDataset"> Dataset name. </param>
+        /// <param name="newMeasureName"> New measure name. </param>
+        /// <returns> True if measure name was successfully updated, false if not. </returns>
         public Boolean updateDatasetMeasure(String nameDataset, String newMeasureName)
         {
             command.CommandText = "UPDATE Dataset SET measure_name = @newMeasureName WHERE name = @nameDataset";
@@ -126,6 +195,10 @@ namespace DataLayer.Data
             else return false;
         }
 
+        /// <summary>
+        /// Get all cities in database.
+        /// </summary>
+        /// <returns> Map of cities. </returns>
         public Dictionary<String, City> getCities()
         {
             Dictionary<String, City> cities = new Dictionary<string, City>();
@@ -148,6 +221,12 @@ namespace DataLayer.Data
             return cities;
         }
 
+        /// <summary>
+        /// Update city table.
+        /// </summary>
+        /// <param name="newCities"> New city names</param>
+        /// <param name="deletedCities"> Deleted city names. </param>
+        /// <returns> True of every change was successful, false if not. </returns>
         public bool updateCities(List<String> newCities, List<String> deletedCities)
         {
             bool success = false;
@@ -204,6 +283,13 @@ namespace DataLayer.Data
             return success;
         }
 
+        /// <summary>
+        /// Update datasets.
+        /// </summary>
+        /// <param name="newDatasets"> Newly created datasets. </param>
+        /// <param name="datasetsToBeDeleted"> Datasets to be deleted. </param>
+        /// <param name="datasetsToBeUpdated"> Updated datasets. </param>
+        /// <returns> True if every change was successful, false if not. </returns>
         public Boolean updateDatasets(List<Dataset> newDatasets, List<int> datasetsToBeDeleted, List<Dataset> datasetsToBeUpdated)
         {
             bool success = false;
@@ -312,6 +398,13 @@ namespace DataLayer.Data
             return success;
         }
 
+        /// <summary>
+        /// Update measures. 
+        /// </summary>
+        /// <param name="newMeasures"> New measures. </param>
+        /// <param name="measuresToBeDeleted"> Measures to be deleted. </param>
+        /// <param name="measuresToBeUpdated"> Updated measures. </param>
+        /// <returns> True if every change was successful, false if not.</returns>
         public Boolean updateMeasures(List<Measure> newMeasures, List<String> measuresToBeDeleted, List<Measure> measuresToBeUpdated)
         {
             bool success = false;
@@ -398,6 +491,14 @@ namespace DataLayer.Data
             return success;
         }
 
+        /// <summary>
+        /// Update all records in dataset.
+        /// </summary>
+        /// <param name="idDataset"> ID of current dataset. </param>
+        /// <param name="newRecords"> Newly created records. </param>
+        /// <param name="recordsToBeDeleted"> Records to be deleted. </param>
+        /// <param name="recordsToBeUpdated"> Updated records. </param>
+        /// <returns></returns>
         public bool updateRecords(int idDataset, List<Record> newRecords, List<int> recordsToBeDeleted, Dictionary<int, Record> recordsToBeUpdated)
         {
             bool success = false;
@@ -630,6 +731,11 @@ namespace DataLayer.Data
             return success;
         }
 
+        /// <summary>
+        /// Test if city is presented in any record in database.
+        /// </summary>
+        /// <param name="cityName"> City name. </param>
+        /// <returns> True if city name is presented in any record, false if not. </returns>
         public bool testIfCityIsPresentedInRecords(String cityName)
         {
             bool isPresented = false;
@@ -651,6 +757,11 @@ namespace DataLayer.Data
             return isPresented;
         }
 
+        /// <summary>
+        ///  Test if measure is presented in any dataset.
+        /// </summary>
+        /// <param name="measureName"> Name of measure. </param>
+        /// <returns> True if measure name is presented in any dataset, false if not. </returns>
         public bool testIfMeasureIsPresentedInDatasets(String measureName)
         {
             bool isPresented = false;

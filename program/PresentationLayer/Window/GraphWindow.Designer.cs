@@ -28,29 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chartWithDisplayedDataset = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cmbSelectedGraphType = new System.Windows.Forms.ComboBox();
             this.lblSelectYear = new System.Windows.Forms.Label();
             this.lblSelectedGraphType = new System.Windows.Forms.Label();
             this.cmbSelectedDatasetGraph = new System.Windows.Forms.ComboBox();
             this.btnReturnFromGraph = new System.Windows.Forms.Button();
-            this.lblSelectedDatas = new System.Windows.Forms.Label();
-            this.cmbSelectedData = new System.Windows.Forms.ComboBox();
+            this.lsbSelectedData = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.chartWithDisplayedDataset)).BeginInit();
             this.SuspendLayout();
             // 
             // chartWithDisplayedDataset
             // 
-            chartArea2.Name = "ChartAreaWithDisplayedDataset";
-            this.chartWithDisplayedDataset.ChartAreas.Add(chartArea2);
-            this.chartWithDisplayedDataset.Location = new System.Drawing.Point(12, 106);
+            this.chartWithDisplayedDataset.BorderlineColor = System.Drawing.Color.Black;
+            this.chartWithDisplayedDataset.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            chartArea1.Name = "ChartAreaWithDisplayedDataset";
+            this.chartWithDisplayedDataset.ChartAreas.Add(chartArea1);
+            this.chartWithDisplayedDataset.Location = new System.Drawing.Point(12, 74);
             this.chartWithDisplayedDataset.Name = "chartWithDisplayedDataset";
-            series2.ChartArea = "ChartAreaWithDisplayedDataset";
-            series2.Name = "SeriesWithDisplayedDataset";
-            this.chartWithDisplayedDataset.Series.Add(series2);
-            this.chartWithDisplayedDataset.Size = new System.Drawing.Size(1069, 398);
+            series1.ChartArea = "ChartAreaWithDisplayedDataset";
+            series1.Name = "SeriesWithDisplayedDataset";
+            this.chartWithDisplayedDataset.Series.Add(series1);
+            this.chartWithDisplayedDataset.Size = new System.Drawing.Size(1028, 430);
             this.chartWithDisplayedDataset.TabIndex = 0;
             this.chartWithDisplayedDataset.GetToolTipText += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ToolTipEventArgs>(this.chartWithDisplayedDataset_GetToolTipText);
             // 
@@ -60,7 +61,7 @@
             this.cmbSelectedGraphType.FormattingEnabled = true;
             this.cmbSelectedGraphType.Location = new System.Drawing.Point(98, 12);
             this.cmbSelectedGraphType.Name = "cmbSelectedGraphType";
-            this.cmbSelectedGraphType.Size = new System.Drawing.Size(410, 21);
+            this.cmbSelectedGraphType.Size = new System.Drawing.Size(942, 21);
             this.cmbSelectedGraphType.TabIndex = 1;
             this.cmbSelectedGraphType.SelectedValueChanged += new System.EventHandler(this.cmbSelectedGraphType_SelectedValueChanged);
             // 
@@ -88,7 +89,7 @@
             this.cmbSelectedDatasetGraph.FormattingEnabled = true;
             this.cmbSelectedDatasetGraph.Location = new System.Drawing.Point(98, 39);
             this.cmbSelectedDatasetGraph.Name = "cmbSelectedDatasetGraph";
-            this.cmbSelectedDatasetGraph.Size = new System.Drawing.Size(410, 21);
+            this.cmbSelectedDatasetGraph.Size = new System.Drawing.Size(942, 21);
             this.cmbSelectedDatasetGraph.TabIndex = 4;
             this.cmbSelectedDatasetGraph.SelectedValueChanged += new System.EventHandler(this.cmbSelectedDatasetGraph_SelectedValueChanged);
             // 
@@ -103,32 +104,21 @@
             this.btnReturnFromGraph.UseVisualStyleBackColor = true;
             this.btnReturnFromGraph.Click += new System.EventHandler(this.btnReturnFromGraph_Click);
             // 
-            // lblSelectedDatas
+            // lsbSelectedData
             // 
-            this.lblSelectedDatas.AutoSize = true;
-            this.lblSelectedDatas.Location = new System.Drawing.Point(12, 69);
-            this.lblSelectedDatas.Name = "lblSelectedDatas";
-            this.lblSelectedDatas.Size = new System.Drawing.Size(0, 13);
-            this.lblSelectedDatas.TabIndex = 10;
-            // 
-            // cmbSelectedData
-            // 
-            this.cmbSelectedData.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSelectedData.Enabled = false;
-            this.cmbSelectedData.FormattingEnabled = true;
-            this.cmbSelectedData.Location = new System.Drawing.Point(98, 66);
-            this.cmbSelectedData.Name = "cmbSelectedData";
-            this.cmbSelectedData.Size = new System.Drawing.Size(410, 21);
-            this.cmbSelectedData.TabIndex = 11;
-            this.cmbSelectedData.SelectedValueChanged += new System.EventHandler(this.cmbSelectedDatas_SelectedValueChanged);
+            this.lsbSelectedData.FormattingEnabled = true;
+            this.lsbSelectedData.Location = new System.Drawing.Point(1046, 6);
+            this.lsbSelectedData.Name = "lsbSelectedData";
+            this.lsbSelectedData.Size = new System.Drawing.Size(197, 498);
+            this.lsbSelectedData.TabIndex = 12;
+            this.lsbSelectedData.SelectedValueChanged += new System.EventHandler(this.lbsSelectedData_SelectedValueChanged);
             // 
             // GraphWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1093, 556);
-            this.Controls.Add(this.cmbSelectedData);
-            this.Controls.Add(this.lblSelectedDatas);
+            this.ClientSize = new System.Drawing.Size(1255, 556);
+            this.Controls.Add(this.lsbSelectedData);
             this.Controls.Add(this.btnReturnFromGraph);
             this.Controls.Add(this.cmbSelectedDatasetGraph);
             this.Controls.Add(this.lblSelectedGraphType);
@@ -154,7 +144,6 @@
         private System.Windows.Forms.Label lblSelectedGraphType;
         private System.Windows.Forms.ComboBox cmbSelectedDatasetGraph;
         private System.Windows.Forms.Button btnReturnFromGraph;
-        private System.Windows.Forms.Label lblSelectedDatas;
-        private System.Windows.Forms.ComboBox cmbSelectedData;
+        private System.Windows.Forms.ListBox lsbSelectedData;
     }
 }

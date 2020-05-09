@@ -1,32 +1,45 @@
 ﻿using DataLayer.Data;
 using DataLayer.Model;
 using DataLayer.Utils;
-using PresentationLayer.GUIElements;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace PresentationLayer.Window
 {
+    /// <summary>
+    /// Window for displaying data into graph.
+    /// </summary>
     public partial class GraphWindow : Form
     {
+        // Database interface.
         private readonly DatabaseInterface databaseInterface;
+
+        // Application name.
         private String appName = "";
+
+        // Main window instance.
         private MainWindow mainWindow;
 
-        private Dictionary<String, GraphCustomType> graphTypes;
-        private GraphCustomType selectedGraphType;
+        // Map of graph types.
+        private Dictionary<String, EGraphCustomType> graphTypes;
+
+        // Currently selected graph type.
+        private EGraphCustomType selectedGraphType;
+
+        // Curently selected dataset.
         private Dataset selectedDataset;
-        private List<String> selectedCities;
+
+        // Currently selected Month.
         private String selectedMonth = "";
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="mainWindow"> Instance of main window. </param>
         public GraphWindow(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -36,18 +49,20 @@ namespace PresentationLayer.Window
             this.appName = mainWindow.AppName;
             this.mainWindow = mainWindow;
 
-            graphTypes = new Dictionary<String, GraphCustomType>();
-            selectedCities = new List<String>();
+            graphTypes = new Dictionary<String, EGraphCustomType>();     
 
             initializeGraphsType();
             initializeDatasets();            
         }
 
+        /// <summary>
+        /// Initialize graph types with given names.
+        /// </summary>
         private void initializeGraphsType()
         {
-            graphTypes.Add("Průměrná teplota ve všech městech po měsíci", new GraphCustomType("Průměrná teplota ve všech městech po měsíci", EDataType.NULL));
-            graphTypes.Add("Porovnání teplot více měst po měsících", new GraphCustomType("Porovnání teplot více měst po měsících", EDataType.CITY));
-            graphTypes.Add("Teplota ve městech za měsíc", new GraphCustomType("Teplota ve městech za měsíc", EDataType.MONTH));
+            graphTypes.Add("Průměrná teplota ve všech městech po měsíci", new EGraphCustomType("Průměrná teplota ve všech městech po měsíci", EDataType.NULL));
+            graphTypes.Add("Porovnání teplot více měst po měsících", new EGraphCustomType("Porovnání teplot více měst po měsících", EDataType.CITY));
+            graphTypes.Add("Teplota ve městech za měsíc", new EGraphCustomType("Teplota ve městech za měsíc", EDataType.MONTH));
 
             foreach (String graphTypeName in graphTypes.Keys)
             {
@@ -55,6 +70,9 @@ namespace PresentationLayer.Window
             }
         }
 
+        /// <summary>
+        /// Initialize datasets in combobox.
+        /// </summary>
         private void initializeDatasets()
         {
             foreach (String datasetName in this.mainWindow.Datasets.Keys)
@@ -63,38 +81,53 @@ namespace PresentationLayer.Window
             }
         }
 
+        /// <summary>
+        /// Initialize cities / months in listbox, depends on selected graph type.
+        /// </summary>
         private void initializeSelectedData()
         {
-            cmbSelectedData.Items.Clear();
+            lsbSelectedData.Items.Clear();
             switch (selectedGraphType.DataType)
             {
                 case EDataType.NULL:
-                    lblSelectedDatas.Text = "";
-                    cmbSelectedData.Enabled = false;                    
+                    lsbSelectedData.Enabled = false;
                     break;
                 case EDataType.CITY:
-                    lblSelectedDatas.Text = "Vybraná města:";
-                    lblSelectedDatas.Location = new Point(12, 69);
-                    cmbSelectedData.Items.AddRange(this.mainWindow.Cities.Keys.ToArray());
-                    cmbSelectedData.Enabled = true;
-                    if (selectedMonth.Length > 0) cmbSelectedData.SelectedItem = selectedMonth;
+                    
+                    lsbSelectedData.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+                    
+                    foreach (String cityName in databaseInterface.getCitiesInDataset(selectedDataset.ID))
+                    {
+                        lsbSelectedData.Items.Add(cityName);
+                    }
+
+                    lsbSelectedData.Enabled = true;
                     break;
-                case EDataType.MONTH:
-                    lblSelectedDatas.Text = "Vybraný měsíc:";
-                    lblSelectedDatas.Location = new Point(12, 69);
-                    cmbSelectedData.Items.AddRange(this.mainWindow.Months.ToArray());
-                    cmbSelectedData.Enabled = true;
-                    if (selectedMonth.Length > 0) cmbSelectedData.SelectedItem = selectedMonth;
+                case EDataType.MONTH:             
+                    
+                    foreach (String month in this.mainWindow.Months)
+                    {
+                        lsbSelectedData.Items.Add(month);
+                    }
+                    lsbSelectedData.SelectionMode = SelectionMode.One;
+
+                    lsbSelectedData.Enabled = true;
+                    if (selectedMonth.Length > 0) lsbSelectedData.SelectedItem = selectedMonth;
                     break;
                 default:
                     return;
             }            
         }
 
+        /// <summary>
+        /// Display specific data into graph.
+        /// </summary>
+        /// <param name="title"></param>
         private void displayDataIntoGraph(String title)
         {            
             this.chartWithDisplayedDataset.Series.Clear();
-            this.chartWithDisplayedDataset.Titles.Clear();            
+            this.chartWithDisplayedDataset.Titles.Clear();
+            this.chartWithDisplayedDataset.Legends.Clear();
             this.chartWithDisplayedDataset.Palette = ChartColorPalette.EarthTones;
             this.chartWithDisplayedDataset.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 8, FontStyle.Regular);
             this.chartWithDisplayedDataset.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Arial", 8, FontStyle.Regular);
@@ -111,7 +144,7 @@ namespace PresentationLayer.Window
                     createDataAverageTemperatureInAllCities(title);
                     title += " v datasetu '" + selectedDataset.Name + "'";
                     this.chartWithDisplayedDataset.Titles.Add(title);
-                    cmbSelectedData.Enabled = false;
+                    lsbSelectedData.Enabled = false;
 
                     break;
                 case EDataType.CITY:
@@ -130,6 +163,10 @@ namespace PresentationLayer.Window
             this.chartWithDisplayedDataset.Titles[0].Font = new Font("Arial", 15, FontStyle.Bold);
         }
 
+        /// <summary>
+        /// Display data for 'Average Temperature In All Cities'.
+        /// </summary>
+        /// <param name="title"> Title of graph. </param>
         private void createDataAverageTemperatureInAllCities(String title)
         {
             Series series = this.chartWithDisplayedDataset.Series.Add(title);            
@@ -172,15 +209,57 @@ namespace PresentationLayer.Window
             setMinMaxAxisY(min, max);
         }
 
+        /// <summary>
+        /// Display data for 'Compare Temperatures In Selected Cities'.
+        /// </summary>
+        /// <param name="title"> Title of graph. </param>
         private void createDataCompareTemperaturesInSelectedCities(String title)
         {
+            Dictionary<int, Record> records = databaseInterface.getRecords(selectedDataset.ID, this.mainWindow.Cities);
+            
+            List<String> months = this.mainWindow.Months;
 
+            Legend legend = this.chartWithDisplayedDataset.Legends.Add("Města");
+            legend.LegendStyle = LegendStyle.Column;
+            legend.CellColumns.Add(new LegendCellColumn()
+            {
+                ColumnType = LegendCellColumnType.SeriesSymbol,
+                MinimumWidth = 250,
+                MaximumWidth = 250
+            });
+            legend.CellColumns.Add(new LegendCellColumn()
+            {
+                ColumnType = LegendCellColumnType.Text,
+                Alignment = ContentAlignment.MiddleLeft
+            });
+
+            double min = 0, max = 0;
+            foreach (Record record in records.Values)
+            {
+                if (!lsbSelectedData.SelectedItems.Contains(record.City.Name)) continue;
+                Series series = this.chartWithDisplayedDataset.Series.Add(record.City.Name);
+                
+                List<double> monthValues = record.getMonths();
+
+                for (int i = 0; i < monthValues.Count; i++)
+                {
+                    series.Points.AddXY(months[i], monthValues[i]);
+
+                    if (monthValues[i] > max) max = monthValues[i];
+                    if (monthValues[i] < min) min = monthValues[i];
+                }
+            }
+        
+            setMinMaxAxisY(min, max);            
         }
 
+        /// <summary>
+        /// Display data for 'Temperatures In Cities In Month'.
+        /// </summary>
+        /// <param name="title"> Title of graph. </param>
         private void createDataTemperaturesInCitiesInMonth(String title)
         {
             Dictionary<int, Record> records = databaseInterface.getRecords(selectedDataset.ID, this.mainWindow.Cities);
-            Dictionary<String, double> values = new Dictionary<String, double>();
 
             Series series = this.chartWithDisplayedDataset.Series.Add(title);
 
@@ -189,7 +268,7 @@ namespace PresentationLayer.Window
             double min = 0, max = 0;
             foreach (Record record in records.Values)
             {
-                double monthValue = record.getMonths()[cmbSelectedData.SelectedIndex];
+                double monthValue = record.getMonths()[lsbSelectedData.SelectedIndex];
                 series.Points.AddXY(record.City.Name, monthValue);
 
                 if (monthValue > max) max = monthValue;
@@ -199,34 +278,47 @@ namespace PresentationLayer.Window
             setMinMaxAxisY(min, max);
         }
 
+        /// <summary>
+        /// Set minimum and maximum for Y Axis.
+        /// </summary>
+        /// <param name="min"> Minimum value of Y axis.</param>
+        /// <param name="max"> Maximum value of Y axis. </param>
         private void setMinMaxAxisY(double min, double max)
         {
             this.chartWithDisplayedDataset.ChartAreas[0].AxisY.Minimum = min;
             this.chartWithDisplayedDataset.ChartAreas[0].AxisY.Maximum = max + 2;
         }
 
+        /// <summary>
+        /// Click event for btnReturnFromGraph.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnReturnFromGraph_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Selected Value Changed event for cmbSelectedGraphType.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmbSelectedGraphType_SelectedValueChanged(object sender, EventArgs e)
         {
-            graphTypes.TryGetValue(cmbSelectedGraphType.SelectedItem.ToString(), out GraphCustomType graphType);
+            graphTypes.TryGetValue(cmbSelectedGraphType.SelectedItem.ToString(), out EGraphCustomType graphType);
 
             if (selectedGraphType != null && selectedGraphType.Name.Equals(graphType.Name)) return;
 
             if (graphType != null)
             {
                 selectedGraphType = graphType;
-            }
-
-            selectedCities.Clear();
-            initializeSelectedData();
+            }        
 
             if (selectedGraphType != null && selectedDataset != null)
-            {                
-                if (selectedGraphType.DataType != EDataType.NULL) cmbSelectedData.Enabled = true;
+            {
+                initializeSelectedData();
+                if (selectedGraphType.DataType != EDataType.NULL) lsbSelectedData.Enabled = true;
                 this.chartWithDisplayedDataset.Series.Clear();
                 this.chartWithDisplayedDataset.Titles.Clear();
                 if (selectedGraphType.DataType != EDataType.NULL) return;
@@ -234,6 +326,11 @@ namespace PresentationLayer.Window
             }
         }
 
+        /// <summary>
+        /// Selected Value Changed for cmbSelectedDatasetGraph.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmbSelectedDatasetGraph_SelectedValueChanged(object sender, EventArgs e)
         {
             this.mainWindow.Datasets.TryGetValue(cmbSelectedDatasetGraph.SelectedItem.ToString(), out Dataset dataset);
@@ -248,32 +345,39 @@ namespace PresentationLayer.Window
             if (selectedGraphType != null && selectedDataset != null)
             {
                 initializeSelectedData();
-                if (selectedGraphType.DataType != EDataType.NULL) cmbSelectedData.Enabled = true;
-                if (selectedGraphType.DataType != EDataType.NULL && selectedCities.Count == 0) return;
+                if (selectedGraphType.DataType != EDataType.NULL) lsbSelectedData.Enabled = true;
+                if (selectedGraphType.DataType != EDataType.NULL && lsbSelectedData.SelectedItems.Count == 0) return;
                 displayDataIntoGraph(selectedGraphType.Name);
             }
         }
 
-        private void cmbSelectedDatas_SelectedValueChanged(object sender, EventArgs e)
-        {                        
+        /// <summary>
+        /// SelectedValueChanged for listbox lbsSelectedData.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lbsSelectedData_SelectedValueChanged(object sender, EventArgs e)
+        {               
             if (selectedGraphType != null && selectedDataset != null)
             {
                 switch(selectedGraphType.DataType)
-                {
-                    case EDataType.CITY:
-                        selectedCities.Add(cmbSelectedData.SelectedItem.ToString());
-                        break;
+                { 
                     case EDataType.MONTH:
-                        selectedMonth = cmbSelectedData.SelectedItem.ToString();
+                        selectedMonth = lsbSelectedData.SelectedItem.ToString(); ;
                         break;
                     default:
-                        return;
+                        break; ;
                 }
 
                 displayDataIntoGraph(selectedGraphType.Name);
             }
         }
 
+        /// <summary>
+        /// Display tooltip text for every line in chart.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void chartWithDisplayedDataset_GetToolTipText(object sender, ToolTipEventArgs e)
         {
             switch (e.HitTestResult.ChartElementType)
@@ -284,6 +388,10 @@ namespace PresentationLayer.Window
                         case EDataType.NULL:
                             var dataPointNull = e.HitTestResult.Series.Points[e.HitTestResult.PointIndex];
                             e.Text = string.Format("Měsíc:  {0}\nPrůměrná teplota:  {1} [{2}]", dataPointNull.AxisLabel, dataPointNull.YValues[0], selectedDataset.Measure.Tag);
+                            break;
+                        case EDataType.CITY:
+                            var dataPointCity = e.HitTestResult.Series.Points[e.HitTestResult.PointIndex];
+                            e.Text = string.Format("Teplota v měsíci {0}:  {1} [{2}]", dataPointCity.AxisLabel, dataPointCity.YValues[0], selectedDataset.Measure.Tag);
                             break;
                         case EDataType.MONTH:
                             var dataPointMonth = e.HitTestResult.Series.Points[e.HitTestResult.PointIndex];

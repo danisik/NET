@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\program",
+    "\\program\\DataLayer",
+    "\\program\\PresentationLayer",
+    "\\program\\PresentationLayer\\Database"
+  ],
+  "SelectedNode": "\\program\\PresentationLayer\\Database\\DatabaseInterface.cs",
+  "PreviewInSolutionExplorer": false
+}

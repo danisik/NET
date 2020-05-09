@@ -2,14 +2,26 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace DataLayer.Data
 {
-    public class GraphCustomType
+    /// <summary>
+    /// Enumeration for graph type.
+    /// </summary>
+    public class EGraphCustomType
     {
+        // Name of custom type.
         private String name;
+
+        // Data type in graph.
         public EDataType dataType;
 
-        public GraphCustomType(String name, EDataType dataType)
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="name">Name of graph type.</param>
+        /// <param name="dataType">Data type in graph.</param>
+        public EGraphCustomType(String name, EDataType dataType)
         {
             this.name = name;
             this.dataType = dataType;

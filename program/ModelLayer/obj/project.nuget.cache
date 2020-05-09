@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "YJhZcB5fFRE2RY2ExFiRsAeg7/P2kFVYiZQ/NzvSn9piptGq1eS9SY7wsY8N6Efq/8pC+oWZ/SG3NuzR5otGoA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\danisik\\Documents\\GitHub\\NET\\program\\ModelLayer\\ModelLayer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\danisik\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\danisik\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
