@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Data;
 using DataLayer.Model;
 using System.IO;
+using System.Diagnostics;
 
 namespace DataLayer.Data
 {
@@ -27,11 +28,7 @@ namespace DataLayer.Data
         /// </summary>
         public DatabaseInterface()
         {
-            // Get path to database and set 'DataDirectory'.
-            String dataDirPath = Path.GetFullPath(@"..\..") + @"\Database\Database.mdf";
-            String absolutePath = Path.GetDirectoryName(dataDirPath);
-            AppDomain.CurrentDomain.SetData("DataDirectory", absolutePath);
-
+            AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetFullPath(@"."));
             connection = new SqlConnection(databaseConnectionString);
             command = new SqlCommand
             {

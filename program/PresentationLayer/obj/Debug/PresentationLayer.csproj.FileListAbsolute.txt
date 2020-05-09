@@ -28,3 +28,12 @@ C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\obj\Debug\Presen
 C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\obj\Debug\PresentationLayer.exe
 C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\obj\Debug\PresentationLayer.pdb
 C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\obj\Debug\PresentationLayer.csproj.CoreCompileInputs.cache
+C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\bin\Debug\PresentationLayer.exe.manifest
+C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\bin\Debug\PresentationLayer.application
+C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\obj\Debug\PresentationLayer.exe.manifest
+C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\obj\Debug\PresentationLayer.application
+C:\Users\danisik\Documents\GitHub\NET\release\bin\PresentationLayer.exe.config
+C:\Users\danisik\Documents\GitHub\NET\release\bin\PresentationLayer.exe.manifest
+C:\Users\danisik\Documents\GitHub\NET\release\bin\PresentationLayer.application
+C:\Users\danisik\Documents\GitHub\NET\release\bin\PresentationLayer.exe
+C:\Users\danisik\Documents\GitHub\NET\release\bin\PresentationLayer.pdb

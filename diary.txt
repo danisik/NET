@@ -65,7 +65,7 @@ Vytvoření grafu pro porovnávání měst mezi sebou + implementace staženého
 																									
 9.5.2020
 ------------
-Komentáře
+Komentáře																							(1 hodina)
 Integrační testy.																					()
 Dokumentace.																						()																									
 
