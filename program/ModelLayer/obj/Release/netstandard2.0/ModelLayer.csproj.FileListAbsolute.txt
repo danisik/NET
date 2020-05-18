@@ -1,0 +1,12 @@
+C:\Users\danisik\Documents\GitHub\NET\program\ModelLayer\bin\Release\netstandard2.0\ModelLayer.deps.json
+C:\Users\danisik\Documents\GitHub\NET\program\ModelLayer\bin\Release\netstandard2.0\ModelLayer.dll
+C:\Users\danisik\Documents\GitHub\NET\program\ModelLayer\bin\Release\netstandard2.0\ModelLayer.pdb
+C:\Users\danisik\Documents\GitHub\NET\program\ModelLayer\bin\Release\netstandard2.0\DataLayer.dll
+C:\Users\danisik\Documents\GitHub\NET\program\ModelLayer\bin\Release\netstandard2.0\DataLayer.pdb
+C:\Users\danisik\Documents\GitHub\NET\program\ModelLayer\obj\Release\netstandard2.0\ModelLayer.csprojAssemblyReference.cache
+C:\Users\danisik\Documents\GitHub\NET\program\ModelLayer\obj\Release\netstandard2.0\ModelLayer.csproj.CoreCompileInputs.cache
+C:\Users\danisik\Documents\GitHub\NET\program\ModelLayer\obj\Release\netstandard2.0\ModelLayer.AssemblyInfoInputs.cache
+C:\Users\danisik\Documents\GitHub\NET\program\ModelLayer\obj\Release\netstandard2.0\ModelLayer.AssemblyInfo.cs
+C:\Users\danisik\Documents\GitHub\NET\program\ModelLayer\obj\Release\netstandard2.0\ModelLayer.csproj.CopyComplete
+C:\Users\danisik\Documents\GitHub\NET\program\ModelLayer\obj\Release\netstandard2.0\ModelLayer.dll
+C:\Users\danisik\Documents\GitHub\NET\program\ModelLayer\obj\Release\netstandard2.0\ModelLayer.pdb

@@ -1,14 +1,13 @@
 ﻿using DataLayer.Data;
 using DataLayer.Model;
 using DataLayer.Utils;
+using ModelLayer.Managers;
 using PresentationLayer.GUIElements;
 using PresentationLayer.Window;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace PresentationLayer
@@ -18,8 +17,8 @@ namespace PresentationLayer
     /// </summary>
     public partial class MainWindow : Form
     {
-        // Database interface.
-        private readonly DatabaseInterface databaseInterface;
+        // Main window manager.
+        private MainWindowManager mainWindowManager;
 
         // Map of datasets.
         private Dictionary<String, Dataset> datasets;
@@ -54,11 +53,11 @@ namespace PresentationLayer
         {
             InitializeComponent();
             appName = this.Text;
-            databaseInterface = new DatabaseInterface();
+            this.mainWindowManager = new MainWindowManager();
 
-            measures = databaseInterface.getMeasures();
-            datasets = databaseInterface.getDatasets(measures);
-            cities = Utils.sortCities(databaseInterface.getCities());
+            measures = mainWindowManager.getMeasures();
+            datasets = mainWindowManager.getDatasets(measures);
+            cities = Utils.sortCities(mainWindowManager.getCities());
 
             initializeComboBoxDataset();
         }
@@ -189,7 +188,7 @@ namespace PresentationLayer
 
                 String newValue = monthCell.Value.ToString();
 
-                if (!validateMonth(newValue))
+                if (!mainWindowManager.validateMonth(newValue))
                 {
                     Utils.displayErrorMessageBox("Zadaná teplota musí být číslo!", appName);
                     monthCell.Value = monthCell.getText();
@@ -213,25 +212,13 @@ namespace PresentationLayer
             }
         }
 
-
-        /// <summary>
-        /// Validate value, if it is double or not.
-        /// </summary>
-        /// <param name="newValue"> Value in String. </param>
-        /// <returns> True if value is double, false if not. </returns>
-        private bool validateMonth(String newValue)
-        {
-            if (!Double.TryParse(newValue, out Double ignored)) return false;
-            else return true;
-        }
-
         /// <summary>
         /// Fill DataGridView with default values.
         /// </summary>
         private void fillDataGridView()
         {
             dataGridViewDataset.Rows.Clear();
-            records = databaseInterface.getRecords(currentlySelectedDataset.ID, cities);
+            records = mainWindowManager.getRecords(currentlySelectedDataset.ID, cities);
 
             foreach (Record record in records.Values)
             {
@@ -409,13 +396,13 @@ namespace PresentationLayer
                 return;
             }
 
-            bool success = databaseInterface.updateRecords(currentlySelectedDataset.ID, newRecords, recordsToBeDeleted, recordsToBeUpdated);
+            bool success = mainWindowManager.updateRecords(currentlySelectedDataset.ID, newRecords, recordsToBeDeleted, recordsToBeUpdated);
 
             if (success)
             {
                 Utils.displayInfoMessageBox("Úprava řádek proběhla úspěšně.", appName);
                 dataGridViewDataset.Rows.Clear();
-                cities = databaseInterface.getCities();
+                cities = mainWindowManager.getCities();
                 fillDataGridView();
                 recordsChanged = false;
             }
@@ -488,7 +475,7 @@ namespace PresentationLayer
             ManageDatasetsWindow window = new ManageDatasetsWindow(this);
             window.ShowDialog();
 
-            datasets = databaseInterface.getDatasets(measures);
+            datasets = mainWindowManager.getDatasets(measures);
             initializeComboBoxDataset();
 
             if (currentlySelectedDataset != null)
@@ -530,7 +517,7 @@ namespace PresentationLayer
             ManageCitiesWindow window = new ManageCitiesWindow(this);
             window.ShowDialog();
 
-            cities = databaseInterface.getCities();
+            cities = mainWindowManager.getCities();
             if (currentlySelectedDataset != null) updateCityCells();
         }
 
@@ -544,8 +531,8 @@ namespace PresentationLayer
             ManageMeasuresWindow window = new ManageMeasuresWindow(this);
             window.ShowDialog();
 
-            measures = databaseInterface.getMeasures();
-            datasets = databaseInterface.getDatasets(measures);
+            measures = mainWindowManager.getMeasures();
+            datasets = mainWindowManager.getDatasets(measures);
             if (currentlySelectedDataset != null)
             {
                 currentlySelectedDataset = datasets[currentlySelectedDataset.Name];
@@ -758,14 +745,6 @@ namespace PresentationLayer
                 recordsChanged = false;
             }
             return true;
-        }
-
-        public DatabaseInterface DatabaseInterface
-        {
-            get
-            {
-                return databaseInterface;
-            }
         }
 
         public String AppName

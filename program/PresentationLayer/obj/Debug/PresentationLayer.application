@@ -7,14 +7,14 @@
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="PresentationLayer.exe.manifest" size="4145">
+    <dependentAssembly dependencyType="install" codebase="PresentationLayer.exe.manifest" size="5478">
       <assemblyIdentity name="PresentationLayer.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>3pGLknACUitdC2QeRf9egVbAvdGrdFFRQwDkFvQpMmc=</dsig:DigestValue>
+        <dsig:DigestValue>MYfmbdX9hA4i208Ac8vJbxfcLL8F027E4N17Lmaywjk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

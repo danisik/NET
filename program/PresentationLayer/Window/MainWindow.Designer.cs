@@ -409,7 +409,6 @@
         private System.Windows.Forms.Label lblSelectedMeasureText;
         private System.Windows.Forms.Button btnNewRecordRow;
         private System.Windows.Forms.Button btnManageCities;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn1;
         private System.Windows.Forms.Button btnConfirmRecordChanges;
         private System.Windows.Forms.Button btnDiscardRecordChanges;
         private System.Windows.Forms.Button btnDeleteSelectedRecordRows;

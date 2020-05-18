@@ -4,13 +4,9 @@ using DataLayer.Utils;
 using PresentationLayer.GUIElements;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using ModelLayer.Managers;
 
 namespace PresentationLayer.Window
 {
@@ -19,8 +15,8 @@ namespace PresentationLayer.Window
     /// </summary>
     public partial class ManageDatasetsWindow : Form
     {
-        // Database interface.
-        private readonly DatabaseInterface databaseInterface;
+        // Manager for manage datasets window.
+        private ManageDatasetsWindowManager manageDatasetsWindowManager;
 
         // Map of datasets.
         private Dictionary<String, Dataset> datasets;
@@ -38,11 +34,11 @@ namespace PresentationLayer.Window
         public ManageDatasetsWindow(MainWindow mainWindow)
         {
             InitializeComponent();
-            this.databaseInterface = mainWindow.DatabaseInterface;
+            this.manageDatasetsWindowManager = new ManageDatasetsWindowManager();
             this.Text = mainWindow.AppName + " - Správa datasetů";
             this.appName = mainWindow.AppName;
             this.mainWindow = mainWindow;
-            this.datasets = databaseInterface.getDatasets(databaseInterface.getMeasures());
+            this.datasets = manageDatasetsWindowManager.getDatasets();
 
             fillDataGridView();
         }
@@ -52,7 +48,7 @@ namespace PresentationLayer.Window
         /// </summary>
         private void fillDataGridView()
         {
-            Dictionary<String, Measure> measures = databaseInterface.getMeasures();
+            Dictionary<String, Measure> measures = manageDatasetsWindowManager.getMeasures();
 
             foreach (Dataset dataset in datasets.Values)
             {
@@ -85,7 +81,7 @@ namespace PresentationLayer.Window
         /// <param name="e"></param>
         private void btnNewDatasetRow_Click(object sender, EventArgs e)
         {
-            Dictionary<String, Measure> measures = databaseInterface.getMeasures();
+            Dictionary<String, Measure> measures = manageDatasetsWindowManager.getMeasures();
 
             DataGridViewRowWithId row = new DataGridViewRowWithId(-1);
 
@@ -132,7 +128,7 @@ namespace PresentationLayer.Window
             Dictionary<int, Dataset> datasetsToBeUpdated = new Dictionary<int,Dataset>();
             List<String> usedDatasets = new List<String>();
 
-            Dictionary<String, Measure> measures = databaseInterface.getMeasures();
+            Dictionary<String, Measure> measures = manageDatasetsWindowManager.getMeasures();
 
             foreach (DataGridViewRow row in dataGridViewManageDatasets.Rows)
             {
@@ -203,18 +199,18 @@ namespace PresentationLayer.Window
                 return;
             }
 
-            bool success = databaseInterface.updateDatasets(newDatasets, datasetsToBeDeleted, datasetsToBeUpdated.Values.ToList());
+            bool success = manageDatasetsWindowManager.updateDatasets(newDatasets, datasetsToBeDeleted, datasetsToBeUpdated.Values.ToList());
 
             if (success)
             {
-                Utils.displayInfoMessageBox("Úprava měst proběhla úspěšně.", appName);
+                Utils.displayInfoMessageBox("Úprava datasetů proběhla úspěšně.", appName);
                 dataGridViewManageDatasets.Rows.Clear();
-                datasets = databaseInterface.getDatasets(databaseInterface.getMeasures());
+                datasets = manageDatasetsWindowManager.getDatasets();
                 fillDataGridView();
             }
             else
             {
-                Utils.displayErrorMessageBox("Vyskytla se chyba při úpravě měst v databázi!",
+                Utils.displayErrorMessageBox("Vyskytla se chyba při úpravě datasetů v databázi!",
                 appName);
             }
         }

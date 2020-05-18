@@ -1,14 +1,10 @@
 ﻿using DataLayer.Data;
 using DataLayer.Model;
 using DataLayer.Utils;
+using ModelLayer.Managers;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Window
@@ -18,8 +14,8 @@ namespace PresentationLayer.Window
     /// </summary>
     public partial class ManageMeasuresWindow : Form
     {
-        // Database interface.
-        private readonly DatabaseInterface databaseInterface;
+        // Manager for manage measures window.
+        private ManageMeasuresWindowManager manageMeasuresWindowManager;
         
         // Map of measures.
         private Dictionary<String, Measure> measures;
@@ -37,11 +33,11 @@ namespace PresentationLayer.Window
         public ManageMeasuresWindow(MainWindow mainWindow)
         {
             InitializeComponent();
-            this.databaseInterface = mainWindow.DatabaseInterface;
+            this.manageMeasuresWindowManager = new ManageMeasuresWindowManager();
             this.Text = mainWindow.AppName + " - Správa jednotek teplot";
             this.appName = mainWindow.AppName;
             this.mainWindow = mainWindow;
-            this.measures = databaseInterface.getMeasures();
+            this.measures = manageMeasuresWindowManager.getMeasures();
 
             fillDataGridView();
         }
@@ -153,7 +149,7 @@ namespace PresentationLayer.Window
             {
                 if (!newMeasures.ContainsKey(measureName))
                 {
-                    bool isPresented = databaseInterface.testIfMeasureIsPresentedInDatasets(measureName);
+                    bool isPresented = manageMeasuresWindowManager.testIfMeasureIsPresentedInDatasets(measureName);
                     if (!isPresented)
                     {
                         measuresToBeDeleted.Add(measureName);
@@ -185,13 +181,13 @@ namespace PresentationLayer.Window
                 Utils.displayInfoMessageBox("Nebyla zaznamenána žádná změna.", appName);
                 return;
             }
-            bool success = databaseInterface.updateMeasures(newMeasures.Values.ToList(), measuresToBeDeleted, measuresToBeUpdated);
+            bool success = manageMeasuresWindowManager.updateMeasures(newMeasures.Values.ToList(), measuresToBeDeleted, measuresToBeUpdated);
 
             if (success)
             {
-                Utils.displayInfoMessageBox("Úprava měst proběhla úspěšně.", appName);
+                Utils.displayInfoMessageBox("Úprava jednotek teplot proběhla úspěšně.", appName);
                 dataGridViewManageMeasures.Rows.Clear();
-                measures = databaseInterface.getMeasures();
+                measures = manageMeasuresWindowManager.getMeasures();
                 fillDataGridView();
             }
             else

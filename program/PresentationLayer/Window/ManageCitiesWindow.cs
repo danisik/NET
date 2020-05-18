@@ -1,14 +1,9 @@
 ﻿using DataLayer.Data;
 using DataLayer.Model;
 using DataLayer.Utils;
+using ModelLayer.Managers;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Window
@@ -18,8 +13,8 @@ namespace PresentationLayer.Window
     /// </summary>
     public partial class ManageCitiesWindow : Form
     {
-        // Database interface.
-        private readonly DatabaseInterface databaseInterface;
+        // Manage cities window manager.
+        private ManageCitiesWindowManager manageCitiesWindowManager;
 
         // Map of cities.
         private Dictionary<String, City> cities;
@@ -37,11 +32,11 @@ namespace PresentationLayer.Window
         public ManageCitiesWindow(MainWindow mainWindow)
         {
             InitializeComponent();
-            this.databaseInterface = mainWindow.DatabaseInterface;
+            this.manageCitiesWindowManager = new ManageCitiesWindowManager();
             this.Text = mainWindow.AppName + " - Správa měst";
             this.appName = mainWindow.AppName;
             this.mainWindow = mainWindow;
-            this.cities = databaseInterface.getCities();
+            this.cities = manageCitiesWindowManager.getCities();
 
             fillDataGridView();
         }
@@ -101,7 +96,7 @@ namespace PresentationLayer.Window
                 // Need to check if any record contains this city name.
                 if (!newCities.Contains(cityName))
                 {
-                    bool isPresented = databaseInterface.testIfCityIsPresentedInRecords(cityName);
+                    bool isPresented = manageCitiesWindowManager.testIfCityIsPresentedInRecords(cityName);
                     if (!isPresented)
                     {
                         citiesToBeDeleted.Add(cityName);
@@ -125,13 +120,13 @@ namespace PresentationLayer.Window
                 return;
             }
 
-            bool success = databaseInterface.updateCities(newCities, citiesToBeDeleted);
+            bool success = manageCitiesWindowManager.updateCities(newCities, citiesToBeDeleted);
 
             if (success)
             {
                 Utils.displayInfoMessageBox("Úprava měst proběhla úspěšně.", appName);
                 dataGridViewManageCities.Rows.Clear();
-                cities = databaseInterface.getCities();
+                cities = manageCitiesWindowManager.getCities();
                 fillDataGridView();
             }
             else

@@ -1,11 +1,7 @@
-﻿using DataLayer.Data;
-using DataLayer.Model;
+﻿using DataLayer.Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace DataLayer.Utils

@@ -25,7 +25,7 @@ Správa tabulky City v novém okně (zatím bez pushování změn).										(2.
 ------------
 Pushování změn v tabulce City - mazání / přidávání + kontroly.										(1 hodina)
 Správa tabulky Record (zatím bez pushování změn).													(0.5 hodiny)
-Správa tabulky Dataset (i s pushováním)																(3 hodina)
+Správa tabulky Dataset (i s pushováním).															(3 hodina)
 Správa teplot v novém okně (bez pushování).															(0.5 hodiny)
 Zvětšení buněk pro měsíce + jednotka teploty zobrazena jako label									(0.5 hodiny)
 
@@ -66,9 +66,13 @@ Vytvoření grafu pro porovnávání měst mezi sebou + implementace staženého
 9.5.2020
 ------------
 Komentáře																							(1 hodina)
-Integrační testy.																					()
-Dokumentace.																						()																									
 
+																									(1 hodina)
 
+10.5.2020
+------------
+Dokumentace.																						(2 hodiny)																									
+
+																									(2 hodiny)
 
 																			

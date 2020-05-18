@@ -1,10 +1,10 @@
 ﻿using DataLayer.Data;
 using DataLayer.Model;
 using DataLayer.Utils;
+using ModelLayer.Managers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -15,8 +15,8 @@ namespace PresentationLayer.Window
     /// </summary>
     public partial class GraphWindow : Form
     {
-        // Database interface.
-        private readonly DatabaseInterface databaseInterface;
+        // Graph window manager.
+        private GraphWindowManager graphWindowManager;
 
         // Application name.
         private String appName = "";
@@ -44,7 +44,7 @@ namespace PresentationLayer.Window
         {
             InitializeComponent();
 
-            this.databaseInterface = mainWindow.DatabaseInterface;
+            this.graphWindowManager = new GraphWindowManager();
             this.Text = mainWindow.AppName + " - Grafy";
             this.appName = mainWindow.AppName;
             this.mainWindow = mainWindow;
@@ -96,7 +96,7 @@ namespace PresentationLayer.Window
                     
                     lsbSelectedData.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
                     
-                    foreach (String cityName in databaseInterface.getCitiesInDataset(selectedDataset.ID))
+                    foreach (String cityName in graphWindowManager.getCitiesInDataset(selectedDataset.ID))
                     {
                         lsbSelectedData.Items.Add(cityName);
                     }
@@ -172,7 +172,7 @@ namespace PresentationLayer.Window
             Series series = this.chartWithDisplayedDataset.Series.Add(title);            
             Dictionary<int, List<double>> monthValues = new Dictionary<int, List<double>>();
 
-            Dictionary<int, Record> records = databaseInterface.getRecords(selectedDataset.ID, this.mainWindow.Cities);
+            Dictionary<int, Record> records = graphWindowManager.getRecords(selectedDataset.ID, this.mainWindow.Cities);
 
             double min = 0, max = 0;
             int i = 0;
@@ -215,7 +215,7 @@ namespace PresentationLayer.Window
         /// <param name="title"> Title of graph. </param>
         private void createDataCompareTemperaturesInSelectedCities(String title)
         {
-            Dictionary<int, Record> records = databaseInterface.getRecords(selectedDataset.ID, this.mainWindow.Cities);
+            Dictionary<int, Record> records = graphWindowManager.getRecords(selectedDataset.ID, this.mainWindow.Cities);
             
             List<String> months = this.mainWindow.Months;
 
@@ -259,7 +259,7 @@ namespace PresentationLayer.Window
         /// <param name="title"> Title of graph. </param>
         private void createDataTemperaturesInCitiesInMonth(String title)
         {
-            Dictionary<int, Record> records = databaseInterface.getRecords(selectedDataset.ID, this.mainWindow.Cities);
+            Dictionary<int, Record> records = graphWindowManager.getRecords(selectedDataset.ID, this.mainWindow.Cities);
 
             Series series = this.chartWithDisplayedDataset.Series.Add(title);
 
