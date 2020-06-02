@@ -500,18 +500,18 @@ namespace DataLayer.Data
 
             SqlParameter idRecordDatasetParameter = new SqlParameter("idRecordDataset", System.Data.SqlDbType.Int);
             SqlParameter nameCityParameter = new SqlParameter("nameCity", System.Data.SqlDbType.VarChar);
-            SqlParameter temperature1Parameter = new SqlParameter("temperature1", System.Data.SqlDbType.Float);
-            SqlParameter temperature2Parameter = new SqlParameter("temperature2", System.Data.SqlDbType.Float);
-            SqlParameter temperature3Parameter = new SqlParameter("temperature3", System.Data.SqlDbType.Float);
-            SqlParameter temperature4Parameter = new SqlParameter("temperature4", System.Data.SqlDbType.Float);
-            SqlParameter temperature5Parameter = new SqlParameter("temperature5", System.Data.SqlDbType.Float);
-            SqlParameter temperature6Parameter = new SqlParameter("temperature6", System.Data.SqlDbType.Float);
-            SqlParameter temperature7Parameter = new SqlParameter("temperature7", System.Data.SqlDbType.Float);
-            SqlParameter temperature8Parameter = new SqlParameter("temperature8", System.Data.SqlDbType.Float);
-            SqlParameter temperature9Parameter = new SqlParameter("temperature9", System.Data.SqlDbType.Float);
-            SqlParameter temperature10Parameter = new SqlParameter("temperature10", System.Data.SqlDbType.Float);
-            SqlParameter temperature11Parameter = new SqlParameter("temperature11", System.Data.SqlDbType.Float);
-            SqlParameter temperature12Parameter = new SqlParameter("temperature12", System.Data.SqlDbType.Float);
+            SqlParameter januaryParameter = new SqlParameter("january", System.Data.SqlDbType.Float);
+            SqlParameter februaryParameter = new SqlParameter("february", System.Data.SqlDbType.Float);
+            SqlParameter marchParameter = new SqlParameter("march", System.Data.SqlDbType.Float);
+            SqlParameter aprilParameter = new SqlParameter("april", System.Data.SqlDbType.Float);
+            SqlParameter mayParameter = new SqlParameter("may", System.Data.SqlDbType.Float);
+            SqlParameter juneParameter = new SqlParameter("june", System.Data.SqlDbType.Float);
+            SqlParameter julyParameter = new SqlParameter("july", System.Data.SqlDbType.Float);
+            SqlParameter augustParameter = new SqlParameter("august", System.Data.SqlDbType.Float);
+            SqlParameter septemberParameter = new SqlParameter("september", System.Data.SqlDbType.Float);
+            SqlParameter octoberParameter = new SqlParameter("october", System.Data.SqlDbType.Float);
+            SqlParameter novemberParameter = new SqlParameter("november", System.Data.SqlDbType.Float);
+            SqlParameter decemberParameter = new SqlParameter("december", System.Data.SqlDbType.Float);
             SqlParameter recordOrderParameter = new SqlParameter("recordOrder", System.Data.SqlDbType.Int);
             SqlParameter idRecordParameter = new SqlParameter("idRecord", System.Data.SqlDbType.Int);
 
@@ -520,40 +520,40 @@ namespace DataLayer.Data
                 string commandText;
                 if (newRecords.Count > 0)
                 { 
-                    command.CommandText = "INSERT INTO Record (id_dataset, name_city, temperature1, temperature2," +
-                        "temperature3, temperature4, temperature5, temperature6, temperature7, temperature8, " +
-                        "temperature9, temperature10, temperature11, temperature12, record_order) VALUES " +
+                    command.CommandText = "INSERT INTO Record (id_dataset, name_city, january, february," +
+                        "march, april, may, june, july, august, " +
+                        "september, october, november, december, record_order) VALUES " +
                         "(@idRecordDataset, " +
                         "@nameCity, " +
-                        "@temperature1, " +
-                        "@temperature2, " +
-                        "@temperature3, " +
-                        "@temperature4, " +
-                        "@temperature5, " +
-                        "@temperature6, " +
-                        "@temperature7, " +
-                        "@temperature8, " +
-                        "@temperature9, " +
-                        "@temperature10, " +
-                        "@temperature11, " +
-                        "@temperature12, " +
+                        "@january, " +
+                        "@february, " +
+                        "@march, " +
+                        "@april, " +
+                        "@may, " +
+                        "@june, " +
+                        "@july, " +
+                        "@august, " +
+                        "@september, " +
+                        "@october, " +
+                        "@november, " +
+                        "@december, " +
                         "@recordOrder" +
                         ")";
 
                     command.Parameters.Add(idRecordDatasetParameter).Value = idDataset;
                     command.Parameters.Add(nameCityParameter);
-                    command.Parameters.Add(temperature1Parameter);
-                    command.Parameters.Add(temperature2Parameter);
-                    command.Parameters.Add(temperature3Parameter);
-                    command.Parameters.Add(temperature4Parameter);
-                    command.Parameters.Add(temperature5Parameter);
-                    command.Parameters.Add(temperature6Parameter);
-                    command.Parameters.Add(temperature7Parameter);
-                    command.Parameters.Add(temperature8Parameter);
-                    command.Parameters.Add(temperature9Parameter);
-                    command.Parameters.Add(temperature10Parameter);
-                    command.Parameters.Add(temperature11Parameter);
-                    command.Parameters.Add(temperature12Parameter);
+                    command.Parameters.Add(januaryParameter);
+                    command.Parameters.Add(februaryParameter);
+                    command.Parameters.Add(marchParameter);
+                    command.Parameters.Add(aprilParameter);
+                    command.Parameters.Add(mayParameter);
+                    command.Parameters.Add(juneParameter);
+                    command.Parameters.Add(julyParameter);
+                    command.Parameters.Add(augustParameter);
+                    command.Parameters.Add(septemberParameter);
+                    command.Parameters.Add(octoberParameter);
+                    command.Parameters.Add(novemberParameter);
+                    command.Parameters.Add(decemberParameter);
                     command.Parameters.Add(recordOrderParameter);
 
                     foreach (Record record in newRecords)
@@ -561,18 +561,18 @@ namespace DataLayer.Data
                         connection.Open();
 
                         nameCityParameter.Value = record.City.Name;
-                        temperature1Parameter.Value = record.January;
-                        temperature2Parameter.Value = record.February;
-                        temperature3Parameter.Value = record.March;
-                        temperature4Parameter.Value = record.April;
-                        temperature5Parameter.Value = record.May;
-                        temperature6Parameter.Value = record.June;
-                        temperature7Parameter.Value = record.July;
-                        temperature8Parameter.Value = record.August;
-                        temperature9Parameter.Value = record.September;
-                        temperature10Parameter.Value = record.October;
-                        temperature11Parameter.Value = record.November;
-                        temperature12Parameter.Value = record.December;
+                        januaryParameter.Value = record.January;
+                        februaryParameter.Value = record.February;
+                        marchParameter.Value = record.March;
+                        aprilParameter.Value = record.April;
+                        mayParameter.Value = record.May;
+                        juneParameter.Value = record.June;
+                        julyParameter.Value = record.July;
+                        augustParameter.Value = record.August;
+                        septemberParameter.Value = record.September;
+                        octoberParameter.Value = record.October;
+                        novemberParameter.Value = record.November;
+                        decemberParameter.Value = record.December;
                         recordOrderParameter.Value = record.Order;                        
 
                         command.ExecuteReader();
@@ -581,18 +581,18 @@ namespace DataLayer.Data
 
                     command.Parameters.Remove(idRecordDatasetParameter);
                     command.Parameters.Remove(nameCityParameter);
-                    command.Parameters.Remove(temperature1Parameter);
-                    command.Parameters.Remove(temperature2Parameter);
-                    command.Parameters.Remove(temperature3Parameter);
-                    command.Parameters.Remove(temperature4Parameter);
-                    command.Parameters.Remove(temperature5Parameter);
-                    command.Parameters.Remove(temperature6Parameter);
-                    command.Parameters.Remove(temperature7Parameter);
-                    command.Parameters.Remove(temperature8Parameter);
-                    command.Parameters.Remove(temperature9Parameter);
-                    command.Parameters.Remove(temperature10Parameter);
-                    command.Parameters.Remove(temperature11Parameter);
-                    command.Parameters.Remove(temperature12Parameter);
+                    command.Parameters.Remove(januaryParameter);
+                    command.Parameters.Remove(februaryParameter);
+                    command.Parameters.Remove(marchParameter);
+                    command.Parameters.Remove(aprilParameter);
+                    command.Parameters.Remove(mayParameter);
+                    command.Parameters.Remove(juneParameter);
+                    command.Parameters.Remove(julyParameter);
+                    command.Parameters.Remove(augustParameter);
+                    command.Parameters.Remove(septemberParameter);
+                    command.Parameters.Remove(octoberParameter);
+                    command.Parameters.Remove(novemberParameter);
+                    command.Parameters.Remove(decemberParameter);
                     command.Parameters.Remove(recordOrderParameter);
                 }
 
@@ -621,35 +621,35 @@ namespace DataLayer.Data
                     command.CommandText = "UPDATE Record SET " +
                         "id_dataset = @idRecordDataset, " +
                         "name_city = @nameCity, " +
-                        "temperature1 = @temperature1, " +
-                        "temperature2 = @temperature2," +
-                        "temperature3 = @temperature3, " +
-                        "temperature4 = @temperature4, " +
-                        "temperature5 = @temperature5, " +
-                        "temperature6 = @temperature6, " +
-                        "temperature7 = @temperature7, " +
-                        "temperature8 = @temperature8," +
-                        "temperature9 = @temperature9, " +
-                        "temperature10 = @temperature10, " +
-                        "temperature11 = @temperature11, " +
-                        "temperature12 = @temperature12, " +
+                        "january = @january, " +
+                        "february = @february," +
+                        "march = @march, " +
+                        "april = @april, " +
+                        "may = @may, " +
+                        "june = @june, " +
+                        "july = @july, " +
+                        "august = @august," +
+                        "september = @september, " +
+                        "october = @october, " +
+                        "november = @november, " +
+                        "december = @december, " +
                         "record_order = @recordOrder " +
                         "WHERE id = @idRecord";
 
                     command.Parameters.Add(idRecordDatasetParameter).Value = idDataset;
                     command.Parameters.Add(nameCityParameter);
-                    command.Parameters.Add(temperature1Parameter);
-                    command.Parameters.Add(temperature2Parameter);
-                    command.Parameters.Add(temperature3Parameter);
-                    command.Parameters.Add(temperature4Parameter);
-                    command.Parameters.Add(temperature5Parameter);
-                    command.Parameters.Add(temperature6Parameter);
-                    command.Parameters.Add(temperature7Parameter);
-                    command.Parameters.Add(temperature8Parameter);
-                    command.Parameters.Add(temperature9Parameter);
-                    command.Parameters.Add(temperature10Parameter);
-                    command.Parameters.Add(temperature11Parameter);
-                    command.Parameters.Add(temperature12Parameter);
+                    command.Parameters.Add(januaryParameter);
+                    command.Parameters.Add(februaryParameter);
+                    command.Parameters.Add(marchParameter);
+                    command.Parameters.Add(aprilParameter);
+                    command.Parameters.Add(mayParameter);
+                    command.Parameters.Add(juneParameter);
+                    command.Parameters.Add(julyParameter);
+                    command.Parameters.Add(augustParameter);
+                    command.Parameters.Add(septemberParameter);
+                    command.Parameters.Add(octoberParameter);
+                    command.Parameters.Add(novemberParameter);
+                    command.Parameters.Add(decemberParameter);
                     command.Parameters.Add(recordOrderParameter);
                     command.Parameters.Add(idRecordParameter);
 
@@ -658,18 +658,18 @@ namespace DataLayer.Data
                     {
                         connection.Open();
                         nameCityParameter.Value = record.City.Name;
-                        temperature1Parameter.Value = record.January;
-                        temperature2Parameter.Value = record.February;
-                        temperature3Parameter.Value = record.March;
-                        temperature4Parameter.Value = record.April;
-                        temperature5Parameter.Value = record.May;
-                        temperature6Parameter.Value = record.June;
-                        temperature7Parameter.Value = record.July;
-                        temperature8Parameter.Value = record.August;
-                        temperature9Parameter.Value = record.September;
-                        temperature10Parameter.Value = record.October;
-                        temperature11Parameter.Value = record.November;
-                        temperature12Parameter.Value = record.December;
+                        januaryParameter.Value = record.January;
+                        februaryParameter.Value = record.February;
+                        marchParameter.Value = record.March;
+                        aprilParameter.Value = record.April;
+                        mayParameter.Value = record.May;
+                        juneParameter.Value = record.June;
+                        julyParameter.Value = record.July;
+                        augustParameter.Value = record.August;
+                        septemberParameter.Value = record.September;
+                        octoberParameter.Value = record.October;
+                        novemberParameter.Value = record.November;
+                        decemberParameter.Value = record.December;
                         recordOrderParameter.Value = record.Order;
                         idRecordParameter.Value = record.Id;
 
@@ -679,18 +679,18 @@ namespace DataLayer.Data
 
                     command.Parameters.Remove(idRecordDatasetParameter);
                     command.Parameters.Remove(nameCityParameter);
-                    command.Parameters.Remove(temperature1Parameter);
-                    command.Parameters.Remove(temperature2Parameter);
-                    command.Parameters.Remove(temperature3Parameter);
-                    command.Parameters.Remove(temperature4Parameter);
-                    command.Parameters.Remove(temperature5Parameter);
-                    command.Parameters.Remove(temperature6Parameter);
-                    command.Parameters.Remove(temperature7Parameter);
-                    command.Parameters.Remove(temperature8Parameter);
-                    command.Parameters.Remove(temperature9Parameter);
-                    command.Parameters.Remove(temperature10Parameter);
-                    command.Parameters.Remove(temperature11Parameter);
-                    command.Parameters.Remove(temperature12Parameter);
+                    command.Parameters.Remove(januaryParameter);
+                    command.Parameters.Remove(februaryParameter);
+                    command.Parameters.Remove(marchParameter);
+                    command.Parameters.Remove(aprilParameter);
+                    command.Parameters.Remove(mayParameter);
+                    command.Parameters.Remove(juneParameter);
+                    command.Parameters.Remove(julyParameter);
+                    command.Parameters.Remove(augustParameter);
+                    command.Parameters.Remove(septemberParameter);
+                    command.Parameters.Remove(octoberParameter);
+                    command.Parameters.Remove(novemberParameter);
+                    command.Parameters.Remove(decemberParameter);
                     command.Parameters.Remove(recordOrderParameter);
                     command.Parameters.Remove(idRecordParameter);                    
                 }
@@ -703,18 +703,18 @@ namespace DataLayer.Data
 
                 if (idRecordDatasetParameter != null) command.Parameters.Remove(idRecordDatasetParameter);
                 if (nameCityParameter != null) command.Parameters.Remove(nameCityParameter);
-                if (temperature1Parameter != null) command.Parameters.Remove(temperature1Parameter);
-                if (temperature2Parameter != null) command.Parameters.Remove(temperature2Parameter);
-                if (temperature3Parameter != null) command.Parameters.Remove(temperature3Parameter);
-                if (temperature4Parameter != null) command.Parameters.Remove(temperature4Parameter);
-                if (temperature5Parameter != null) command.Parameters.Remove(temperature5Parameter);
-                if (temperature6Parameter != null) command.Parameters.Remove(temperature6Parameter);
-                if (temperature7Parameter != null) command.Parameters.Remove(temperature7Parameter);
-                if (temperature8Parameter != null) command.Parameters.Remove(temperature8Parameter);
-                if (temperature9Parameter != null) command.Parameters.Remove(temperature9Parameter);
-                if (temperature10Parameter != null) command.Parameters.Remove(temperature10Parameter);
-                if (temperature11Parameter != null) command.Parameters.Remove(temperature11Parameter);
-                if (temperature12Parameter != null) command.Parameters.Remove(temperature12Parameter);
+                if (januaryParameter != null) command.Parameters.Remove(januaryParameter);
+                if (februaryParameter != null) command.Parameters.Remove(februaryParameter);
+                if (marchParameter != null) command.Parameters.Remove(marchParameter);
+                if (aprilParameter != null) command.Parameters.Remove(aprilParameter);
+                if (mayParameter != null) command.Parameters.Remove(mayParameter);
+                if (juneParameter != null) command.Parameters.Remove(juneParameter);
+                if (julyParameter != null) command.Parameters.Remove(julyParameter);
+                if (augustParameter != null) command.Parameters.Remove(augustParameter);
+                if (septemberParameter != null) command.Parameters.Remove(septemberParameter);
+                if (octoberParameter != null) command.Parameters.Remove(octoberParameter);
+                if (novemberParameter != null) command.Parameters.Remove(novemberParameter);
+                if (decemberParameter != null) command.Parameters.Remove(decemberParameter);
                 if (recordOrderParameter != null) command.Parameters.Remove(recordOrderParameter);
                 if (idRecordParameter != null && command.Parameters.Contains(idRecordParameter)) command.Parameters.Remove(idRecordParameter);
             }

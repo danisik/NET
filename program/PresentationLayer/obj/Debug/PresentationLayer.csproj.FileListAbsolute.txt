@@ -9,8 +9,6 @@ C:\Users\danisik\Documents\GitHub\NET\program\Presentation_layer\obj\Debug\Prese
 C:\Users\danisik\Documents\GitHub\NET\program\Presentation_layer\obj\Debug\PresentationLayer.csproj.CopyComplete
 C:\Users\danisik\Documents\GitHub\NET\program\Presentation_layer\obj\Debug\PresentationLayer.exe
 C:\Users\danisik\Documents\GitHub\NET\program\Presentation_layer\obj\Debug\PresentationLayer.pdb
-C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\bin\Debug\Database\Database.mdf
-C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\bin\Debug\Database\Database_log.ldf
 C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\bin\Debug\PresentationLayer.exe.config
 C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\bin\Debug\PresentationLayer.exe
 C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\bin\Debug\PresentationLayer.pdb
@@ -37,3 +35,7 @@ C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\obj\Debug\Presen
 C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\obj\Debug\PresentationLayer.csproj.CopyComplete
 C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\obj\Debug\PresentationLayer.exe
 C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\obj\Debug\PresentationLayer.pdb
+C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\bin\debug\ModelLayer.dll
+C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\bin\debug\System.Data.SqlClient.dll
+C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\bin\debug\ModelLayer.pdb
+C:\Users\danisik\Documents\GitHub\NET\program\PresentationLayer\bin\debug\System.Data.SqlClient.xml

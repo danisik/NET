@@ -54,26 +54,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ModelLayer.dll" size="20480">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ModelLayer.dll" size="19968">
       <assemblyIdentity name="ModelLayer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>qagjy2tRMilhqbVjAk98ukg3+Si2b2xq8YTcqWW8ykQ=</dsig:DigestValue>
+        <dsig:DigestValue>K1Hau38MR1aPNyLU3kNyW2iKmcKx3bJst842ee1rJx8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PresentationLayer.exe" size="57328">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PresentationLayer.exe" size="57840">
       <assemblyIdentity name="PresentationLayer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>jV4sOoHeNapqbXwDeJDV1y3vHhAJ7PE26BRLFFP9Z+c=</dsig:DigestValue>
+        <dsig:DigestValue>PA3ZS0vRFS8L+9sKHkuIi16JNsMEYtlWQjQfe8bX1io=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
